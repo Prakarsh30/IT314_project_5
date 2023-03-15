@@ -1,9 +1,10 @@
 import React from "react";
+import Sidebar from "./components/homepage/sidebar";
 
 const App = () => {
   return (
     <div>
-      <h1>Hey! its client side</h1>
+      <Sidebar />
     </div>
   );
 };
