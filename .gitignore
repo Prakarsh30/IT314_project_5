@@ -2,9 +2,7 @@
 
 # dependencies
 node_modules
-G5_Lab3_IT314.pdf
-G5_Lab4_IT314.pdf
-Lab2.pdf
+*.pdf
 # /.pnp
 # .pnp.js
 
