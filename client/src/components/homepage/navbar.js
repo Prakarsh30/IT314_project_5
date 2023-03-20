@@ -3,10 +3,10 @@ import "./navbar_style.css";
 
 const Navbar = () => {
   return (
-    <div className="topnav">
+    <nav className="topnav">
         <a className="active" href="#home">Home</a>
         <a href="#login">Log In</a>
-      </div>
+      </nav>
   );
 };
 
