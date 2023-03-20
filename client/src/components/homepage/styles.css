@@ -2,14 +2,14 @@
 html {
   font-family: "Aref Ruqaa Ink", serif;
   font-size: 20px;
-  background: #5e42a6;
+  background: #88BDBC;
 }
 
 .sidebar {
   position: fixed;
   width: 25%;
   height: 100vh;
-  background: #312450;
+  background: #254E58;
   font-size: 0.65em;
 }
 
