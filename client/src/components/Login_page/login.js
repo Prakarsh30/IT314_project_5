@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./login_styles.css";
+import {FaUserAlt} from "react-icons/fa";
+import {FaLock  } from "react-icons/fa";
 
 export default function LoginPage() {
 
@@ -17,45 +19,63 @@ export default function LoginPage() {
     event.preventDefault();
   }
   return (
-    <div className="login-container">
-      <h3 className="title">Welcome Back User</h3>
+    
+<div className="container">
+  <div className="screen">
+    <div className="screen__content">
       <Form onSubmit={handleSubmit}>
-        <div className="fluid-input">
-        <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
+      <form className="login">
+
+        <div className="login__field">
+        <FaUserAlt i className="login__icon fas fa-user" />
+        
+          <Form.Group size="lg" controlId="email">
           <Form.Control
             autoFocus
-            type="email"
+            
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="fluid-input-input"
+            
+            type="text"
+            className="login__input"
+            placeholder="User name / Email"
           />
         </Form.Group>
         </div>
 
-        <div className="fluid-input">
-        <Form.Group size="lg" controlId="password"> 
-
-          <Form.Label>Password:</Form.Label>
+        <div className="login__field">
+          
+        <FaLock i className="login__icon fas fa-lock" />
+          <Form.Group size="lg" controlId="password"> 
 
           <Form.Control
-            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="fluid-input-input"
+            type="password"
+            className="login__input"
+            placeholder="Password"
           />
 
         </Form.Group>
         </div>
 
         <div>
-        <Button block size="lg" type="submit" disabled={!validateForm()} className="login-button">
-          Login
+        <Button block size="lg" type="submit" disabled={!validateForm()} className="button login__submit">
+        <span className="button__icon">Log In</span>
+          <i className="button__icon fas fa-chevron-right" />
         </Button>
         </div>
+      </form>
       </Form>
-
     </div>
+    <div className="screen__background">
+      <span className="screen__background__shape screen__background__shape4" />
+      <span className="screen__background__shape screen__background__shape3" />
+      <span className="screen__background__shape screen__background__shape2" />
+      <span className="screen__background__shape screen__background__shape1" />
+    </div>
+  </div>
+</div>
 
   );
 
