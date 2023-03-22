@@ -1,12 +1,18 @@
 import React from "react";
 import "./styles.css";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  let navigate = useNavigate();
   return (
     <main className="main">
       <aside className="sidebar">
         <nav className="nav">
           <ul>
+            
+            <li className="active">
+              <button onClick={() => navigate('login')}>Login</button>
+            </li>
             <li className="active">
               <a href="/notices">Notices</a>
             </li>
@@ -23,11 +29,11 @@ const Sidebar = () => {
         </nav>
       </aside>
 
-      <section className="section--container">
+      {/* <section className="section--container">
         <div className="container">
           <p>Hey! its me</p>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 };
