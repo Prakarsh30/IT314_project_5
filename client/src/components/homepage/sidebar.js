@@ -14,7 +14,7 @@ const Sidebar = () => {
               <button onClick={() => navigate('login')}>Login</button>
             </li>
             <li className="active">
-              <a href="/notices">Notices</a>
+              <a href="/NoticeBoard">Notices</a>
             </li>
             <li>
               <a href="/complaints">Complaints</a>
