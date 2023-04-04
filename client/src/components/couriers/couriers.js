@@ -50,13 +50,45 @@ export default function CourierPage() {
 
     const newCourier= [item1, item2,item3];
 
+    // form inputs; will be integrated with backend using post and get methods later
+    const [couriedID, setcourierID] = useState("");
+    const [name, setName] = useState("");
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        alert(`New courier for: ${name} with courier ID: ${couriedID}`);
+    }
+
     return (
     
         <div className="App">
         <body className="AppBody">
+        
         <h2>Couriers Updates</h2>
         <br></br>
         <p>Students are requested to collect their couriers from the room of Hostel Supervisor within a month of receiving. This List is updated daily. </p>
+        <br></br>
+
+        {/* form to add new courier */}
+        <div className="form">
+            <form onSubmit={handleSubmit}>
+                <label class ="label">Student name:
+                    <input
+                    type="text" 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    class = "ipBox"/>
+                </label>
+                <label class ="label">Courier ID:
+                    <input 
+                    type="text" 
+                    value={couriedID}
+                    onChange={(e) => setcourierID(e.target.value)}
+                    class = "ipBox"/>
+                </label>
+                <input type="submit" className="button"/>
+            </form>
+        </div>
         <br></br>
         <table>
             <thead class = "headerStyle">
