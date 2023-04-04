@@ -21,7 +21,7 @@ const createCouriers = async (req, res) => {
     }
 };
   
-exports.deleteCouriers = async(req, res) =>{
+exports.deleteCourier = async(req, res) =>{
     // delete requested ID
     const {_id} = req.body;
 
@@ -38,4 +38,4 @@ exports.deleteCouriers = async(req, res) =>{
 }
 
 
-  module.exports = { getCouriers, createCouriers, deleteCouriers };
+  module.exports = { getCouriers, createCouriers };
