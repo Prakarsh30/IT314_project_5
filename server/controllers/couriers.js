@@ -25,7 +25,7 @@ exports.deleteCouriers = async(req, res) =>{
     // delete requested ID
     const {_id} = req.body;
 
-    const notice = await noticeMessage.findByIdAndDelete(_id);
+    const notice = await courierMessage.findByIdAndDelete(_id);
   
     // console.log(notice);
     try{
