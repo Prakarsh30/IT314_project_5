@@ -51,7 +51,7 @@ export default function LoginPage() {
       navigate("admin", { curruser: { email: user.email } });
     } else if (user.role == "student") {
       navigate("student", { curruser: { email: user.email } });
-    } else navigate("*");
+    } else navigate("");
   };
 
   function validateForm() {
