@@ -1,9 +1,7 @@
-import React from 'react';
-import './NoticeBoard.css';
-
+// import React, { useState } from "react";
 
 function NoticeBoard() {
-  const examples=[
+  const examples = [
     {
       Heading: "H1",
       content: "Notice 1",
@@ -18,15 +16,28 @@ function NoticeBoard() {
     }
   ]
   return (
-    <div className="notice-board">
-      <h2>Notice Board</h2>
-      <ul>
-        {examples.map((example, index) => (
-          <li key={index}>{example.Heading},{example.content},{example.writer},{example.createdAt}</li>
-        ))}
-      </ul>
+    
+    <div className="accordion" id="accordionExample">
+      {examples.map((example, index) => (
+      <div key={index} className="accordion-item" >
+        <h2 className="accordion-header">
+          <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            {example.Heading},Created by: {example.writer},{example.createdAt}
+          </button>
+        </h2>
+        <div id="collapseOne" className="accordion-collapse collapse " data-bs-parent="#accordionExample">
+          <div className="accordion-body">
+            <strong>Bold</strong> {example.content}
+          </div>
+        </div>
+      </div> 
+      ))}
     </div>
+    
   );
+ 
 }
 
 export default NoticeBoard;
+
+
