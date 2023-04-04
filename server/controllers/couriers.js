@@ -25,9 +25,9 @@ exports.deleteCouriers = async(req, res) =>{
     // delete requested ID
     const {_id} = req.body;
 
-    const notice = await courierMessage.findByIdAndDelete(_id);
+    const courier = await courierMessage.findByIdAndDelete(_id);
   
-    // console.log(notice);
+    // console.log(courier);
     try{
         res.status(201).json({message: "Successful"});
     }catch(err){
