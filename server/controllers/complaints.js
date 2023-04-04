@@ -21,7 +21,7 @@ const createComplaints = async (req, res) => {
   }
 };
 
-exports.deleteComplaints = async (req, res) => {
+exports.deleteComplaint = async (req, res) => {
   // delete requested ID
   const { _id } = req.body;
 
@@ -34,4 +34,4 @@ exports.deleteComplaints = async (req, res) => {
   }
 };
 
-module.exports = { getComplaints, createComplaints, deleteComplaints };
+module.exports = { getComplaints, createComplaints };
