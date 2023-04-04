@@ -9,10 +9,6 @@ const Sidebar = () => {
       <aside className="sidebar">
         <nav className="nav">
           <ul>
-            
-            <li className="active">
-              <button onClick={() => navigate('login')}>Login</button>
-            </li>
             <li className="active">
               <a href="/notices">Notices</a>
             </li>

@@ -51,7 +51,7 @@ export default function LoginPage() {
       navigate("admin", { curruser: { email: user.email } });
     } else if (user.role == "student") {
       navigate("student", { curruser: { email: user.email } });
-    } else navigate("*");
+    } else navigate("");
   };
 
   function validateForm() {
@@ -69,17 +69,16 @@ export default function LoginPage() {
             <form className="login">
               <div className="login__field">
                 <FaUserAlt i className="login__icon fas fa-user" />
-
-                <Form.Group size="lg" controlId="email">
-                  <Form.Control
-                    autoFocus
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    type="text"
-                    className="login__input"
-                    placeholder="User name / Email"
-                  />
-                </Form.Group>
+                  <Form.Group size="lg" controlId="email">
+                    <Form.Control
+                      autoFocus
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="text"
+                      className="login__input"
+                      placeholder="Username/Email"
+                    />
+                  </Form.Group>
               </div>
 
               <div className="login__field">
