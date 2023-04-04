@@ -25,7 +25,7 @@ exports.deleteComplaints = async (req, res) => {
   // delete requested ID
   const { _id } = req.body;
 
-  const courier = await complaintMessage.findByIdAndDelete(_id);
+  const complaint = await complaintMessage.findByIdAndDelete(_id);
 
   try {
     res.status(201).json({ message: "Successful" });
