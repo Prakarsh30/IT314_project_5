@@ -9,7 +9,7 @@
 }
 
 body {
-    background: linear-gradient(90deg, #005a1c #3d3b5d);
+    background: #88BDBC;
 }
 
 
@@ -26,6 +26,7 @@ table {
     border: 2px solid rgb(255, 255, 255);
     width: 100%;
     height: 0px;
+    background: #88BDBC;
 }
 
 th {
@@ -48,6 +49,6 @@ td {
 
 .AppBody {
     width: 100%;
-    background-color: whitesmoke;
+    background: #88BDBC;
     padding: 1.5%;
 }
