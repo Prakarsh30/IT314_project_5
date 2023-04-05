@@ -5,6 +5,9 @@ import LoginPage from "./components/Login_page/login";
 import CouriersPage from "./components/couriers/couriers";
 import NoticeBoard from "./components/Notices/NoticeBoard";
 import Complaints from "./components/complaints/complaints";
+import Lostnfound from "./components/lostnfound/lostnfound";
+
+
 // import addComp from "./components/complaints/Add_complaint";
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 
@@ -20,6 +23,8 @@ function App() {
           <Route path='/complaints' element={<Complaints/>}/>
           <Route path='/complaints/add' element={<addComp/>}/>
           <Route path='/NoticeBoard' element={<NoticeBoard />}/>
+          <Route path='/lostnfound' element={<Lostnfound/>}/>
+          
         </Routes>
       </BrowserRouter>
     </>
