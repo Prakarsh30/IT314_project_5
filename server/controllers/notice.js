@@ -1,37 +1,33 @@
-const noticeMessage = require("../models/notices");
+// this page is to diplsay notice page
+const { json } = require("express");
+const noticeMessage = require("../models/notice");
 
-const getNotices = async (req, res) => {
-  try {
-    const noticeMessages = await noticeMessage.find();
-    res.status(200).json(noticeMessages);
-  } catch (error) {
-    res.status(409).send({ message: error.message });
-  }
-};
+exports.getNotice = async(req, res) =>{
+  // fetch all the notices
+    console.log("get notice route huree")
+    const notice = await noticeMessage.find();
 
-const createNotices = async (req, res) => {
-  const notice = req.body;
+    if(notice){
+        res.status(200).json(notice);
+    }else{
+        res.status(404).json({message: "No notice found"});
+    }
+}
 
-  const newNotice = new noticeMessage(notice);
-  try {
-    await newNotice.save();
-    res.status(200).send(newNotice);
-  } catch (error) {
-    res.status(409).json({ message: error.message });
-  }
-};
+exports.postNotice = async(req, res) =>{
+    // create a new notice
+    
+    const {Heading, content, writer} = req.body;
+    const notice = await noticeMessage.create({Heading, content, writer});
+    // print heading from notice
+    try{
+      noticeMessage.insertOne(notice);
+        res.status(201).json(notice);
+    }catch(err){
+        res.status(409).json({message: err.message});
+    }    
+}
 
-exports.deleteNotice = async (req, res) => {
-  // delete requested ID
-  const { _id } = req.body;
 
-  const notice = await noticeMessage.findByIdAndDelete(_id);
 
-  try {
-    res.status(201).json({ message: "Successful" });
-  } catch (err) {
-    res.status(409).json({ message: err.message });
-  }
-};
 
-module.exports = { getNotices, createNotices};
