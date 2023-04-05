@@ -8,22 +8,22 @@
 }
 
 body {
-	background: linear-gradient(90deg, #C7C5F4, #776BCC);		
+	background: linear-gradient(90deg, #254E58, #88BDBC);		
 }
 
 .container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 100vh;
+	min-height: 735px;
 }
 
 .screen {		
-	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
+	background: linear-gradient(90deg, #254E58, #88BDBC);		
 	position: relative;	
-	height: 600px;
+	height: 500 px;
 	width: 360px;	
-	box-shadow: 0px 0px 24px #5C5696;
+	box-shadow: 0px 0px 24px #254E58;
 }
 
 .screen__content {
@@ -60,7 +60,7 @@ body {
 .screen__background__shape2 {
 	height: 220px;
 	width: 220px;
-	background: #6C63AC;	
+	background: #95c1c0;	
 	top: -172px;
 	right: 0;	
 	border-radius: 32px;
@@ -69,7 +69,7 @@ body {
 .screen__background__shape3 {
 	height: 540px;
 	width: 190px;
-	background: linear-gradient(270deg, #5D54A4, #6A679E);
+	background: linear-gradient(270deg, #5b9796, #2a4e58);
 	top: -24px;
 	right: 0;	
 	border-radius: 32px;
@@ -78,7 +78,7 @@ body {
 .screen__background__shape4 {
 	height: 400px;
 	width: 200px;
-	background: #7E7BB9;	
+	background: #254E58;	
 	top: 420px;
 	right: 50px;	
 	border-radius: 60px;
@@ -98,7 +98,7 @@ body {
 .login__icon {
 	position: absolute;
 	top: 30px;
-	color: #7875B5;
+	color: #3f6a75;
 }
 
 .login__input {
@@ -107,8 +107,8 @@ body {
 	background: none;
 	padding: 10px;
 	padding-left: 24px;
-	font-weight: 700;
-	width: 75%;
+	font-weight: 00;
+	width: 80%;
 	transition: .2s;
 }
 
@@ -116,7 +116,7 @@ body {
 .login__input:focus,
 .login__input:hover {
 	outline: none;
-	border-bottom-color: #6A679E;
+	border-bottom-color: #254E58;
 }
 
 .login__submit {
@@ -131,23 +131,23 @@ body {
 	display: flex;
 	align-items: center;
 	width: 100%;
-	color: #4C489D;
-	box-shadow: 0px 2px 2px #5C5696;
+	color: #316d72;
+	/* box-shadow: 0px 2px 2px #254E58; */
 	cursor: pointer;
-	transition: .2s;
+	transition: 0s;
 }
 
 .login__submit:active,
 .login__submit:focus,
 .login__submit:hover {
-	border-color: #6A679E;
+	border-color: #5e93a0;
 	outline: none;
 }
 
 .button__icon {
 	font-size: 24px;
 	margin-left: auto;
-	color: #7875B5;
+	color: #588d9a;
   text-align: center;
 }
 
@@ -169,9 +169,9 @@ body {
 
 .social-login__icon {
 	padding: 20px 10px;
-	color: #fff;
+	color: #4a7d8a;
 	text-decoration: none;	
-	text-shadow: 0px 0px 8px #7875B5;
+	text-shadow: 0px 0px 8px #437f8f;
 }
 
 .social-login__icon:hover {

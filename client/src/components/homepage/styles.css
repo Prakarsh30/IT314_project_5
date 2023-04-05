@@ -5,6 +5,10 @@ html {
   background: #88BDBC;
 }
 
+.alignmiddle{
+  align-items: center;
+}
+
 .sidebar {
   position: fixed;
   width: 25%;
@@ -62,7 +66,7 @@ html {
   position: relative;
   width: 75%;
   float: right;
-  height: 100vh;
+  height: 75vh;
 }
 .section--container .container {
   display: flex;

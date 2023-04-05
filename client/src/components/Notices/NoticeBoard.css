@@ -1,0 +1,19 @@
+.notice-board {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .notice-board h2 {
+    margin-top: 0;
+  }
+  
+  .notice-board ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .notice-board li {
+    margin-bottom: 5px;
+  }
+  
