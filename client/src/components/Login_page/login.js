@@ -67,21 +67,22 @@ export default function LoginPage() {
           <Form onSubmit={handleSubmit}>
             <form className="login">
               <div className="login__field">
-                <FaUserAlt i className="login__icon fas fa-user" />
-                  <Form.Group size="lg" controlId="email">
-                    <Form.Control
-                      autoFocus
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      type="text"
-                      className="login__input"
-                      placeholder="Username/Email"
-                    />
-                  </Form.Group>
+                <FaUserAlt i className="login__icon" />
+
+                <Form.Group size="lg" controlId="email">
+                  <Form.Control
+                    autoFocus
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                    className="login__input"
+                    placeholder="Username/Email"
+                  />
+                </Form.Group>
               </div>
 
               <div className="login__field">
-                <FaLock i className="login__icon fas fa-lock" />
+                <FaLock i className="login__icon" />
                 <Form.Group size="lg" controlId="password">
                   <Form.Control
                     value={password}

@@ -49,3 +49,31 @@ td {
     background-color: whitesmoke;
     padding: 1.5%;
 }
+
+.form{
+    width: 100%;
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;    
+    padding-top:10px;
+    padding-bottom: 10px;
+}
+
+.label{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.button{
+    width:80px;
+    height:30px;
+    background: #e87070;
+    font-size: 14px;
+    justify-self: right;
+}
+
+.ipBox{
+    width: 240px;
+    height: 30px;
+    font-size: 14px;
+}
