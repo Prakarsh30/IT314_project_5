@@ -5,6 +5,7 @@ import Navbar from "./components/homepage/navbar";
 import LoginPage from "./components/Login_page/login";
 import Complaints from "./components/complaints/complaints";
 // import addComp from "./components/complaints/Add_complaint";
+import NoticeBoard from "./components/Notices/NoticeBoard";
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path='/' element={<Sidebar />}/>
           <Route path='/complaints' element={<Complaints/>}/>
           <Route path='/complaints/add' element={<addComp/>}/>
+          <Route path='/NoticeBoard' element={<NoticeBoard />}/>
         </Routes>
       </BrowserRouter>
     </>
