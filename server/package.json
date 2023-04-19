@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "test": "jest",
     "start": "nodemon app.js"
   },
   "author": "",
@@ -14,9 +15,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^7.0.0"
+    "mongoose": "^7.0.0",
+    "supertest": "^6.3.3"
   },
   "devDependencies": {
+    "jest": "^29.5.0",
     "nodemon": "^2.0.21"
   }
 }

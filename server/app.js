@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 const PORT = 5000;
 const CONNECTION_URL =
-  "mongodb+srv://kirtan03:HostelManagementSystem@cluster0.9qmyhry.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://202001043:HostelManagementSystem@cluster0.rukbmu4.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose
   .connect(CONNECTION_URL)
@@ -33,3 +33,5 @@ app.use("/complaints", complaintsRoute);
 app.use("/couriers", couriersRoute);
 app.use("/lostnfound", lostnfoundRoute);
 app.use("/notice", noticeRoute);
+
+

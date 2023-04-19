@@ -1,4 +1,4 @@
-const courierMessage = require("../models/couriers");
+const courierMessage = require("../models/courier");
 
 const getCouriers = async (req, res) => {
     try {

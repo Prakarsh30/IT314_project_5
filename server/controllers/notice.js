@@ -1,4 +1,4 @@
-const noticeMessage = require("../models/notices");
+const noticeMessage = require("../models/notice");
 
 const getNotices = async (req, res) => {
   try {
@@ -21,7 +21,7 @@ const createNotices = async (req, res) => {
   }
 };
 
-exports.deleteNotice = async (req, res) => {
+const deleteNotice = async (req, res) => {
   // delete requested ID
   const { _id } = req.body;
 
@@ -34,4 +34,4 @@ exports.deleteNotice = async (req, res) => {
   }
 };
 
-module.exports = { getNotices, createNotices};
+module.exports = { getNotices, createNotices, deleteNotice};
