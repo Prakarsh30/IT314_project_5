@@ -1,0 +1,57 @@
+.courier-card {
+  border: 3px solid #000000;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  max-width:300px;
+  background-color: #19A7CE;
+  font-family: Arial, sans-serif;
+  margin: 0%;
+  height: 345px;
+}
+
+.courier-header {
+  margin-bottom: 10px;
+  text-align: center;
+  background-color: #146C94;
+  padding: 10px;
+}
+
+.courier-header h2 {
+  font-size: 22px;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #F6F1F1;
+}
+
+.courier-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  margin-top: 30px;
+  margin-left: 10px;  
+}
+
+.courier-list li {
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.courier-list li:hover {
+  background-color: #f5f5f5;
+  color: black;
+}
+
+.courier-list li a {
+  color: #f5f5f5;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.courier-list li a:hover {
+  text-decoration: underline;
+  color: black;
+}

@@ -14,8 +14,9 @@ body {
 .container {
 	display: flex;
 	align-items: center;
+	position:absolute;
 	justify-content: center;
-	min-height: 735px;
+	min-height: 600px;
 }
 
 .screen {		
