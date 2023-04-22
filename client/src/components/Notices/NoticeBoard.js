@@ -1,68 +1,157 @@
 import React, { useState } from "react";
-
+import "./add_notice.css";
 function NoticeBoard() {
-  // Define the examples array to hold the notice data
-  const examples = [
+  const [examples, setExamples] = useState([
     {
-      Heading: "H1",
+      heading: "H1",
       content: "Notice 1",
       writer: "Admin 1",
       createdAt: null,
     },
     {
-      Heading: "H2",
+      heading: "H2",
       content: "Notice 2",
       writer: "Admin 2",
       createdAt: null,
     }
-  ];
+  ]);
 
-  // Define the state variable to keep track of which notice is currently open
-  const [openIndex, setOpenIndex] = useState(null);
+  const [newNotice, setNewNotice] = useState({
+    heading: "",
+    content: "",
+    writer: "",
+    createdAt: null,
+  });
 
-  // Function to handle click on the accordion button
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setNewNotice({
+      ...newNotice,
+      [name]: value,
+    });
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    const newExamples = [...examples];
+    newExamples.push(newNotice);
+    setExamples(newExamples);
+    setNewNotice({
+      heading: "",
+      content: "",
+      writer: "",
+      createdAt: null,
+    });
+  };
+
   const handleAccordionClick = (index) => {
-    // If the clicked accordion is already open, close it
     if (index === openIndex) {
       setOpenIndex(null);
-    } 
-    // If the clicked accordion is not open, open it
-    else {
+    } else {
       setOpenIndex(index);
     }
-  }
+  };
+
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const addNoticeFormStyles = {
+    backgroundColor: "#f5f5f5",
+    padding: "20px",
+    borderRadius: "5px",
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+    marginBottom: "30px",
+  };
+
+  const inputStyles = {
+    marginBottom: "10px",
+    padding: "8px",
+    borderRadius: "5px",
+    border: "none",
+    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+    width: "100%",
+    boxSizing: "border-box",
+    fontSize: "16px",
+  };
+
+  const buttonStyles = {
+    backgroundColor: "#4CAF50",
+    color: "white",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    fontSize: "16px",
+  };
 
   return (
-    // Create a Bootstrap accordion with the id "accordionExample"
-    <div className="accordion" id="accordionExample">
-      {/* Map over each notice in the examples array */}
-      {examples.map((example, index) => (
-        // For each notice, create an accordion item
-        <div key={index} className="accordion-item">
-          {/* Define the accordion header with a button that toggles the accordion collapse */}
-          <h2 className="accordion-header">
-            <button
-              className={`accordion-button ${openIndex === index ? "" : "collapsed"}`}
-              type="button"
-              onClick={() => handleAccordionClick(index)}
-              aria-expanded={openIndex === index ? "true" : "false"}
-              aria-controls={`collapse-${index}`}
+    <div>
+      <div className="accordion" id="accordionExample">
+        {examples.map((example, index) => (
+          <div key={index} className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className={`accordion-button ${
+                  openIndex === index ? "" : "collapsed"
+                }`}
+                type="button"
+                onClick={() => handleAccordionClick(index)}
+                aria-expanded={openIndex === index ? "true" : "false"}
+                aria-controls={`collapse-${index}`}
+              >
+                {example.heading}, Created by: {example.writer},{" "}
+                {example.createdAt}
+              </button>
+            </h2>
+            <div
+              id={`collapse-${index}`}
+              className={`accordion-collapse collapse ${
+                openIndex === index ? "show" : ""
+              }`}
+              data-bs-parent="#accordionExample"
             >
-              {example.Heading}, Created by: {example.writer}, {example.createdAt}
-            </button>
-          </h2>
-          {/* Define the accordion collapse with the notice content */}
-          <div
-            id={`collapse-${index}`}
-            className={`accordion-collapse collapse ${openIndex === index ? "show" : ""}`}
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body">
-              <strong>Bold</strong> {example.content}
+              <div className="accordion-body">
+                <strong>Bold</strong> {example.content}
+              </div>
             </div>
           </div>
+        ))}
+      </div>
+      <form onSubmit={handleFormSubmit} style={addNoticeFormStyles}>
+        <h3>Add New Notice</h3>
+        <div className="form-group">
+          <label htmlFor="heading">Heading:</label>
+          <input
+            type="text"
+            id="heading"
+            name="heading"
+            value={newNotice.heading}
+            onChange={handleInputChange}
+          />
         </div>
-      ))}
+        <div className="form-group">
+          <label htmlFor="content">Content:</label>
+          <textarea
+            id="content"
+            name="content"
+            value={newNotice.content}
+            onChange={handleInputChange}
+          ></textarea>
+        </div>
+        <div className="form-group">
+          <label htmlFor="writer">Writer:</label>
+          <input
+            type="text"
+            id="writer"
+            name="writer"
+            value={newNotice.writer}
+            onChange={handleInputChange}
+          />
+        </div>
+        <button type="submit" className="btn-add-notice">
+          Add Notice
+        </button>
+      </form>
     </div>
   );
 }

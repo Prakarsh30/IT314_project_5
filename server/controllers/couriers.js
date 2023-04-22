@@ -3,16 +3,23 @@ const courierMessage = require("../models/courier");
 const getCouriers = async (req, res) => {
   try {
     const courierMessages = await courierMessage.find();
-    res.status(200).json(courierMessages);
+    // console.log(courierMessages); ->> printed in console
+    res.status(200).send(courierMessages);
+    console.log("Sent data");
   } catch (error) {
     res.status(409).send({ message: error.message });
   }
 };
 
 const createCouriers = async (req, res) => {
+  console.log("Adding Courier");
   const courier = req.body;
 
+  // console.log(courier);
   const newCourier = new courierMessage(courier);
+
+  // console.log(newCourier.couriedID);
+  
   try {
     await newCourier.save();
     res.status(200).send(newCourier);
