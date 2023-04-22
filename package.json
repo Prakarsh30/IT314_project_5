@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@mui/x-data-grid": "^6.0.4",
+    "react-icons": "^4.8.0"
+  }
+}

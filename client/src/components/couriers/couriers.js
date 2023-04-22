@@ -70,7 +70,7 @@ export default function CourierPage() {
         <br></br>
 
         {/* form to add new courier */}
-        <div className="form">
+        <div className="courierform">
             <form onSubmit={handleSubmit}>
                 <label class ="label">Student name:
                     <input

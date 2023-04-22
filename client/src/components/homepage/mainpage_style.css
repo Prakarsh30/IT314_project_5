@@ -1,0 +1,10 @@
+body{
+    background-color: white;
+}
+
+.container{
+    width: 9000px;
+    margin-top: 10px;
+    align-items: stretch; 
+  
+}
