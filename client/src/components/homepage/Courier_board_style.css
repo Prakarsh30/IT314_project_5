@@ -1,12 +1,12 @@
 .courier-card {
   border: 3px solid #000000;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-  width: 300px;
+  /* width: 300px; */
   max-width:300px;
   background-color: #19A7CE;
   font-family: Arial, sans-serif;
   margin: 0%;
-  height: 345px;
+  height: 45vh;
 }
 
 .courier-header {

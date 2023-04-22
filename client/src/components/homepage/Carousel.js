@@ -8,7 +8,7 @@ function Carousels() {
         <img
           src="https://www.hindustantimes.com/ht-img/img/2023/04/12/1600x900/IMAGE_1679302987_1681265098418_1681265105760_1681265105760.jpg"
           alt="First slide"
-          style={{ width: '100%', height: '700px' }} 
+          style={{ width: '100%', height: '90vh' }} 
         />
         <Carousel.Caption>
           <h3>First slide label</h3>
@@ -19,7 +19,7 @@ function Carousels() {
         <img
           src="https://www.hindustantimes.com/ht-img/img/2023/04/05/1600x900/Demon_slayer_season_2_recap_1680711861129_1680711892122_1680711892122.png"
           alt="Second slide"
-          style={{ width: '100%', height: '700px' }} 
+          style={{ width: '100%', height: '90vh' }} 
         />
 
         <Carousel.Caption>
@@ -31,7 +31,7 @@ function Carousels() {
         <img
           src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/02/demon-slayer-season-3-poster.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5"
           alt="Third slide"
-          style={{ width: '100%', height: '700px' }} 
+          style={{ width: '100%', height: '90vh' }} 
         />
 
         <Carousel.Caption>

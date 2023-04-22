@@ -10,13 +10,11 @@ function Mainpage(){
     return(
         <div className="container">
             {/* <Sidebar/> */}
-            <div>
+            <div className="left">
                 <Notices/>
-                <div style={{marginTop: '10px'}}>
-                    <CourierBoard/>
-                </div>
+                <CourierBoard/>
             </div>
-            <div>
+            <div className="right">
                 <Carousels/>
             </div>
         </div>

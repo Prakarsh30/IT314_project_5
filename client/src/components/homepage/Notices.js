@@ -12,7 +12,6 @@ function Notices() {
             <li><a href="#">Headline 2</a></li>
             <li><a href="#">Headline 3</a></li>
             <li><a href="#">Headline 4</a></li>
-            <li><a href="#">Headline 5</a></li>
           </ul>
         </div>
       </div>
