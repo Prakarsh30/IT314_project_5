@@ -17,50 +17,58 @@ export default function CourierPage() {
     // console.log(role);
 
 
+    // list of all current couriers
+    let newCourier;
     
-    // get requets to get list of all request.
-    // print list.
-
-    const [courier_item, setItems] = useState("");
-
-    // structure of data entry and method to post data
-
-    // using static json data object to print table and get the layout of table and the couriers page
-    
-    const item1 = {
-        couriedID: "1",
-        student_name: "Test1",
-        ID: "ASBH1",
-        date: '29-01-23',
+    const [courierList,setCourierList] = useState([]);
+    // get all list of current couriers when page is loaded
+    document.onreadystatechange = async function() {
+        newCourier = (await fetch("http://localhost:5000/couriers")).json();
+        
+        newCourier.then(async (data) =>  {
+            console.log(data)
+            await setCourierList(data);
+        })
+        console.log(courierList);
+        console.log("Loaded data");
     };
-
-    const item2 = {
-        couriedID: "2",
-        student_name: "Test2",
-        ID: "XW31A",
-        date: '29-01-23',
-    };
-
-    const item3 = {
-        couriedID: "3",
-        student_name: "Test3",
-        ID: "A123Z",
-        date: '29-01-23',
-    };
-
-    const newCourier= [item1, item2,item3];
 
     // form inputs; will be integrated with backend using post and get methods later
     const [couriedID, setcourierID] = useState("");
     const [name, setName] = useState("");
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        alert(`New courier for: ${name} with courier ID: ${couriedID}`);
+    const Newitem = {
+        student_name: "",
+        couriedID: "",
+        date: "",
+    };
+
+    const handleRedirecting = async (e) => {
+        e.preventDefault();
+
+        Newitem.student_name = name;
+        Newitem.couriedID = couriedID;
+
+        alert(`New courier for: ${Newitem.student_name} with courier ID: ${Newitem.couriedID}`);
+
+        await Adding(Newitem);
+    };
+
+    const Adding = async (Newitem) => {
+        const res = await fetch("http://localhost:5000/couriers", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Newitem),
+        });
+
+        const data = await res.json();
+
+        console.log(data);
     }
 
     return (
-    
         <div className="App">
         <body className="AppBody">
         
@@ -71,7 +79,7 @@ export default function CourierPage() {
 
         {/* form to add new courier */}
         <div className="form">
-            <form onSubmit={handleSubmit}>
+            <form>
                 <label class ="label">Student name:
                     <input
                     type="text" 
@@ -86,7 +94,8 @@ export default function CourierPage() {
                     onChange={(e) => setcourierID(e.target.value)}
                     class = "ipBox"/>
                 </label>
-                <input type="submit" className="button"/>
+                <input type="submit" className="button" 
+                onClick={handleRedirecting}/>
             </form>
         </div>
         <br></br>
@@ -101,13 +110,13 @@ export default function CourierPage() {
             </thead>
             <tbody>
             {
-                newCourier.map((data, index)=>{
+                courierList.map((data, index)=>{
                     return(
                         <tr key={index} class = "data_entry">
                             <td>{index+1}</td>
-                            <td>{data.ID}</td>
+                            <td>{data.couriedID}</td>
                             <td>{data.student_name}</td>
-                            <td>{data.date}</td>
+                            <td>{data.RecievedAt}</td>
                         </tr>
                     )
                 })
