@@ -1,6 +1,7 @@
-// import React, { useState } from "react";
+import React, { useState } from "react";
 
 function NoticeBoard() {
+  // Define the examples array to hold the notice data
   const examples = [
     {
       Heading: "H1",
@@ -14,30 +15,56 @@ function NoticeBoard() {
       writer: "Admin 2",
       createdAt: null,
     }
-  ]
+  ];
+
+  // Define the state variable to keep track of which notice is currently open
+  const [openIndex, setOpenIndex] = useState(null);
+
+  // Function to handle click on the accordion button
+  const handleAccordionClick = (index) => {
+    // If the clicked accordion is already open, close it
+    if (index === openIndex) {
+      setOpenIndex(null);
+    } 
+    // If the clicked accordion is not open, open it
+    else {
+      setOpenIndex(index);
+    }
+  }
+
   return (
-    
+    // Create a Bootstrap accordion with the id "accordionExample"
     <div className="accordion" id="accordionExample">
+      {/* Map over each notice in the examples array */}
       {examples.map((example, index) => (
-      <div key={index} className="accordion-item" >
-        <h2 className="accordion-header">
-          <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            {example.Heading},Created by: {example.writer},{example.createdAt}
-          </button>
-        </h2>
-        <div id="collapseOne" className="accordion-collapse collapse " data-bs-parent="#accordionExample">
-          <div className="accordion-body">
-            <strong>Bold</strong> {example.content}
+        // For each notice, create an accordion item
+        <div key={index} className="accordion-item">
+          {/* Define the accordion header with a button that toggles the accordion collapse */}
+          <h2 className="accordion-header">
+            <button
+              className={`accordion-button ${openIndex === index ? "" : "collapsed"}`}
+              type="button"
+              onClick={() => handleAccordionClick(index)}
+              aria-expanded={openIndex === index ? "true" : "false"}
+              aria-controls={`collapse-${index}`}
+            >
+              {example.Heading}, Created by: {example.writer}, {example.createdAt}
+            </button>
+          </h2>
+          {/* Define the accordion collapse with the notice content */}
+          <div
+            id={`collapse-${index}`}
+            className={`accordion-collapse collapse ${openIndex === index ? "show" : ""}`}
+            data-bs-parent="#accordionExample"
+          >
+            <div className="accordion-body">
+              <strong>Bold</strong> {example.content}
+            </div>
           </div>
         </div>
-      </div> 
       ))}
     </div>
-    
   );
- 
 }
 
 export default NoticeBoard;
-
-
