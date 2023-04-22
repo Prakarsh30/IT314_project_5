@@ -6,19 +6,22 @@ import CouriersPage from "./components/couriers/couriers";
 import NoticeBoard from "./components/Notices/NoticeBoard";
 import Complaints from "./components/complaints/complaints";
 import Lostnfound from "./components/lostnfound/lostnfound";
+import Notices from "./components/homepage/Notices";
+import Mainpage from "./components/homepage/mainpage";
 
 
 // import addComp from "./components/complaints/Add_complaint";
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 
+
 function App() {
   return (
     <>
-    <Navbar/>
+      <Navbar/>
       <BrowserRouter>
         <Routes>
           <Route path='/login' element={<LoginPage/>}/>
-          <Route path='/' element={<Sidebar />}/>
+          <Route path='/' element={<Mainpage/>}/>
           <Route path='/couriers' element={<CouriersPage/>}/>
           <Route path='/complaints' element={<Complaints/>}/>
           <Route path='/complaints/add' element={<addComp/>}/>

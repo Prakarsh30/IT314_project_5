@@ -1,0 +1,15 @@
+body{
+    background-color: white;
+}
+.container{
+    padding: 0;
+    display: flex;
+   height: 90vh;
+   min-width: 100%;
+}
+.left{
+    width: 30%;
+}
+.right{
+    width: 70%;
+}

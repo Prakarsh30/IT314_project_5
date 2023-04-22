@@ -1,13 +1,15 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 const PORT = 5000;
-const CONNECTION_URL =
-  "mongodb+srv://kirtan03:HostelManagementSystem@cluster0.9qmyhry.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose
-  .connect(CONNECTION_URL)
+  .connect(process.env.CONNECTION_URL)
   .then(() => {
     app.listen(PORT, (req, res) => {
       console.log("Server is listening on,", `http://localhost:${PORT}`);
@@ -16,6 +18,11 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
+
+const db = mongoose.connection;
+db.on("error", (error) => console.error(error));
+db.once("open", () => console.log("Connected to Database"));
+
 //comment main
 const homepageRoute = require("./routes/homepage");
 const complaintsRoute = require("./routes/complaints");
@@ -27,7 +34,7 @@ const loginRoute = require("./routes/login");
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-app.use('/login', loginRoute);
+app.use("/login", loginRoute);
 app.use("", homepageRoute);
 app.use("/complaints", complaintsRoute);
 app.use("/couriers", couriersRoute);
