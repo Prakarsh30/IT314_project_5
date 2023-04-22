@@ -28,6 +28,7 @@ export default function LoginPage() {
       body: JSON.stringify(user),
     });
     const data = await res.json();
+    
     console.log(data);
     if (res.status === 400 || !data) {
       window.alert("Invalid Credentials");
@@ -37,7 +38,6 @@ export default function LoginPage() {
       navigate("../homepage/sidebar");
     }
   };
-
   const handleRedirecting = async (e) => {
     e.preventDefault();
     user.email = email;
