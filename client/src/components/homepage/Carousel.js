@@ -6,38 +6,66 @@ function Carousels() {
     <Carousel>
       <Carousel.Item>
         <img
-          src="https://www.hindustantimes.com/ht-img/img/2023/04/12/1600x900/IMAGE_1679302987_1681265098418_1681265105760_1681265105760.jpg"
+          src="https://www.daiict.ac.in/sites/default/files/2021-04/Campus%2051.JPG"
           alt="First slide"
-          style={{ width: '100%', height: '90vh' }} 
+          style={{ width: '100%', height: '93vh' }} 
         />
         <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3>First</h3>
+          <p>HOR Men</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
-          src="https://www.hindustantimes.com/ht-img/img/2023/04/05/1600x900/Demon_slayer_season_2_recap_1680711861129_1680711892122_1680711892122.png"
+          src="https://www.daiict.ac.in/sites/default/files/2021-04/Campus%2033.JPG"
           alt="Second slide"
-          style={{ width: '100%', height: '90vh' }} 
+          style={{ width: '100%', height: '93vh' }} 
         />
 
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3>Second</h3>
+          <p>New HOR Men</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
-          src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/02/demon-slayer-season-3-poster.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5"
+          src="https://www.daiict.ac.in/sites/default/files/2021-04/Campus%2028.JPG"
           alt="Third slide"
-          style={{ width: '100%', height: '90vh' }} 
+          style={{ width: '100%', height: '93vh' }} 
         />
 
         <Carousel.Caption>
-          <h3>Third slide label</h3>
+          <h3>Third</h3>
           <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            New HOR Men
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          src="https://www.pagalguy.com/wp-content/uploads/2018/10/07F1889D1068067F.jpg"
+          alt="Fourth slide"
+          style={{ width: '100%', height: '93vh' }} 
+        />
+
+        <Carousel.Caption>
+          <h3>Fourth</h3>
+          <p>
+            Hostel Top
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          src="https://static.zollege.in/public/college_data/images/campusimage/1440673033777.PNG"
+          alt="Fifth slide"
+          style={{ width: '100%', height: '93vh' }} 
+        />
+
+        <Carousel.Caption>
+          <h3><a>Fifth</a></h3>
+          <p>
+            HOR Women
           </p>
         </Carousel.Caption>
       </Carousel.Item>
