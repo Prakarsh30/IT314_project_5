@@ -4,21 +4,26 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import "./lostnfound.css";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 export default function Lostnfound() {
 
-    let newCourier;
+    let Lostnfound;
     
-    const [courierList,setCourierList] = useState([]);
+    const [lostnfound,setLostnfound] = useState([]);
     // get all list of current couriers when page is loaded
     document.onreadystatechange = async function() {
-        newCourier = (await fetch("http://localhost:5000/couriers")).json();
+        Lostnfound = (await fetch("http://localhost:5000/couriers")).json();
         
-        newCourier.then(async (data) =>  {
+        Lostnfound.then(async (data) =>  {
             console.log(data)
-            await setCourierList(data);
+            await setLostnfound(data);
         })
-        console.log(courierList);
+        console.log(lostnfound);
         console.log("Loaded data");
     };
 
@@ -27,6 +32,7 @@ export default function Lostnfound() {
     const [studentid, setStudentid] = useState("");
     const [contact, setContact] = useState("")
     const [description, setDescription] = useState("")
+    const [status, setStatus] = useState("")
 
     const Newitem = {
         itemname: "",
@@ -34,6 +40,7 @@ export default function Lostnfound() {
         contact: "",
         description: "",
         date: "",
+        status: "",
     };
 
     const handleRedirecting = async (e) => {
@@ -43,7 +50,8 @@ export default function Lostnfound() {
         Newitem.studentid = studentid;
         Newitem.contact = contact;
         Newitem.description = description;
-        alert(`New item named: ${Newitem.itemname} added to the list`);
+        Newitem.status = status;
+        alert(`New ${Newitem.status} item named: ${Newitem.itemname} added to the list`);
 
         await Adding(Newitem);
     };
@@ -160,7 +168,7 @@ const card2 = (
             </thead>
             <tbody>
             {
-                courierList.map((data, index)=>{
+                lostnfound.map((data, index)=>{
                     return(
                         <tr key={index} class = "lostnfound_data_entry">
                             <td>{index+1}</td>
