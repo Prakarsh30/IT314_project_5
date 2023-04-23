@@ -31,7 +31,18 @@ import handleAlertClose from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import "./complaints.css";
+import { LikeButton } from "./Likebutton";
+// import Dialog, {
+//   DialogTitle,
+//   DialogContent,
+//   DialogFooter,
+//   DialogButton,
+// } from "@material/react-dialog";
 
+const joje = () => {
+  console.log("hey");
+};
 const set = (key, value, expiry) => {
   const now = new Date();
   const item = {
@@ -54,7 +65,12 @@ const get = (key) => {
   }
   return item.value;
 };
-
+let closeImg = {
+  cursor: "pointer",
+  float: "right",
+  marginTop: "5px",
+  width: "20px",
+};
 const remove = (key) => {
   localStorage.removeItem(key);
 };
@@ -90,6 +106,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 // module.exports = complaintMessage;
 
 const Complaints = () => {
+  // useEffect(() => {
+  //   const dialog = ref.current;
+  //   dialog.showModal();
+  //   return () => dialog.close();
+  // }, []);
+  const [state, setState] = useState({ isOpen: false });
   const [open, setOpen] = React.useState(false);
   const [complaints, setComplaints] = useState([]);
   const [title, setTitle] = useState("");
@@ -275,195 +297,192 @@ const Complaints = () => {
 
   const get = (keyName) => {
     const data = localStorage.getItem(keyName);
-    if (!data) {     // if no value exists associated with the key, return null
-        return null;
+    if (!data) {
+      // if no value exists associated with the key, return null
+      return null;
     }
     const item = JSON.parse(data);
     if (Date.now() > item.ttl) {
-        localStorage.removeItem(keyName);
-        return null;
+      localStorage.removeItem(keyName);
+      return null;
     }
     return item.value;
   };
 
-const role = get("role");
+  const role = get("role");
 
   return (
-    <div>
-      <div className="complaints">
-        <div className="complaints__header">
-          <h1>Complaints</h1>
-          
-          {role === "admin" && (<Button
-            variant="contained"
-            color="primary"
-            onClick={handleClickOpen}
-            className="complaints__add"
-          >
-            Add Complaint
-          </Button>)}
-          {/* <Button
-            variant="contained"
-            color="primary"
-            onClick={handleClickOpen}
-            className="complaints__add"
-          >
-            Add Complaint
-          </Button> */}
+    // <div>
+    //   <div className="complaints">
+    //     <div className="complaints__header">
+    //       <h1>Complaints</h1>
 
+    //       {role === "admin" && (<Button
+    //         variant="contained"
+    //         color="primary"
+    //         onClick={handleClickOpen}
+    //         className="complaints__add"
+    //       >
+    //         Add Complaint
+    //       </Button>)}
+    //       {/* <Button
+    //         variant="contained"
+    //         color="primary"
+    //         onClick={handleClickOpen}
+    //         className="complaints__add"
+    //       >
+    //         Add Complaint
+    //       </Button> */}
 
-        </div>
-        <div className="complaints__body">
-          {complaints.map((complaint) => (
-            <div className="complaints__card">
-              <div className="complaints__cardHeader">
-                <h3>{complaint.title}</h3>
-                <div className="complaints__cardHeaderButtons">
-                  
-                  {/*  */}
+    //     </div>
+    //     <div className="complaints__body">
+    //       {complaints.map((complaint) => (
+    //         <div className="complaints__card">
+    //           <div className="complaints__cardHeader">
+    //             <h3>{complaint.title}</h3>
+    //             <div className="complaints__cardHeaderButtons">
 
-                  
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() =>
-                      handleEditOpen(
-                        complaint._id,
-                        complaint.title,
-                        complaint.message,
-                        complaint.creator
-                      )
-                    }
-                  >
-                    Edit
-                  </Button>
+    //               {/*  */}
 
+    //               <Button
+    //                 variant="contained"
+    //                 color="primary"
+    //                 onClick={() =>
+    //                   handleEditOpen(
+    //                     complaint._id,
+    //                     complaint.title,
+    //                     complaint.message,
+    //                     complaint.creator
+    //                   )
+    //                 }
+    //               >
+    //                 Edit
+    //               </Button>
 
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() =>
-                      handleDeleteOpen(
-                        complaint._id,
-                        complaint.title,
-                        complaint.message,
-                        complaint.creator
-                      )
-                    }
-                  >
-                    Delete
-                  </Button>
+    //               <Button
+    //                 variant="contained"
+    //                 color="secondary"
+    //                 onClick={() =>
+    //                   handleDeleteOpen(
+    //                     complaint._id,
+    //                     complaint.title,
+    //                     complaint.message,
+    //                     complaint.creator
+    //                   )
+    //                 }
+    //               >
+    //                 Delete
+    //               </Button>
 
+    //             </div>
+    //           </div>
+    //           <div className="complaints__cardBody">
+    //             <p>{complaint.message}</p>
+    //           </div>
+    //           <div className="complaints__cardFooter">
+    //             <p>Created by: {complaint.creator}</p>
+    //           </div>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   </div>
+    //   <Dialog
+    //     open={open}
+    //     onClose={handleClose}
+    //     aria-labelledby="form-dialog-title"
+    //   >
+    //     <DialogTitle id="form-dialog-title">Add Complaint</DialogTitle>
+    //     <DialogContent>
+    //       <DialogContentText>
+    //         To add a complaint, please enter the title, message and creator
+    //         name.
+    //       </DialogContentText>
+    //       <TextField
+    //         autoFocus
+    //         margin="dense"
+    //         id="title"
+    //         label="Title"
+    //         type="text"
+    //         fullWidth
+    //         onChange={handleTitleChange}
+    //       />
+    //       <TextField
+    //         margin="dense"
+    //         id="message"
+    //         label="Message"
+    //         type="text"
+    //         fullWidth
+    //         onChange={handleMessageChange}
+    //       />
+    //       <TextField
+    //         margin="dense"
+    //         id="creator"
+    //         label="Creator"
+    //         type="text"
+    //         fullWidth
+    //         onChange={handleCreatorChange}
+    //       />
+    //     </DialogContent>
+    //     <DialogActions>
+    //       <Button onClick={handleClose} color="primary">
+    //         Cancel
+    //       </Button>
+    //       <Button onClick={handleSubmit} color="primary">
+    //         Add
+    //       </Button>
+    //     </DialogActions>
+    //   </Dialog>
+    //   <Dialog
+    //     open={edit}
+    //     onClose={handleEditClose}
+    //     aria-labelledby="form-dialog-title"
+    //   >
+    //     <DialogTitle id="form-dialog-title">Edit Complaint</DialogTitle>
+    //     <DialogContent>
+    //       <DialogContentText>
+    //         To edit a complaint, please enter the title, message and creator
+    //         name.
+    //       </DialogContentText>
+    //       <TextField
+    //         autoFocus
+    //         margin="dense"
+    //         id="title"
+    //         label="Title"
+    //         type="text"
+    //         fullWidth
+    //         value={editTitle}
+    //         onChange={handleEditTitleChange}
+    //       />
+    //       <TextField
+    //         margin="dense"
+    //         id="message"
+    //         label="Message"
+    //         type="text"
+    //         fullWidth
+    //         value={editMessage}
+    //         onChange={handleEditMessageChange}
+    //       />
+    //       <TextField
+    //         margin="dense"
+    //         id="creator"
+    //         label="Creator"
+    //         type="text"
+    //         fullWidth
+    //         value={editCreator}
+    //         onChange={handleEditCreatorChange}
+    //       />
+    //     </DialogContent>
+    //     <DialogActions>
+    //       <Button onClick={handleEditClose} color="primary">
+    //         Cancel
+    //       </Button>
+    //       <Button onClick={() => handleEdit(editId)} color="primary">
+    //         Edit
+    //       </Button>
+    //     </DialogActions>
+    //   </Dialog>
 
-                </div>
-              </div>
-              <div className="complaints__cardBody">
-                <p>{complaint.message}</p>
-              </div>
-              <div className="complaints__cardFooter">
-                <p>Created by: {complaint.creator}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Add Complaint</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To add a complaint, please enter the title, message and creator
-            name.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="title"
-            label="Title"
-            type="text"
-            fullWidth
-            onChange={handleTitleChange}
-          />
-          <TextField
-            margin="dense"
-            id="message"
-            label="Message"
-            type="text"
-            fullWidth
-            onChange={handleMessageChange}
-          />
-          <TextField
-            margin="dense"
-            id="creator"
-            label="Creator"
-            type="text"
-            fullWidth
-            onChange={handleCreatorChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
-            Add
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Dialog
-        open={edit}
-        onClose={handleEditClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Edit Complaint</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To edit a complaint, please enter the title, message and creator
-            name.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="title"
-            label="Title"
-            type="text"
-            fullWidth
-            value={editTitle}
-            onChange={handleEditTitleChange}
-          />
-          <TextField
-            margin="dense"
-            id="message"
-            label="Message"
-            type="text"
-            fullWidth
-            value={editMessage}
-            onChange={handleEditMessageChange}
-          />
-          <TextField
-            margin="dense"
-            id="creator"
-            label="Creator"
-            type="text"
-            fullWidth
-            value={editCreator}
-            onChange={handleEditCreatorChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleEditClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={() => handleEdit(editId)} color="primary">
-            Edit
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* <Dialog
+    /* <Dialog
 
         open={deleteOpen}
         onClose={handleDeleteClose}
@@ -493,8 +512,147 @@ const role = get("role");
         <Alert onClose={handleAlertClose} severity={alertType}>
           {alertMessage}
         </Alert>
-      </snackbar> */}
+      </snackbar> */
+
+    <div className="ag-format-container">
+      <div className="ag-courses_box">
+        <div className="ag-courses_item">
+          <button className="model_btn" onclick={joje}>
+            <a href="#" className="ag-courses-item_link">
+              <div className="ag-courses-item_bg" />
+              <div className="ag-courses-item_title">
+                UI/Web&amp;Graph design for teenagers 11-17&nbsp;years old
+              </div>
+              <div className="ag-courses-item_date-box">
+                Start:
+                <span className="ag-courses-item_date">04.11.2022</span>
+              </div>
+            </a>
+          </button>
+        </div>
+        <div className="ag-courses_item">
+          <a href="#" className="ag-courses-item_link">
+            <div className="ag-courses-item_bg" />
+            <div className="ag-courses-item_title">
+              UX/UI Web-Design&nbsp;+ Mobile Design
+            </div>
+            <div className="ag-courses-item_date-box">
+              Start:
+              <span className="ag-courses-item_date">04.11.2022</span>
+            </div>
+          </a>
+        </div>
+        <div className="ag-courses_item">
+          <a href="#" className="ag-courses-item_link">
+            <div className="ag-courses-item_bg" />
+            <div className="ag-courses-item_title">
+              Annual package "Product+UX/UI+Graph designer&nbsp;2022"
+            </div>
+            <div className="ag-courses-item_date-box">
+              Start:
+              <span className="ag-courses-item_date">04.11.2022</span>
+            </div>
+          </a>
+        </div>
+        <div className="ag-courses_item">
+          <a href="#" className="ag-courses-item_link">
+            <div className="ag-courses-item_bg" />
+            <div className="ag-courses-item_title">Graphic Design</div>
+            <div className="ag-courses-item_date-box">
+              Start:
+              <span className="ag-courses-item_date">04.11.2022</span>
+            </div>
+          </a>
+        </div>
+        <div className="ag-courses_item">
+          <a href="#" className="ag-courses-item_link">
+            <div className="ag-courses-item_bg" />
+            <div className="ag-courses-item_title">Motion Design</div>
+            <div className="ag-courses-item_date-box">
+              Date:
+              <span className="ag-courses-item_date">30.11.2022</span>
+            </div>
+          </a>
+        </div>
+        <div className="ag-courses_item">
+          <a href="#" className="ag-courses-item_link">
+            <div className="ag-courses-item_bg" />
+            <div className="ag-courses-item_title">
+              Front-end development&nbsp;+ jQuery&nbsp;+ CMS
+            </div>
+          </a>
+        </div>
+        <div className="ag-courses_item">
+          <a href="#" className="ag-courses-item_link">
+            <div className="ag-courses-item_bg"></div>
+            <div className="ag-courses-item_title">Digital Marketing</div>
+          </a>
+        </div>
+        <div className="ag-courses_item">
+          <a href="#" className="ag-courses-item_link">
+            <div className="ag-courses-item_bg" />
+            <div className="ag-courses-item_title">Interior Design</div>
+            <div className="ag-courses-item_date-box">
+              Start:
+              <span className="ag-courses-item_date">31.10.2022</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <button class="primary" onClick={(e) => setState({ isOpen: true })}>
+        Open Dialog
+      </button>
+      {/* <dialog id="dialog">
+        <h2>Hello.</h2>
+        <p>
+          A CSS-only modal based on the{" "}
+          <a
+            href="https://developer.mozilla.org/es/docs/Web/CSS/::backdrop"
+            target="_blank"
+          >
+            ::backdrop
+          </a>{" "}
+          pseudo-class. Hope you find it helpful.
+        </p>
+        <p>
+          You can also change the styles of the <code>::backdrop</code> from the
+          CSS.
+        </p>
+        <button onclick={joje} aria-label="close" className="x">
+          ❌
+        </button>
+      </dialog> */}
+      <Dialog
+        className="icon-dialog mdc-dialog--scrollable"
+        onClose={() => this.setState({ isOpen: false })}
+        open={state.isOpen}
+        // title={
+
+        // }
+      >
+        <DialogTitle>My Dialog</DialogTitle>
+        {/* <hr></hr> */}
+        <DialogContent id="root">
+          Annual package "Product+UX/UI+Graph designer&nbsp;2022"
+          <LikeButton />
+        </DialogContent>
+        {/* <DialogFooter>
+          <DialogButton action="dismiss">Like</DialogButton>
+          <DialogButton action="accept" isDefault>
+            Dislike
+          </DialogButton>
+        </DialogFooter> */}
+        <button
+          onclick={(e) => setState({ isOpen: false })}
+          aria-label="close"
+          className="x"
+        >
+          ❌
+        </button>
+      </Dialog>
     </div>
+
+    // </div>
   );
 };
 
