@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-// import Form from "react-bootstrap/Form";
-// import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import "./login_styles.css";
-// import { FaUserAlt } from "react-icons/fa";
-// import { FaLock } from "react-icons/fa";
 
 export default function LoginPage() {
   let navigate = useNavigate();
@@ -79,6 +75,8 @@ export default function LoginPage() {
     user.password = password;
     // console.log(user);
     await login(user);
+
+    navigate("/", { curruser: { email: user.email } });
   };
 
   function validateForm() {
@@ -89,6 +87,10 @@ export default function LoginPage() {
     event.preventDefault();
   }
 
+  const [button_flag, setbutton_flag] = useState(false);
+  function handlebutton() {
+    setbutton_flag(!button_flag);
+  }
   return (
     // <div className="container">
     //   <div className="screen">
