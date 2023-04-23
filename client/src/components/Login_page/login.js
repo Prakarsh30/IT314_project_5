@@ -20,7 +20,7 @@ export default function LoginPage() {
   const set = (keyName, keyValue, ttl) => {
     const data = {
         value: keyValue,                  // store the value within this object
-        ttl: Date.now() + (ttl * 1000),   // store the TTL (time to live)
+        // ttl: Date.now() + (ttl * 1000),   // store the TTL (time to live)
     }
     localStorage.setItem(keyName, JSON.stringify(data));
   };
@@ -48,28 +48,35 @@ export default function LoginPage() {
       body: JSON.stringify(user),
     });
     const data = await res.json();
+    console.log("hey");
     
     console.log(data);
     if (res.status === 400 || !data) {
 
       window.alert("Invalid Credentials");
     } else {
-      console.log(data.token);
-      
-      // set the token in local storage
-      set("token", data.token, 3600);
-      // window.alert("Login Successful");
+      // console.log(data.token);
+
+      // // set the token in local storage
+      // console.log(data)
+      // set("token", data.token, 3600);
+      set("email", data.user.email, 3600);
+      set("role", data.user.role, 3600);
+      const token = get("role");
+      console.log(token);
+      //t window.alert("Login Successful");
       //navigate to the home page
       // window.alert("Login successful")
       // navigate("/");
     }
   };
-
+// get the token from local storage
+  
   const handleRedirecting = async (e) => {
     e.preventDefault();
     user.email = email;
     user.password = password;
-    console.log(user);
+    // console.log(user);
     await login(user);
 
       navigate("/", { curruser: { email: user.email } });
@@ -186,7 +193,6 @@ export default function LoginPage() {
           placeholder="Password"
           required=""
           onChange={(data) => {
-            console.log(data.target.value);
             setPassword(data.target.value);
           }}
         />

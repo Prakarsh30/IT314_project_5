@@ -26,8 +26,7 @@ exports.auth= async(req,res) =>{
     }
 
     // const token = jwt.sign({_id:isexist._id},process.env.SECRET_KEY);
-
-    res.json({
+    res.status(200).json({
         // token,
         user:{
             _id:isexist._id,

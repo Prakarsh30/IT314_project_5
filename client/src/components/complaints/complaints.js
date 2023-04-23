@@ -273,21 +273,43 @@ const Complaints = () => {
       });
   }, []);
 
+  const get = (keyName) => {
+    const data = localStorage.getItem(keyName);
+    if (!data) {     // if no value exists associated with the key, return null
+        return null;
+    }
+    const item = JSON.parse(data);
+    if (Date.now() > item.ttl) {
+        localStorage.removeItem(keyName);
+        return null;
+    }
+    return item.value;
+  };
+
+const role = get("role");
+
   return (
     <div>
       <div className="complaints">
         <div className="complaints__header">
           <h1>Complaints</h1>
           
-          
-          <Button
+          {role === "admin" && (<Button
             variant="contained"
             color="primary"
             onClick={handleClickOpen}
             className="complaints__add"
           >
             Add Complaint
-          </Button>
+          </Button>)}
+          {/* <Button
+            variant="contained"
+            color="primary"
+            onClick={handleClickOpen}
+            className="complaints__add"
+          >
+            Add Complaint
+          </Button> */}
 
 
         </div>
