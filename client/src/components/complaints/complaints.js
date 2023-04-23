@@ -1,47 +1,47 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
-import { TextField } from '@mui/material';
-import axios from 'axios';
-import {Alert} from '@mui/material';
-import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
-import deleteOpen from '@mui/icons-material/Delete';
-import snackbar from '@mui/material';
-import handleAlertClose from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import { useHistory } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import CloseIcon from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
+import { TextField } from "@mui/material";
+import axios from "axios";
+import { Alert } from "@mui/material";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import deleteOpen from "@mui/icons-material/Delete";
+import snackbar from "@mui/material";
+import handleAlertClose from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const set=(key,value,expiry)=>{
+const set = (key, value, expiry) => {
   const now = new Date();
   const item = {
     value: value,
     expiry: now.getTime() + expiry,
-  }
-    localStorage.setItem(key, JSON.stringify(item));
+  };
+  localStorage.setItem(key, JSON.stringify(item));
 };
 
-const get=(key)=>{
+const get = (key) => {
   const itemStr = localStorage.getItem(key);
   if (!itemStr) {
     return null;
@@ -55,14 +55,13 @@ const get=(key)=>{
   return item.value;
 };
 
-const remove=(key)=>{
+const remove = (key) => {
   localStorage.removeItem(key);
 };
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 
 // Here is my model file
 
@@ -157,7 +156,7 @@ const Complaints = () => {
 
   const handleCreatorChange = (e) => {
     setCreator(e.target.value);
-  }
+  };
 
   const handleEditTitleChange = (e) => {
     setEditTitle(e.target.value);
@@ -170,29 +169,36 @@ const Complaints = () => {
   const handleEditCreatorChange = (e) => {
     setEditCreator(e.target.value);
   };
-
+  const handleAlertClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setAlert(false);
+  };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:5000/complaints/${id}`)
-    .then((res) => {
-      setDeleteAlert(false);
-      setDeleteAlertMessage("Complaint deleted successfully");
-      setDeleteAlertType("success");
-      setDeleteAlert(true);
-      setTimeout(() => {
-        setDeleteAlert(false);
-      }, 3000);
-      axios.get("http://localhost:5000/complaints")
+    axios
+      .delete(`http://localhost:5000/complaints/${id}`)
       .then((res) => {
-        setComplaints(res.data);
+        setDeleteAlert(false);
+        setDeleteAlertMessage("Complaint deleted successfully");
+        setDeleteAlertType("success");
+        setDeleteAlert(true);
+        setTimeout(() => {
+          setDeleteAlert(false);
+        }, 3000);
+        axios
+          .get("http://localhost:5000/complaints")
+          .then((res) => {
+            setComplaints(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
       });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
   };
 
   const handleEdit = (id) => {
@@ -201,26 +207,28 @@ const Complaints = () => {
       message: editMessage,
       creator: editCreator,
     };
-    axios.patch(`http://localhost:5000/complaints/${id}`, updatedComplaint)
-    .then((res) => {
-      setEdit(false);
-      setEditAlertMessage("Complaint updated successfully");
-      setEditAlertType("success");
-      setEditAlert(true);
-      setTimeout(() => {
-        setEditAlert(false);
-      }, 3000);
-      axios.get("http://localhost:5000/complaints")
+    axios
+      .patch(`http://localhost:5000/complaints/${id}`, updatedComplaint)
       .then((res) => {
-        setComplaints(res.data);
+        setEdit(false);
+        setEditAlertMessage("Complaint updated successfully");
+        setEditAlertType("success");
+        setEditAlert(true);
+        setTimeout(() => {
+          setEditAlert(false);
+        }, 3000);
+        axios
+          .get("http://localhost:5000/complaints")
+          .then((res) => {
+            setComplaints(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
       });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
   };
 
   const handleSubmit = (e) => {
@@ -230,51 +238,80 @@ const Complaints = () => {
       message: message,
       creator: creator,
     };
-    axios.post("http://localhost:5000/complaints", newComplaint)
-    .then((res) => {
-      setOpen(false);
-      setAlertMessage("Complaint added successfully");
-      setAlertType("success");
-      setAlert(true);
-      setTimeout(() => {
-        setAlert(false);
-      }, 3000);
-      axios.get("http://localhost:5000/complaints")
+    axios
+      .post("http://localhost:5000/complaints", newComplaint)
+      .then((res) => {
+        setOpen(false);
+        setAlertMessage("Complaint added successfully");
+        setAlertType("success");
+        setAlert(true);
+        setTimeout(() => {
+          setAlert(false);
+        }, 3000);
+        axios
+          .get("http://localhost:5000/complaints")
+          .then((res) => {
+            setComplaints(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/complaints")
       .then((res) => {
         setComplaints(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  }, []);
+
+  const get = (keyName) => {
+    const data = localStorage.getItem(keyName);
+    if (!data) {     // if no value exists associated with the key, return null
+        return null;
+    }
+    const item = JSON.parse(data);
+    if (Date.now() > item.ttl) {
+        localStorage.removeItem(keyName);
+        return null;
+    }
+    return item.value;
   };
 
-  useEffect(() => {
-    axios.get("http://localhost:5000/complaints")
-    .then((res) => {
-      setComplaints(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }, []);
-  
+const role = get("role");
+
   return (
     <div>
       <div className="complaints">
         <div className="complaints__header">
           <h1>Complaints</h1>
-          <Button
+          
+          {role === "admin" && (<Button
             variant="contained"
             color="primary"
             onClick={handleClickOpen}
             className="complaints__add"
           >
             Add Complaint
-          </Button>
+          </Button>)}
+          {/* <Button
+            variant="contained"
+            color="primary"
+            onClick={handleClickOpen}
+            className="complaints__add"
+          >
+            Add Complaint
+          </Button> */}
+
+
         </div>
         <div className="complaints__body">
           {complaints.map((complaint) => (
@@ -282,6 +319,10 @@ const Complaints = () => {
               <div className="complaints__cardHeader">
                 <h3>{complaint.title}</h3>
                 <div className="complaints__cardHeaderButtons">
+                  
+                  {/*  */}
+
+                  
                   <Button
                     variant="contained"
                     color="primary"
@@ -292,13 +333,13 @@ const Complaints = () => {
                         complaint.message,
                         complaint.creator
                       )
-
                     }
                   >
                     Edit
                   </Button>
-                  <Button
 
+
+                  <Button
                     variant="contained"
                     color="secondary"
                     onClick={() =>
@@ -313,6 +354,7 @@ const Complaints = () => {
                     Delete
                   </Button>
 
+
                 </div>
               </div>
               <div className="complaints__cardBody">
@@ -326,7 +368,6 @@ const Complaints = () => {
         </div>
       </div>
       <Dialog
-
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
@@ -338,7 +379,6 @@ const Complaints = () => {
             name.
           </DialogContentText>
           <TextField
-
             autoFocus
             margin="dense"
             id="title"
@@ -348,7 +388,6 @@ const Complaints = () => {
             onChange={handleTitleChange}
           />
           <TextField
-
             margin="dense"
             id="message"
             label="Message"
@@ -357,7 +396,6 @@ const Complaints = () => {
             onChange={handleMessageChange}
           />
           <TextField
-
             margin="dense"
             id="creator"
             label="Creator"
@@ -376,7 +414,6 @@ const Complaints = () => {
         </DialogActions>
       </Dialog>
       <Dialog
-
         open={edit}
         onClose={handleEditClose}
         aria-labelledby="form-dialog-title"
@@ -388,7 +425,6 @@ const Complaints = () => {
             name.
           </DialogContentText>
           <TextField
-
             autoFocus
             margin="dense"
             id="title"
@@ -399,7 +435,6 @@ const Complaints = () => {
             onChange={handleEditTitleChange}
           />
           <TextField
-
             margin="dense"
             id="message"
             label="Message"
@@ -409,7 +444,6 @@ const Complaints = () => {
             onChange={handleEditMessageChange}
           />
           <TextField
-
             margin="dense"
             id="creator"
             label="Creator"
@@ -418,7 +452,6 @@ const Complaints = () => {
             value={editCreator}
             onChange={handleEditCreatorChange}
           />
-
         </DialogContent>
         <DialogActions>
           <Button onClick={handleEditClose} color="primary">
@@ -435,16 +468,15 @@ const Complaints = () => {
         open={deleteOpen}
         onClose={handleDeleteClose}
         aria-labelledby="form-dialog-title"
-                    
       >
         <DialogTitle id="form-dialog-title">Delete Complaint</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Are you sure you want to delete this complaint?
           </DialogContentText>
-                    
-        </DialogContent> */}
-        {/* <DialogActions>
+        </DialogContent>
+
+        <DialogActions>
           <Button onClick={handleDeleteClose} color="primary">
             Cancel
           </Button>
@@ -455,8 +487,8 @@ const Complaints = () => {
       </Dialog>
       <snackbar
         open={alert}
-        autoHideDuration={6000}
-        // onClose={handleAlertClose}
+        autoHideDuration={3000}
+        onClose={handleAlertClose}
       >
         <Alert onClose={handleAlertClose} severity={alertType}>
           {alertMessage}
@@ -466,7 +498,4 @@ const Complaints = () => {
   );
 };
 
-
-
-
-  export default Complaints;
+export default Complaints;

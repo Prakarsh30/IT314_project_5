@@ -39,8 +39,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 7vh;
-  background-color: #000000;
+  height: 10vh;
+  background-color: #000304;
   color: #fff;
   font-size: 18px;
   padding: 0 20px;
@@ -76,6 +76,15 @@
   color:#F6F1F1;
 }
 
+.dropdown-content a:hover{
+  text-decoration: none;
+  background-color:#19A7CE;
+  color:#F6F1F1;
+}
+
+.dropdown-content a:hover{
+  text-decoration: none;
+}
 .dropdown:hover .dropdown-content {
   display: block;
 }
@@ -102,4 +111,5 @@
 .home-btn:hover,
 .login-btn:hover {
   background-color: #146C94;
+  text-decoration: none;
 }
