@@ -385,8 +385,11 @@ body {
   }
   
   .login button {
+	padding: 13px;
+	margin: auto;
 	background-color: var(--loginSubmitBackgroundColor);
 	color: var(--loginSubmitColor);
+	font-size:medium;
 	font-weight: 700;
 	text-transform: uppercase;
 	border: none;
@@ -404,6 +407,7 @@ body {
   }
 
   .field{
+	
 	display: flex;
 	justify-content: center;
 	font-weight:550;
@@ -417,7 +421,9 @@ body {
   }
 
   #buttonset{
+	font-size:10.5pt;
 	width: 100px;
 	padding: 0;
 	background-color: transparent;
+	margin: auto 0;
   }
