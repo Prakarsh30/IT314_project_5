@@ -40,7 +40,7 @@
   justify-content: space-between;
   align-items: center;
   height: 10vh;
-  background-color: #000000;
+  background-color: #000304;
   color: #fff;
   font-size: 18px;
   padding: 0 20px;
@@ -69,6 +69,9 @@
   display: block;
 }
 
+.dropdown-content a:hover{
+  text-decoration: none;
+}
 .dropdown:hover .dropdown-content {
   display: block;
 }
@@ -95,4 +98,5 @@
 .home-btn:hover,
 .login-btn:hover {
   background-color: #146C94;
+  text-decoration: none;
 }

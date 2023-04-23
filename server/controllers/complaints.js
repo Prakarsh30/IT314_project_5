@@ -24,7 +24,7 @@ const createComplaints = async (req, res) => {
   }
 };
 
-exports.deleteComplaint = async (req, res) => {
+const deleteComplaint = async (req, res) => {
   // delete requested ID
   const { _id } = req.body;
 
@@ -42,4 +42,4 @@ exports.deleteComplaint = async (req, res) => {
 //   const { _id } = req.body;
 //   if(_id==req.
 
-module.exports = { getComplaints, createComplaints };
+module.exports = { getComplaints, createComplaints,deleteComplaint };

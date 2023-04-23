@@ -17,6 +17,26 @@ export default function LoginPage() {
     password: "",
     role: "",
   };
+  const set = (keyName, keyValue, ttl) => {
+    const data = {
+        value: keyValue,                  // store the value within this object
+        ttl: Date.now() + (ttl * 1000),   // store the TTL (time to live)
+    }
+    localStorage.setItem(keyName, JSON.stringify(data));
+  };
+
+  const get = (keyName) => {
+    const data = localStorage.getItem(keyName);
+    if (!data) {     // if no value exists associated with the key, return null
+        return null;
+    }
+    const item = JSON.parse(data);
+    if (Date.now() > item.ttl) {
+        localStorage.removeItem(keyName);
+        return null;
+    }
+    return item.value;
+  };
 
   // no sign up page, we will only have sign in page that collect email, password and role
   const login = async (user) => {
@@ -31,26 +51,28 @@ export default function LoginPage() {
     
     console.log(data);
     if (res.status === 400 || !data) {
+
       window.alert("Invalid Credentials");
     } else {
-      window.alert("Login Successful");
+      console.log(data.token);
+      
+      // set the token in local storage
+      set("token", data.token, 3600);
+      // window.alert("Login Successful");
       //navigate to the home page
-      navigate("../homepage/sidebar");
+      // window.alert("Login successful")
+      // navigate("/");
     }
   };
+
   const handleRedirecting = async (e) => {
     e.preventDefault();
     user.email = email;
     user.password = password;
-
+    console.log(user);
     await login(user);
 
-    if (user.role == "Admin") {
-      // history.push("/volunteer");
       navigate("/", { curruser: { email: user.email } });
-    } else if (user.role == "student") {
-      navigate("/", { curruser: { email: user.email } });
-    } else navigate("");
   };
 
   function validateForm() {
@@ -60,6 +82,7 @@ export default function LoginPage() {
   function handleSubmit(event) {
     event.preventDefault();
   }
+
   return (
     // <div className="container">
     //   <div className="screen">
@@ -119,10 +142,11 @@ export default function LoginPage() {
     //   </div>
     // </div>
     <>
+
   <div className="align">
   <div className="grid">
     <form
-      action="https://httpbin.org/post"
+      action="https://localhost:5000/post"
       method="POST"
       className="form login"
       onSubmit={handleSubmit}
@@ -142,6 +166,9 @@ export default function LoginPage() {
           className="form__input"
           placeholder="Username"
           required=""
+          onChange={(data) => {
+            setEmail(data.target.value);
+          }}
         />
       </div>
       <div className="form__field">
@@ -158,13 +185,18 @@ export default function LoginPage() {
           className="form__input"
           placeholder="Password"
           required=""
+          onChange={(data) => {
+            console.log(data.target.value);
+            setPassword(data.target.value);
+          }}
         />
+
       </div>
-      <div className="form__field"
-      disabled={!validateForm()}
-      onClick={handleRedirecting}>
-        {/* <input type="submit" defaultValue="Sign In" /> */}
-        <button name="field_name" value="submitted_value" className="login_btn">Log In</button>
+      <div className="form__field">
+      
+         {/* <input type="submit" defaultValue="Sign In" />  */}
+        <button className="login_btn" 
+        onClick={handleRedirecting}>Log In</button>
       </div>
     </form>
     {/* <p className="form_field">

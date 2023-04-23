@@ -15,7 +15,7 @@ const Navbar = () => {
       <button className="dropbtn"><GiHamburgerMenu /></button>
       <div className="dropdown-content">
         <a href="/NoticeBoard">Notice Board</a>
-        <a href="complaints">Complaints</a>
+        <a href="/complaints">Complaints</a>
         <a href="/couriers">Couriers</a>
         <a href="/lostnfound">Lost and found</a>
 
