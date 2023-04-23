@@ -39,7 +39,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 10vh;
+  height: 7%;
   background-color: #000304;
   color: #fff;
   font-size: 18px;
@@ -64,25 +64,25 @@
 }
 
 .dropdown-content a {
-  color: #F6F1F1;
+  color: #f6f1f1;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover{
+.dropdown-content a:hover {
   text-decoration: none;
-  background-color:#19A7CE;
-  color:#F6F1F1;
+  background-color: #19a7ce;
+  color: #f6f1f1;
 }
 
-.dropdown-content a:hover{
+.dropdown-content a:hover {
   text-decoration: none;
-  background-color:#19A7CE;
-  color:#F6F1F1;
+  background-color: #19a7ce;
+  color: #f6f1f1;
 }
 
-.dropdown-content a:hover{
+.dropdown-content a:hover {
   text-decoration: none;
 }
 .dropdown:hover .dropdown-content {
@@ -97,8 +97,8 @@
   border: none;
   cursor: pointer;
 }
-.dropbtn:hover{
-  background-color: #146C94 ;
+.dropbtn:hover {
+  background-color: #146c94;
 }
 
 .home-btn,
@@ -110,6 +110,6 @@
 
 .home-btn:hover,
 .login-btn:hover {
-  background-color: #146C94;
+  background-color: #146c94;
   text-decoration: none;
 }

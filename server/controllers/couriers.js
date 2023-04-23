@@ -28,7 +28,7 @@ const createCouriers = async (req, res) => {
   }
 };
 
-exports.deleteCouriers = async (req, res) => {
+const deleteCouriers = async (req, res) => {
   // delete requested ID
   const { _id } = req.body;
 
