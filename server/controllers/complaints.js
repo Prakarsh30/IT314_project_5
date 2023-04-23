@@ -16,7 +16,7 @@ const createComplaints = async (req, res) => {
   console.log(newComplaint);
   try {
     await newComplaint.save();
-      console.log("hey" , newComplaint);
+    console.log("hey", newComplaint);
 
     res.status(200).send(newComplaint);
   } catch (error) {
@@ -24,7 +24,7 @@ const createComplaints = async (req, res) => {
   }
 };
 
-const deleteComplaint = async (req, res) => {
+const deleteComplaints = async (req, res) => {
   // delete requested ID
   const { _id } = req.body;
 
@@ -42,4 +42,4 @@ const deleteComplaint = async (req, res) => {
 //   const { _id } = req.body;
 //   if(_id==req.
 
-module.exports = { getComplaints, createComplaints,deleteComplaint };
+module.exports = { getComplaints, createComplaints, deleteComplaints };
