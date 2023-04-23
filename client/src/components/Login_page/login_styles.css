@@ -320,6 +320,7 @@ body {
   
   .form__field {
 	display: flex;
+	align-items: center;
   }
   
   .form__input {
@@ -401,7 +402,22 @@ body {
   p {
 	margin-block: 1.5rem;
   }
+
+  .field{
+	display: flex;
+	justify-content: center;
+	font-weight:550;
+	text-align: center;
+	margin: 0;
+	color:black;
+  }
   
   .text--center {
 	text-align: center;
+  }
+
+  #buttonset{
+	width: 100px;
+	padding: 0;
+	background-color: transparent;
   }
