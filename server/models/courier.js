@@ -1,13 +1,20 @@
 const mongoose = require("mongoose");
 
 const courier = mongoose.Schema({
-  couriedID: Number,
-  student_name: String,
-  ID: Number,
-  RecievedAt: {
-    type: Date,
-    default: new Date(),
-  },
+    student_name: {
+        type: String,
+        required: true,
+        minlength: 3
+    },
+    couriedID: {
+        type: String,
+        required: true,
+        minlength: 3
+    },
+    RecievedAt: {
+        type: Date,
+        default: new Date().toISOString().split('T'),
+    },
 });
 
 const courierMessage = mongoose.model("courierMessage", courier);

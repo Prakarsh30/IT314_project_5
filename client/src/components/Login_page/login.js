@@ -47,9 +47,9 @@ export default function LoginPage() {
 
     if (user.role == "Admin") {
       // history.push("/volunteer");
-      navigate("admin", { curruser: { email: user.email } });
+      navigate("/", { curruser: { email: user.email } });
     } else if (user.role == "student") {
-      navigate("student", { curruser: { email: user.email } });
+      navigate("/", { curruser: { email: user.email } });
     } else navigate("");
   };
 
