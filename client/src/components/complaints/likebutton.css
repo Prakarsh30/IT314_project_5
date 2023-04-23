@@ -1,0 +1,106 @@
+body {
+  font-family: "Roboto", sans-serif;
+  color: #283943;
+}
+*:focus {
+  outline-color: #cca106;
+}
+.post {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5%;
+}
+.content {
+  padding-left: 3%;
+  position: relative;
+}
+.content:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 5%;
+  right: 35%;
+  display: block;
+  height: 450px;
+  width: 450px;
+  background: #b4d8d033;
+}
+.content h1 {
+  font-family: "Abril Fatface", cursive;
+  font-size: 48px;
+  letter-spacing: 0.02em;
+}
+p {
+  font-weight: 300;
+  max-width: 550px;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+button {
+  font-size: 27px;
+  transition: 0.3s;
+  border: 0;
+  background: transparent;
+  margin: 5px;
+  color: #283943;
+}
+button:hover {
+  color: #43667a;
+}
+.active {
+  color: #cca106;
+}
+.nav__button {
+  background: #283943;
+  height: 100%;
+  color: white;
+  padding: 5px 12px;
+  margin: 5px;
+}
+.nav__button:hover {
+  color: #cca106;
+}
+.imgs {
+  position: relative;
+}
+img {
+  width: 90%;
+  transition: 0.05s;
+}
+.ocean {
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+}
+.lemons {
+  position: absolute;
+  width: 60%;
+  right: 0;
+  top: 20%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 900px) {
+  .post {
+    flex-direction: column;
+  }
+}
+
+.fa-instagram {
+  position: absolute;
+  color: #283943;
+  top: 3%;
+  right: 2%;
+  font-size: 38px;
+}
+
+.fa-instagram:hover {
+  font-size: 42px;
+  color: #cca106;
+  transition: all 0.1s linear;
+  cursor: pointer;
+}
