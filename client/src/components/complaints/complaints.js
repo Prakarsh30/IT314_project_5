@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import moment from "moment";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
@@ -32,7 +32,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./complaints.css";
-import { LikeButton } from "./Likebutton";
+import LikeButton from "./Likebutton";
+// import { makeStyles, Theme } from "@material-ui/core";
+
 // import Dialog, {
 //   DialogTitle,
 //   DialogContent,
@@ -135,6 +137,43 @@ const Complaints = () => {
   const [deleteTitle, setDeleteTitle] = useState("");
   const [deleteMessage, setDeleteMessage] = useState("");
   const [deleteCreator, setDeleteCreator] = useState("");
+
+  /*
+  Get all complaints
+  */
+
+  const [allComplaints, setAllComplaints] = useState([]);
+
+  const OnLoadFunc = async () => {
+    const res = await fetch("http://localhost:5000/complaints", {
+      method: "get",
+    });
+    const data = await res.json();
+    setAllComplaints(data);
+  };
+
+  useEffect(() => {
+    OnLoadFunc();
+  }, []);
+
+  // const styles = {
+  //   root: {
+  //     backgroundColor: "transparent",
+  //   },
+
+  //   paper: {
+  //     backgroundColor: "transparent",
+  //     boxShadow: "none",
+  //     overflow: "hidden",
+  //   },
+  // };
+
+  // const useStyles = makeStyles((theme: Theme) => ({
+  //   backDrop: {
+  //     backdropFilter: "blur(3px)",
+  //     backgroundColor: "rgba(0,0,30,0.4)",
+  //   },
+  // }));
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -516,140 +555,48 @@ const Complaints = () => {
 
     <div className="ag-format-container">
       <div className="ag-courses_box">
-        <div className="ag-courses_item">
-          <button className="model_btn" onclick={joje}>
+        {allComplaints.map((complaint) => (
+          <div className="ag-courses_item">
             <a href="#" className="ag-courses-item_link">
-              <div className="ag-courses-item_bg" />
-              <div className="ag-courses-item_title">
-                UI/Web&amp;Graph design for teenagers 11-17&nbsp;years old
-              </div>
-              <div className="ag-courses-item_date-box">
-                Start:
-                <span className="ag-courses-item_date">04.11.2022</span>
-              </div>
+              <button onClick={(e) => setState({ isOpen: true })}>
+                <div className="ag-courses-item_bg" />
+                <div className="ag-courses-item_title">{complaint.title}</div>
+                <div className="ag-courses-item_date-box">
+                  Date: &nbsp;
+                  <span className="ag-courses-item_date">
+                    {moment(complaint.createdAt).format("LL")}
+                  </span>
+                </div>
+              </button>
             </a>
-          </button>
-        </div>
-        <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
-            <div className="ag-courses-item_bg" />
-            <div className="ag-courses-item_title">
-              UX/UI Web-Design&nbsp;+ Mobile Design
-            </div>
-            <div className="ag-courses-item_date-box">
-              Start:
-              <span className="ag-courses-item_date">04.11.2022</span>
-            </div>
-          </a>
-        </div>
-        <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
-            <div className="ag-courses-item_bg" />
-            <div className="ag-courses-item_title">
-              Annual package "Product+UX/UI+Graph designer&nbsp;2022"
-            </div>
-            <div className="ag-courses-item_date-box">
-              Start:
-              <span className="ag-courses-item_date">04.11.2022</span>
-            </div>
-          </a>
-        </div>
-        <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
-            <div className="ag-courses-item_bg" />
-            <div className="ag-courses-item_title">Graphic Design</div>
-            <div className="ag-courses-item_date-box">
-              Start:
-              <span className="ag-courses-item_date">04.11.2022</span>
-            </div>
-          </a>
-        </div>
-        <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
-            <div className="ag-courses-item_bg" />
-            <div className="ag-courses-item_title">Motion Design</div>
-            <div className="ag-courses-item_date-box">
-              Date:
-              <span className="ag-courses-item_date">30.11.2022</span>
-            </div>
-          </a>
-        </div>
-        <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
-            <div className="ag-courses-item_bg" />
-            <div className="ag-courses-item_title">
-              Front-end development&nbsp;+ jQuery&nbsp;+ CMS
-            </div>
-          </a>
-        </div>
-        <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
-            <div className="ag-courses-item_bg"></div>
-            <div className="ag-courses-item_title">Digital Marketing</div>
-          </a>
-        </div>
-        <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
-            <div className="ag-courses-item_bg" />
-            <div className="ag-courses-item_title">Interior Design</div>
-            <div className="ag-courses-item_date-box">
-              Start:
-              <span className="ag-courses-item_date">31.10.2022</span>
-            </div>
-          </a>
-        </div>
+            <Dialog
+              className="icon-dialog mdc-dialog--scrollable"
+              onClose={() => this.setState({ isOpen: false })}
+              open={state.isOpen}
+              sx={{
+                "& .MuiBackdrop-root": { backgroundColor: "transparent" },
+                backdropFilter: "blur(1px)",
+              }}
+            >
+              <DialogTitle>{complaint.title}</DialogTitle>
+              <DialogContent>
+                {complaint.message}
+                <LikeButton
+                  like={complaint.likeCount}
+                  dislike={complaints.dislikeCount}
+                />
+              </DialogContent>
+              <button
+                onClick={(e) => setState({ isOpen: false })}
+                aria-label="close"
+                className="x"
+              >
+                ❌
+              </button>
+            </Dialog>
+          </div>
+        ))}
       </div>
-      <button class="primary" onClick={(e) => setState({ isOpen: true })}>
-        Open Dialog
-      </button>
-      {/* <dialog id="dialog">
-        <h2>Hello.</h2>
-        <p>
-          A CSS-only modal based on the{" "}
-          <a
-            href="https://developer.mozilla.org/es/docs/Web/CSS/::backdrop"
-            target="_blank"
-          >
-            ::backdrop
-          </a>{" "}
-          pseudo-class. Hope you find it helpful.
-        </p>
-        <p>
-          You can also change the styles of the <code>::backdrop</code> from the
-          CSS.
-        </p>
-        <button onclick={joje} aria-label="close" className="x">
-          ❌
-        </button>
-      </dialog> */}
-      <Dialog
-        className="icon-dialog mdc-dialog--scrollable"
-        onClose={() => this.setState({ isOpen: false })}
-        open={state.isOpen}
-        // title={
-
-        // }
-      >
-        <DialogTitle>My Dialog</DialogTitle>
-        {/* <hr></hr> */}
-        <DialogContent id="root">
-          Annual package "Product+UX/UI+Graph designer&nbsp;2022"
-          <LikeButton />
-        </DialogContent>
-        {/* <DialogFooter>
-          <DialogButton action="dismiss">Like</DialogButton>
-          <DialogButton action="accept" isDefault>
-            Dislike
-          </DialogButton>
-        </DialogFooter> */}
-        <button
-          onclick={(e) => setState({ isOpen: false })}
-          aria-label="close"
-          className="x"
-        >
-          ❌
-        </button>
-      </Dialog>
     </div>
 
     // </div>

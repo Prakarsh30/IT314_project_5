@@ -1,8 +1,11 @@
 import React from "react";
+import { ReactDOM } from "react";
+
 import "./likebutton.css";
-export class LikeButton extends React.Component {
+
+class LikeButton extends React.Component {
   state = {
-    like: true,
+    like: false,
     dislike: false,
     position: { x: 0, y: 0 },
   };
@@ -48,24 +51,28 @@ export class LikeButton extends React.Component {
 
   render() {
     return (
-      <div id="root">
+      <div>
         <button
           id="like"
           onClick={() => this.handleClickLike()}
           className={this.state.like ? "active" : "not-active"}
         >
-          <i className="far fa-thumbs-up"></i>
-          {this.state.like ? 101 : 100}
+          <i className="fa fa-thumbs-up"></i>
+          {this.state.like ? this.props.like + 1 : this.props.like}
         </button>
         <button
           id="dislike"
           onClick={() => this.handleClickDislike()}
           className={this.state.dislike ? "active" : "not-active"}
         >
-          <i className="far fa-thumbs-down"></i>
-          {this.state.dislike ? 26 : 25}
+          <i className="fa fa-thumbs-down"></i>
+
+          {this.state.dislike ? this.props.dislike + 1 : this.props.dislike}
         </button>
       </div>
     );
   }
 }
+
+// ReactDOM.render(<LikeButton />, document.getElementById("root"));
+export default LikeButton;

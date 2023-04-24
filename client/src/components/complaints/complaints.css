@@ -46,6 +46,7 @@ a {
 .ag-courses-item_link:hover,
 .ag-courses-item_link:hover .ag-courses-item_date {
   text-decoration: none;
+
   color: #fff;
 }
 .ag-courses-item_link:hover .ag-courses-item_bg {
@@ -167,7 +168,7 @@ Dialog {
 }
 Dialog::backdrop {
   animation: fadeIn 1s ease both;
-  background: #000;
+  background: transparent;
   z-index: 2;
   backdrop-filter: blur(20px);
 }
@@ -200,7 +201,7 @@ Dialog p {
 Dialog p a:visited {
   color: #000;
 }
-
+/* 
 button.primary {
   display: inline-block;
   font-size: 0.8rem;
@@ -218,7 +219,7 @@ button.primary {
 button.primary:hover {
   box-shadow: 0 20px 20px -10px #000;
   transform: translateY(-5px);
-}
+} */
 @keyframes fadeIn {
   from {
     opacity: 0;
