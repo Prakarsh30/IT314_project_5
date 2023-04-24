@@ -128,16 +128,14 @@ const card2 = (
 
     return (
         <body>
-            <Stack className="university-card" marginLeft={30} marginTop={3} alignItems={'center'}> 
+            <Stack className="university-card" marginLeft={39} marginTop={3} alignItems={'center'}> 
             <h2>Lost and Found</h2>
             <h5>Report and check your items here.</h5>
     </Stack>
         <br></br>
         <div class="container">
-        {/* <div class="leftpane1">
-            <h3>Hello</h3>
-        </div> */}
         <div class="leftpane2"> 
+
         <Box sx={{ minWidth: 275 }}>
             <Card>{card2}</Card>
         </Box>
@@ -175,8 +173,8 @@ const card2 = (
                 <Button variant="contained" className="lostnfound_button" onClick={handleRedirecting}>
       submit
     </Button>
+    
             </form>
-            
         </div>
         </div>
         <div class="somepane">
