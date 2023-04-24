@@ -5,20 +5,20 @@
     margin: 0;
     padding: 0;
     font-family: Raleway, sans-serif;
+    /* display: block; */
 }
-
-body {
-    background: linear-gradient(90deg, #C7C5F4, #776BCC);
-}
-
 
 /* styles for table here */
 .App {
     width: 100%;
-    height: 100vh;
-    display: flex;
+    min-height: 100vh;
     justify-content: center;
     padding: 2.5%;
+}
+
+h2{
+    font-weight: bold;
+    color: black;
 }
 
 table {
@@ -35,19 +35,34 @@ td {
     text-align: center;
 }
 
+.tdb {
+    text-align: center;
+    margin-left: 0px;
+}
+
 .data_entry {
     width: 100%;
     height: 10px;
+    padding-right: 0px;
 }
 
 .headerStyle {
-    background-color: crimson;
+    background-color: rgb(70, 169, 169);
+    color: black;
+    text-align: center;
 }
 
-.AppBody {
+body {
     width: 100%;
-    background-color: whitesmoke;
+    display: block;
+    height:auto;
+    /* padding: 1.5%; */
+}
+
+.inBlock{
+    /* margin: 1.5%; */
     padding: 1.5%;
+    background-color: whitesmoke;
 }
 
 .courierform{
@@ -60,16 +75,32 @@ td {
 }
 
 .label{
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    align-self: center;
+    text-align: center;
+    color: black;
+    text-emphasis: bold;
 }
 
 .button{
     width:80px;
     height:30px;
-    background: #e87070;
+    background: #ffacac;
+    color: black;
     font-size: 14px;
     justify-self: right;
+    border: none;
+}
+
+.button2 {
+    width: 100px;
+    height: 30px;
+    background: #ff5a5a;
+    color: black;
+    font-size: 14px;
+    justify-self: right;
+    border: none;
 }
 
 .ipBox{
@@ -78,70 +109,9 @@ td {
     font-size: 14px;
 }
 
-
-.login {
-    width: 400px;
-    padding: 30px;
-    padding-top: 13px;
-}
-
-.login__field {
-    padding: 20px 0px;
-    position: relative;
-}
-
-.login__icon {
-    position: absolute;
-    top: 30px;
-    color: #3f6a75;
-}
-
-.login__input {
-    border: none;
-    border-bottom: 2px solid #D1D1D4;
-    background: none;
-    padding: 10px;
-    padding-left: 24px;
-    font-weight: 00;
-    width: 80%;
-    transition: .2s;
-}
-
-.login__input:active,
-.login__input:focus,
-.login__input:hover {
-    outline: none;
-    border-bottom-color: #254E58;
-}
-
-.login__submit {
-    background: #fff;
-    font-size: 14px;
-    margin-top: 30px;
-    padding: 16px 20px;
-    border-radius: 26px;
-    border: 1px solid #D4D3E8;
-    text-transform: uppercase;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
+.formblock{
+    display: block;
     width: 100%;
-    color: #316d72;
-    /* box-shadow: 0px 2px 2px #254E58; */
-    cursor: pointer;
-    transition: 0s;
-}
-
-.login__submit:active,
-.login__submit:focus,
-.login__submit:hover {
-    border-color: #5e93a0;
-    outline: none;
-}
-
-.button__icon {
-    font-size: 24px;
-    margin-left: auto;
-    color: #588d9a;
-    text-align: center;
+    padding: 10px;
+    background-color: rgb(182, 255, 255);
 }

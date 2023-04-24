@@ -21,6 +21,7 @@ table {
 
 th {
     border-bottom: 1px solid black;
+    text-align: center;
 }
 
 td {
@@ -38,25 +39,15 @@ td {
     background-color: #F6F1F1;
 }
 
-.card1 {
-  height: auto;
-  width: auto;
-  background-color: #000000;
-  font-style: italic;
-  color: #fff;
-  text-align: center;;
+.table_css {
+    background-color: #F6F1F1;
+    text-align: center;
 }
-
-/* .AppBody {
-    width: 100%;
-    background-color: whitesmoke;
-    padding: 1.5%;
-} */
 
 .lostnfound_form{
     width: 100%;
     height: auto;
-    background-color: rgb(255, 255, 255);
+    background-color: #F6F1F1;
     justify-content: center;    
     padding-top:10px;
     padding-bottom: 10px;
@@ -76,30 +67,68 @@ td {
 }
 
 .lostnfound_ipBox{
-    width: 240px;
-    height: 40px;
+    width: 100px;
+    height: 20px;
     font-size: 14px;
+    margin-left: 10px;
+    color: #000000;
 }
 
 .middlepane{
-  width: 70%;
+  width: 80%;
    height: available;
-   min-height: 700px;
+   min-height: auto;
    float: center;
-   background-color: #146C94;
+   /* background-color: #F6F1F1; */
    border-collapse: collapse;
+   display:block;
 }
 
-.leftpane{
-  width: 30%;
-  background-color: #19A7CE;
-   height: available;
-   min-height: 700px;
+.middlepane{
+    width: 80%;
+     height: available;
+     min-height: auto;
+  }
+
+.somepane{
+    width: 1%;
+  }
+
+.leftpane2{
+  width: 20%;
+  background-color: #F6F1F1;
+   height: 500px;
+   min-height: auto;
    float: center;
    border-collapse: collapse;
+   display: flexbox;
 }
+
+.leftpane2{
+    width: 20%;
+    background-color: #F6F1F1;
+     height: 50px;
+     min-height: auto;
+     float: center;
+     border-collapse: collapse;
+     display: flexbox;
+  }
 
 .container{
   width: available;
   height: available;
 }
+
+.university-card {
+    /* display: flex; */
+    /* flex-direction: row; */
+    background: lightcyan;
+    justify-content: center;
+    align-items: center;
+    width: 900px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 100px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  padding:1%;
+  }
