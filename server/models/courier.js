@@ -11,9 +11,14 @@ const courier = mongoose.Schema({
         required: true,
         minlength: 3
     },
+    room:{
+        type: String,
+        required: true,
+        minlength: 3
+    },
     RecievedAt: {
-        type: Date,
-        default: new Date().toISOString().split('T'),
+        type: String,
+        default: new Date().toISOString().substring(0,10),
     },
 });
 

@@ -7,7 +7,11 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 const PORT = 5000;
-
+app.use(express.json());
+app.use(cors({
+  origin:"http://localhost:3000"
+}));
+app.use(express.urlencoded({ extended: true }));
 mongoose
   .connect(process.env.CONNECTION_URL)
   .then(() => {
@@ -32,7 +36,9 @@ const noticeRoute = require("./routes/notice");
 const loginRoute = require("./routes/login");
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin:"http://localhost:3000"
+}));
 app.use(express.urlencoded({ extended: true }));
 app.use("/login", loginRoute);
 app.use("", homepageRoute);
