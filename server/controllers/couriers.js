@@ -28,19 +28,21 @@ const createCouriers = async (req, res) => {
   }
 };
 
-exports.deleteCourier = async (req, res) => {
+const deleteCouriers = async (req, res) => {
   // delete requested ID
-  const { _id } = req.body;
-
+  // const { _id } = req.body;
+  const _id = req.params.id;
+  console.log(_id); 
   const courier = await courierMessage.findByIdAndDelete(_id);
 
-  // console.log(courier);
+  console.log(courier);
   try {
     res.status(201).json({ message: "Successful" });
   } catch (err) {
     // console.log("not deleted");
     res.status(409).json({ message: err.message });
   }
+  console.log("Exit method");
 };
 
-module.exports = { getCouriers, createCouriers };
+module.exports = { getCouriers, createCouriers, deleteCouriers };

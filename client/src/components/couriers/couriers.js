@@ -36,11 +36,13 @@ export default function CourierPage() {
     // form inputs; will be integrated with backend using post and get methods later
     const [couriedID, setcourierID] = useState("");
     const [name, setName] = useState("");
+    const [room, setRoom] = useState("");
 
     const Newitem = {
         student_name: "",
         couriedID: "",
-        date: "",
+        room: "",
+        date:"",
     };
 
     const handleRedirecting = async (e) => {
@@ -48,10 +50,12 @@ export default function CourierPage() {
 
         Newitem.student_name = name;
         Newitem.couriedID = couriedID;
+        Newitem.room = room;
 
-        alert(`New courier for: ${Newitem.student_name} with courier ID: ${Newitem.couriedID}`);
+        alert(`New courier for: ${Newitem.student_name} with courier ID: ${Newitem.couriedID}, Room No.: ${Newitem.room}`);
 
         await Adding(Newitem);
+        window.location.reload();
     };
 
     const Adding = async (Newitem) => {
@@ -68,23 +72,42 @@ export default function CourierPage() {
         console.log(data);
     }
 
+    const deleteEntry = async(_id) =>{
+        console.log(_id);
+        const res = await fetch(`http://localhost:5000/couriers/${_id}`, {
+        method: "delete",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        }, { mode: 'no-cors'});
+        console.log('deleted!');
+        window.location.reload();
+    }
+
     return (
         <div className="App">
-        <body className="AppBody">
-        
+        <body>
+        <div className="inBlock">
         <h2>Couriers Updates</h2>
         <br></br>
         <p>Students are requested to collect their couriers from the room of Hostel Supervisor within a month of receiving. This List is updated daily. </p>
         <br></br>
 
         {/* form to add new courier */}
-        <div className="form">
+        <div className="formblock">
             <form>
                 <label class ="label">Student name:
                     <input
                     type="text" 
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    class = "ipBox"/>
+                </label>
+                <label class ="label">Room Number:
+                    <input
+                    type="text" 
+                    value={room}
+                    onChange={(e) => setRoom(e.target.value)}
                     class = "ipBox"/>
                 </label>
                 <label class ="label">Courier ID:
@@ -103,9 +126,11 @@ export default function CourierPage() {
             <thead class = "headerStyle">
                 <tr>
                     <th>Index</th>
-                    <th>Courier ID</th>
                     <th>Student Name</th>
+                    <th>Room No.</th>
+                    <th>Courier ID</th>
                     <th>Date</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -114,15 +139,18 @@ export default function CourierPage() {
                     return(
                         <tr key={index} class = "data_entry">
                             <td>{index+1}</td>
-                            <td>{data.couriedID}</td>
                             <td>{data.student_name}</td>
+                            <td>{data.room}</td>
+                            <td>{data.couriedID}</td>
                             <td>{data.RecievedAt}</td>
+                            <td className="tdb"> <button onClick={()=>deleteEntry(data._id)} className="button2">Delete</button></td>
                         </tr>
                     )
                 })
             }
             </tbody>
         </table>
+        </div>
         </body>
         </div>
     );
