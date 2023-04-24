@@ -1,116 +1,192 @@
-import "./lostnfound.css";
-import * as React from 'react';
+import React, { useState } from "react";
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { DataGrid } from '@mui/x-data-grid';
-import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import "./lostnfound.css";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 export default function Lostnfound() {
 
-  const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 90,
-    },
-    {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-    },
-  ];
+    let Lostnfound;
+    
+    const [lostnfound,setLostnfound] = useState([]);
+    // get all list of current couriers when page is loaded
+    document.onreadystatechange = async function() {
+        Lostnfound = (await fetch("http://localhost:5000/couriers")).json();
+        
+        Lostnfound.then(async (data) =>  {
+            console.log(data)
+            await setLostnfound(data);
+        })
+        console.log(lostnfound);
+        console.log("Loaded data");
+    };
 
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
+    // form inputs; will be integrated with backend using post and get methods later
+    const [itemname, setName] = useState("");
+    const [studentid, setStudentid] = useState("");
+    const [contact, setContact] = useState("")
+    const [description, setDescription] = useState("")
+    const [status, setStatus] = useState("")
 
-  return(
-    <div class="container">
-            <div class="leftpane">
-            <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField
-          id="outlined-error"
-          label="Error"
-          defaultValue="Hello World"
-        />
-        <TextField
-          id="outlined-error-helper-text"
-          label="Error"
-          defaultValue="Hello World"
-          helperText="Incorrect entry."
-        />
+    const Newitem = {
+        itemname: "",
+        studentid: "",
+        contact: "",
+        description: "",
+        date: "",
+        status: "",
+    };
+
+    const handleRedirecting = async (e) => {
+        e.preventDefault();
+
+        Newitem.itemname = itemname;
+        Newitem.studentid = studentid;
+        Newitem.contact = contact;
+        Newitem.description = description;
+        Newitem.status = status;
+        alert(`New ${Newitem.status} item named: ${Newitem.itemname} added to the list`);
+
+        await Adding(Newitem);
+    };
+
+    const Adding = async (Newitem) => {
+        const res = await fetch("http://localhost:5000/couriers", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Newitem),
+        });
+
+        const data = await res.json();
+
+        console.log(data);
+    }
+    const card1 = (
+      <div class="card1">
+      <React.Fragment>
+        <CardContent>
+           <h4>Lost and Found Instructions:</h4>
+          The students are requested to collect the missing items from the hostel supervisor's office. The contact information of the reporter is shared in the table.
+        </CardContent>
+      </React.Fragment>
       </div>
-      <div>
-        <TextField
-          id="filled-error"
-          label="Error"
-          defaultValue="Hello World"
-          variant="filled"
-        />
-        <TextField
-          id="filled-error-helper-text"
-          label="EEEEEE"
-          defaultValue="Hello World"
-          helperText="Incorrect entry."
-          variant="filled"
-        />
-      </div>
-      <div>
-        <TextField
-          id="standard-error"
-          label="Error"
-          defaultValue="Hello World"
-          variant="standard"
-        />
-        <TextField
-          id="standard-error-helper-text"
-          label="Error"
-          defaultValue="Hello World"
-          helperText="Incorrect entry."
-          variant="standard"
-        />
-      </div>
+    );
+
+const card2 = (
+      <React.Fragment>
+        <CardContent>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+           <h6>Found a lost item? Fill out the form below!</h6>
+          </Typography>
+        </CardContent>
+      </React.Fragment>
+    );
+
+    const card3 = (
+      <React.Fragment>
+        <CardContent>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+           <h5>Looking for a lost item? Check out the table below!</h5>
+          </Typography>
+        </CardContent>
+      </React.Fragment>
+    );
+
+    return (
+        <body>
+        <br></br>
+        <Box sx={{ minWidth: 275 }}>
+      <Card>{card1}</Card>
     </Box>
-    <Button variant="contained" Submit>
-      Submit
-    </Button>
-            </div>
-            <div class="middlepane" style={{ height: 400, width: '100%' }}> 
-            <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
-             </div>
-</div>
-  );
-  
-      
+        <br></br>
+        <div class="container">
+        <div class="leftpane">
+        {/* form to add new courier */}
+        <Box sx={{ minWidth: 275 }}>
+      <Card>{card2}</Card>
+    </Box>
+    <br></br>
+        <div className="lostnfound_form">
+            <form>
+                <label class ="lostnfound_label">Item name :
+                    <input
+                    type="text" 
+                    value={itemname}
+                    onChange={(e) => setName(e.target.value)}
+                    class = "lostnfound_ipBox"/>
+                </label>
+                <label class ="lostnfound_label">Student ID : 
+                    <input 
+                    type="text" 
+                    value={studentid}
+                    onChange={(e) => setStudentid(e.target.value)}
+                    class = "lostnfound_ipBox"/>
+                </label>
+                <label class ="lostnfound_label">Student Contact : 
+                    <input 
+                    type="text" 
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
+                    class = "lostnfound_ipBox"/>
+                </label>
+                <label class ="lostnfound_label">Item Description : 
+                    <input 
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    class = "lostnfound_ipBox"/>
+                </label>
+                <input type="submit" className="lostnfound_button" 
+                onClick={handleRedirecting}/>
+            </form>
+        </div>
+        </div>
+        <br></br>
+        <div class="middlepane">
+        <Box sx={{ minWidth: 275 }}>
+      <Card>{card3}</Card>
+    </Box>
+    <br></br>
+        <table>
+            <thead class = "lostnfound_headerStyle">
+                <tr>
+                    <th>Index</th>
+                    <th>Item Name</th>
+                    <th>Item Description</th>
+                    <th>Student ID</th>
+                    <th>Student Contact</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            {
+                lostnfound.map((data, index)=>{
+                    return(
+                        <tr key={index} class = "lostnfound_data_entry">
+                            <td>{index+1}</td>
+                            <td>{data.itemname}</td>
+                            <td>{data.description}</td>
+                            <td>{data.studentid}</td>
+                            <td>{data.contact}</td>
+                            <td>{data.RecievedAt}</td>
+                        </tr>
+                    )
+                })
+            }
+            </tbody>
+        </table>
+        </div>
+        </div>
+        </body>
+        
+    );
     
 }

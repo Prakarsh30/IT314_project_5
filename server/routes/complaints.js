@@ -1,9 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const { getComplaints,  } = require("../controllers/complaints");
-const {createComplaints} = require("../controllers/complaints");
-const {deleteComplaint} = require("../controllers/complaints");
+const {
+  getComplaints,
+  createComplaints,
+  deleteComplaints,
+} = require("../controllers/complaints");
+
 router.get("/", getComplaints);
 router.post("/", createComplaints);
+router.delete("/", deleteComplaints);
+
 module.exports = router;

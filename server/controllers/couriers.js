@@ -19,7 +19,7 @@ const createCouriers = async (req, res) => {
   const newCourier = new courierMessage(courier);
 
   // console.log(newCourier.couriedID);
-  
+
   try {
     await newCourier.save();
     res.status(200).send(newCourier);
@@ -28,6 +28,7 @@ const createCouriers = async (req, res) => {
   }
 };
 
+const deleteCouriers = async (req, res) => {
 const deleteCouriers = async (req, res) => {
   // delete requested ID
   // const { _id } = req.body;
