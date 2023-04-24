@@ -110,6 +110,7 @@ const Complaints = () => {
   const [deleteAlertMessage, setDeleteAlertMessage] = useState("");
   const [deleteAlertType, setDeleteAlertType] = useState("");
   const [deleteId, setDeleteId] = useState("");
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteTitle, setDeleteTitle] = useState("");
   const [deleteMessage, setDeleteMessage] = useState("");
   const [deleteCreator, setDeleteCreator] = useState("");
@@ -127,7 +128,8 @@ const Complaints = () => {
   };
 
   const handleDeleteClose = () => {
-    setDeleteAlert(false);
+    // setDeleteAlert(false);
+    setDeleteOpen(false);
   };
 
   const handleEditOpen = (id, title, message, creator) => {
@@ -139,7 +141,8 @@ const Complaints = () => {
   };
 
   const handleDeleteOpen = (id, title, message, creator) => {
-    setDeleteAlert(true);
+    // setDeleteAlert(true);
+    setDeleteOpen(true);
     setDeleteId(id);
     setDeleteTitle(title);
     setDeleteMessage(message);
@@ -180,12 +183,12 @@ const Complaints = () => {
     axios
       .delete(`http://localhost:5000/complaints/${id}`)
       .then((res) => {
-        setDeleteAlert(false);
+        setDeleteOpen(false);
         setDeleteAlertMessage("Complaint deleted successfully");
         setDeleteAlertType("success");
-        setDeleteAlert(true);
+        // setDeleteAlert(true);
         setTimeout(() => {
-          setDeleteAlert(false);
+          setDeleteOpen(false);
         }, 3000);
         axios
           .get("http://localhost:5000/complaints")
@@ -275,43 +278,42 @@ const Complaints = () => {
 
   const get = (keyName) => {
     const data = localStorage.getItem(keyName);
-    if (!data) {     // if no value exists associated with the key, return null
-        return null;
+    if (!data) {
+      // if no value exists associated with the key, return null
+      return null;
     }
     const item = JSON.parse(data);
     if (Date.now() > item.ttl) {
-        localStorage.removeItem(keyName);
-        return null;
+      localStorage.removeItem(keyName);
+      return null;
     }
     return item.value;
   };
 
-const role = get("role");
+  const role = get("role");
 
   return (
     <div>
       <div className="complaints">
         <div className="complaints__header">
           <h1>Complaints</h1>
-          
-          {role === "admin" && (<Button
+
+          {/* {role === "admin" && (<Button
             variant="contained"
             color="primary"
             onClick={handleClickOpen}
             className="complaints__add"
           >
             Add Complaint
-          </Button>)}
-          {/* <Button
+          </Button>)} */}
+          <Button
             variant="contained"
             color="primary"
             onClick={handleClickOpen}
             className="complaints__add"
           >
             Add Complaint
-          </Button> */}
-
-
+          </Button>
         </div>
         <div className="complaints__body">
           {complaints.map((complaint) => (
@@ -319,42 +321,41 @@ const role = get("role");
               <div className="complaints__cardHeader">
                 <h3>{complaint.title}</h3>
                 <div className="complaints__cardHeaderButtons">
-                  
                   {/*  */}
 
-                  
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() =>
-                      handleEditOpen(
-                        complaint._id,
-                        complaint.title,
-                        complaint.message,
-                        complaint.creator
-                      )
-                    }
-                  >
-                    Edit
-                  </Button>
+                  {role === "admin" && (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() =>
+                        handleEditOpen(
+                          complaint._id,
+                          complaint.title,
+                          complaint.message,
+                          complaint.creator
+                        )
+                      }
+                    >
+                      Edit
+                    </Button>
+                  )}
 
-
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() =>
-                      handleDeleteOpen(
-                        complaint._id,
-                        complaint.title,
-                        complaint.message,
-                        complaint.creator
-                      )
-                    }
-                  >
-                    Delete
-                  </Button>
-
-
+                  {role === "admin" && (
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() =>
+                        handleDeleteOpen(
+                          complaint._id,
+                          complaint.title,
+                          complaint.message,
+                          complaint.creator
+                        )
+                      }
+                    >
+                      Delete
+                    </Button>
+                  )}
                 </div>
               </div>
               <div className="complaints__cardBody">
@@ -463,8 +464,8 @@ const role = get("role");
         </DialogActions>
       </Dialog>
 
-      {/* <Dialog
-
+      {/* handledelete */}
+      <Dialog
         open={deleteOpen}
         onClose={handleDeleteClose}
         aria-labelledby="form-dialog-title"
@@ -475,7 +476,6 @@ const role = get("role");
             Are you sure you want to delete this complaint?
           </DialogContentText>
         </DialogContent>
-
         <DialogActions>
           <Button onClick={handleDeleteClose} color="primary">
             Cancel
@@ -485,15 +485,6 @@ const role = get("role");
           </Button>
         </DialogActions>
       </Dialog>
-      <snackbar
-        open={alert}
-        autoHideDuration={3000}
-        onClose={handleAlertClose}
-      >
-        <Alert onClose={handleAlertClose} severity={alertType}>
-          {alertMessage}
-        </Alert>
-      </snackbar> */}
     </div>
   );
 };

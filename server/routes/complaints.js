@@ -7,7 +7,7 @@ const {deleteComplaint} = require("../controllers/complaints");
 // const {updateComplaint} = require("../controllers/complaints");
 router.get("/", getComplaints);
 router.post("/", createComplaints);
-router.delete("/", deleteComplaint);
+router.delete("/:id", deleteComplaint);
 // router.put("/", updateComplaint);
 
 module.exports = router;

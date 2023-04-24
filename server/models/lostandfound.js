@@ -8,6 +8,8 @@ const lostandfound = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  type: Boolean,
+
 });
 
 const lostandfoundMessage = mongoose.model("lostandfoundMessage", lostandfound);
