@@ -10,8 +10,14 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Stack } from "@mui/material";
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 const get = (key) => {
   const itemStr = localStorage.getItem(key);
   if (!itemStr) {
@@ -47,13 +53,13 @@ export default function Lostnfound() {
   const [studentid, setStudentid] = useState("");
   const [contact, setContact] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("lost");
+  const [status, setStatus] = useState("");
   const Newitem = {
     itemname: "",
     studentid: "",
     contact: "",
     description: "",
-    status: "lost",
+    status: "",
   };
 
   const handleRedirecting = async (e) => {
@@ -93,6 +99,10 @@ export default function Lostnfound() {
     },{mode: 'no-cors'});
     console.log(res);
     window.location.reload();
+  };
+
+  const handleEdit = async (f) => {
+    // Function to edit
   };
 
   const Adding = async (Newitem) => {
@@ -158,6 +168,7 @@ export default function Lostnfound() {
     </React.Fragment>
   );
 const role = get("role");
+
   return (
     <body>
       <Stack
@@ -222,7 +233,7 @@ const role = get("role");
                 <h6>Item status</h6>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="lost"
+                  defaultValue=""
                   name="radio-buttons-group"
                   row
                 >
@@ -269,8 +280,7 @@ const role = get("role");
                     <th>Student Contact</th>
                     <th>Status</th>
                     <th>Date Created</th>
-                    <th>Last Modified</th>
-                    <th>Status</th>
+                    <th> </th>
                     <th> </th>
                   </tr>
                 </thead>
@@ -285,7 +295,6 @@ const role = get("role");
                         <td>{data.contact}</td>
                         <td>{data.status}</td>
                         <td>{data.createdAt.substring(0, 10)}</td>
-                        <td>{data.updatedAt.substring(0, 10)}</td>
                         <td>
                         {/* {role=="admin"&&(<td className="tdb"> 
                         <button onClick={()=>updateStatus(data._id)} 
@@ -293,18 +302,28 @@ const role = get("role");
                           Delete
                         </button></td>)} */}
                         {role=="admin"&&(<td className="tdb"> 
-                        <button onClick={()=>handleDelete(data._id)}
+                        <Button variant="text" onClick={()=>handleDelete(data._id)}
                         className="button2">
-                          Delete
-                        </button></td>)}
+                          <DeleteIcon />
+                        </Button></td>)}
                           {/* <Button variant="text">
                             <DeleteIcon />
                           </Button> */}
                         </td>
-                        {/*onClick={handleDelete}*} */}
+                        <td>
+                        {role=="admin"&&(<td className="tdb"> 
+                        <Button variant="text" onClick={()=>handleEdit(data._id)}
+                        className="button2">
+                          <EditIcon/>
+                        </Button></td>)}
+                          {/* <Button variant="text">
+                            <DeleteIcon />
+                          </Button> */}
+                        </td>
                       </tr>
                     );
                   })}
+                  
                 </tbody>
               </table>
             </div>
