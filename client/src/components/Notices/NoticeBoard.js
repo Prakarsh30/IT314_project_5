@@ -47,6 +47,22 @@ function NoticeBoard() {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+// const notice = mongoose.Schema({
+//   Heading: String,
+//   content: String,
+//   writer: String,
+//   createdAt: {
+//     type: Date,
+//     default: new Date(),
+//   },
+// });
+    // const newNotice={
+      
+    //   Heading: Heading,
+    //   content: content,
+    //   writer: writer,
+    // }
+
     if (!editing) {
       const newExamples = [...examples];
       newNotice.id = newExamples.length + 1;
