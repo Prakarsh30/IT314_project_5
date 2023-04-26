@@ -15,7 +15,9 @@ function Notices() {
     const data = await res.json();
     setList(data);
   };
+  
   let newList;
+  // get latest 4 news
   if (list.length < 4) {
     newList = list.filter((example, index) => index < 4);
   } else {
@@ -25,16 +27,21 @@ function Notices() {
 
   function filterString(str) {
     let newStr = str;
-    if (str.length > 42) {
-      newStr = str.substring(0, 42) + "...";
+    if (str.length > 250) {
+      newStr = str.substring(0, 250) + "...";
     }
     return newStr;
   }
+  console.log('NEW LIST');
+  console.log(newList);
+  console.log(list);
   return (
+    
     <div className="news-card">
       <div className="news-header">
         <h2>Latest News</h2>
       </div>
+      <marquee behavior="scroll" direction="up" id="mymarquee" scrollamount="1" onmouseover="this.stop();" onmouseout="this.start();">
       <div className="news-body">
         <ul className="news-list">
           {newList.map((example, index) => (
@@ -47,10 +54,6 @@ function Notices() {
               </a>
             </li>
           ))}
-          {/* <li><a href="#">Headline 1</a></li>
-            <li><a href="#">Headline 2</a></li>
-            <li><a href="#">Headline 3</a></li>
-            <li><a href="#">Headline 4</a></li> */}
         </ul>
         <ul>
           <li>
@@ -58,6 +61,7 @@ function Notices() {
           </li>
         </ul>
       </div>
+      </marquee>
     </div>
   );
 }

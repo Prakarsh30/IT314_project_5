@@ -11,11 +11,21 @@ describe("POST /couriers", () => {
     // test succesfull insertion
     test("it should return 200", async () => {
         const res = await request(baseURL).post("/couriers").send({
-            student_name: "Japan Bhatt",
-            couriedID: "AV34T31",
-            room: "D316",
+            student_name: "Deep Shah",
+            couriedID: "AV34T32",
+            room: "A203",
         });
         expect(res.statusCode).toEqual(200);
+    });
+
+    // test insertion with incomplete data
+    test("it should return error", async () => {
+        const res = await request(baseURL).post("/couriers").send({
+            student_name: "",
+            couriedID: "AVadd1",
+            room: "D316",
+        });
+        expect(res.statusCode).toEqual(409);
     });
 
     // test if multiple couriers with same courier ID
@@ -25,7 +35,6 @@ describe("POST /couriers", () => {
             couriedID: "AV34T65",
             room: "D208",
         });
-
         const res2 = await request(baseURL).post("/couriers").send({
             student_name: "Dhruv Prajapati",
             couriedID: "AV34T65",
@@ -33,8 +42,8 @@ describe("POST /couriers", () => {
         });
 
         expect(res2.statusCode).toEqual(459);
-        expect(res2.body.message).toEqual("Complaint already exists.");
+        expect(res2.body.message).toEqual("Courier with same ID already exists.");
     });
-
     }
 );
+
