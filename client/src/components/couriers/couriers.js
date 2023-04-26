@@ -32,67 +32,67 @@ export default function CourierPage() {
   // console.log(role);
 
   // list of all current couriers
-  let newCourier;
+    let newCourier;
 
-  const [courierList, setCourierList] = useState([]);
+    const [courierList, setCourierList] = useState([]);
   // get all list of current couriers when page is loaded
-  document.onreadystatechange = async function () {
+    document.onreadystatechange = async function () {
     newCourier = (await fetch("http://localhost:5000/couriers")).json();
 
     newCourier.then(async (data) => {
-      console.log(data);
-      await setCourierList(data);
-      await setFilter(data);
-    });
-    console.log(courierList);
-    console.log("Loaded data");
-  };
+        console.log(data);
+        await setCourierList(data);
+        await setFilter(data);
+        });
+        console.log(courierList);
+        console.log("Loaded data");
+    };
 
-  // form inputs; will be integrated with backend using post and get methods later
-  const [couriedID, setcourierID] = useState("");
-  const [filter, setFilter] = useState([]);
-  const [name, setName] = useState("");
-  const [room, setRoom] = useState("");
+    // form inputs; will be integrated with backend using post and get methods later
+    const [couriedID, setcourierID] = useState("");
+    const [filter, setFilter] = useState([]);
+    const [name, setName] = useState("");
+    const [room, setRoom] = useState("");
 
-  const Newitem = {
-    student_name: "",
-    couriedID: "",
-    room: "",
-    date: "",
-  };
+    const Newitem = {
+        student_name: "",
+        couriedID: "",
+        room: "",
+        date: "",
+    };
 
-  const handleRedirecting = async (e) => {
-    e.preventDefault();
+    const handleRedirecting = async (e) => {
+        e.preventDefault();
 
-    Newitem.student_name = name;
-    Newitem.couriedID = couriedID;
-    Newitem.room = room;
+        Newitem.student_name = name;
+        Newitem.couriedID = couriedID;
+        Newitem.room = room;
 
-    alert(
-      `New courier for: ${Newitem.student_name} with courier ID: ${Newitem.couriedID}, Room No.: ${Newitem.room}`
-    );
+        alert(
+            `New courier for: ${Newitem.student_name} with courier ID: ${Newitem.couriedID}, Room No.: ${Newitem.room}`
+        );
 
-    await Adding(Newitem);
-    window.location.reload();
-  };
+        await Adding(Newitem);
+        window.location.reload();
+    };
 
-  const Adding = async (Newitem) => {
-    const res = await fetch("http://localhost:5000/couriers", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(Newitem),
-    });
+    const Adding = async (Newitem) => {
+        const res = await fetch("http://localhost:5000/couriers", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Newitem),
+        });
 
-    const data = await res.json();
+        const data = await res.json();
 
-    console.log(data);
-  };
+        console.log(data);
+
         if(res.status != 200){
             alert(`${data.message}`);
         }
-    }
+    };
 
   const deleteEntry = async (_id) => {
     console.log(_id);
@@ -111,71 +111,19 @@ export default function CourierPage() {
   };
   const role = cookies.role;
 
-  // function table_sort() {
-  //     const styleSheet = document.createElement('style')
-  //     styleSheet.innerHTML = `
-  //             .order-inactive span {
-  //                 visibility:hidden;
-  //             }
-  //             .order-inactive:hover span {
-  //                 visibility:visible;
-  //             }
-  //             .order-active span {
-  //                 visibility: visible;
-  //             }
-  //         `
-  //     document.head.appendChild(styleSheet)
-
-  //     document.querySelectorAll('th.order').forEach(th_elem => {
-  //         let asc = true
-  //         const span_elem = document.createElement('span')
-  //         span_elem.style = "font-size:0.8rem; margin-left:0.5rem"
-  //         span_elem.innerHTML = "▼"
-  //         th_elem.appendChild(span_elem)
-  //         th_elem.classList.add('order-inactive')
-
-  //         const index = Array.from(th_elem.parentNode.children).indexOf(th_elem)
-  //         th_elem.addEventListener('click', (e) => {
-  //         document.querySelectorAll('th.order').forEach(elem => {
-  //             elem.classList.remove('order-active')
-  //             elem.classList.add('order-inactive')
-  //         })
-  //         th_elem.classList.remove('order-inactive')
-  //         th_elem.classList.add('order-active')
-
-  //         if (!asc) {
-  //             th_elem.querySelector('span').innerHTML = '▲'
-  //         } else {
-  //             th_elem.querySelector('span').innerHTML = '▼'
-  //         }
-  //         const arr = Array.from(th_elem.closest("table").querySelectorAll('tbody tr'))
-  //         arr.sort((a, b) => {
-  //             const a_val = a.children[index].innerText
-  //             const b_val = b.children[index].innerText
-  //             return (asc) ? a_val.localeCompare(b_val) : b_val.localeCompare(a_val)
-  //         })
-  //         arr.forEach(elem => {
-  //             th_elem.closest("table").querySelector("tbody").appendChild(elem)
-  //         })
-  //         asc = !asc
-  //         })
-  //     })
-  // }
-  // table_sort();
-
-  const requestSearch = (searchedVal) => {
-    const filteredRows = courierList.filter((row) => {
-      return row.student_name
-        .toString()
-        .toLowerCase()
-        .includes(searchedVal.toString().toLowerCase());
-    });
-    if (searchedVal.length < 1) {
-      setFilter(courierList);
-    } else {
-      setFilter(filteredRows);
+    const requestSearch = (searchedVal) => {
+        const filteredRows = courierList.filter((row) => {
+        return row.student_name
+            .toString()
+            .toLowerCase()
+            .includes(searchedVal.toString().toLowerCase());
+        });
+        if (searchedVal.length < 1) {
+        setFilter(courierList);
+        } else {
+        setFilter(filteredRows);
+        }
     }
-  };
 
   return (
     <div className="App">
@@ -289,5 +237,5 @@ export default function CourierPage() {
         </body>
       </html>
     </div>
-  );
-}
+    );
+};

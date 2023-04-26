@@ -156,141 +156,156 @@ function NoticeBoard() {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search notices..."
-        value={searchTerm}
-        onChange={handleSearchChange}
-        style={{ width: "100%" }}
-      />
-      <div>
-        <label htmlFor="filter">Filter by:</label>
-        <select id="filter" value={filter} onChange={handleFilterChange}>
-          <option value="all">All Notices</option>
-          <option value="date">Date</option>
-          <option value="author">Author</option>
-        </select>
-      </div>
-      {filter === "date" && (
-        <div>
-          <label htmlFor="datePicker">Select Date:</label>
-          <DatePicker
-            id="datePicker"
-            selected={selectedDate}
-            onChange={handleDateChange}
-          />
-        </div>
-      )}
-      {filter === "author" && (
-        <div>
-          <label htmlFor="author">Select Author:</label>
-          <select
-            id="author"
-            value={selectedAuthor}
-            onChange={handleAuthorChange}
-          >
-            <option value="">All Authors</option>
-            {uniqueAuthors.map((author, index) => (
-              <option key={index} value={author}>
-                {author}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-      <div className="accordion" id="accordionExample">
-        {filteredExamples.map((example, index) => (
-          <div key={index} className="accordion-item">
-            <h2 className="accordion-header">
-              <button
-                className={`accordion-button ${
-                  openIndex === index ? "" : "collapsed"
-                }`}
-                type="button"
-                onClick={() => handleAccordionClick(index)}
-                aria-expanded={openIndex === index ? "true" : "false"}
-                aria-controls={`collapse-${index}`}
-              >
-                {example.heading}, Created by: {example.writer},{" "}
-                {example.createdAt.toLocaleString()}
-              </button>
-            </h2>
-            <div
-              id={`collapse-${index}`}
-              className={`accordion-collapse collapse ${
-                openIndex === index ? "show" : ""
-              }`}
-              data-bs-parent="#accordionExample"
-            >
-              <div className="accordion-body">
-                <strong>{example.content}</strong>
-                <div style={{ float: "right" }}>
-                  <button
-                    onClick={() => handleEdit(example.id)}
-                    style={{
-                      backgroundColor: "blue",
-                      color: "white",
-                      fontSize: "100%",
-                      marginRight: "5px",
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(example.id)}
-                    style={{
-                      backgroundColor: "red",
-                      color: "white",
-                      fontSize: "100%",
-                    }}
-                  >
-                    Delete
-                  </button>
-                </div>
+    <div className="App">
+      <html>
+        <body>
+          <div className="inBlock">
+            <h3 className="searchBlock">
+              <span>Search Notices</span>
+              <input
+                type="text"
+                placeholder="Search notices..."
+                class="form-control search-input"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+            </h3>
+
+            <br></br>
+            {/* top part done */}
+
+            <div className="FilterBlock">
+              <label htmlFor="filter">Filter by:</label>
+              <select id="filter" value={filter} onChange={handleFilterChange}>
+                <option value="all">All Notices</option>
+                <option value="date">Date</option>
+                <option value="author">Author</option>
+              </select>
+              {filter === "date" && (
+              <div>
+                <label htmlFor="datePicker">Select Date:</label>
+                <DatePicker
+                  id="datePicker"
+                  selected={selectedDate}
+                  onChange={handleDateChange}
+                />
               </div>
+              )}
+              {filter === "author" && (
+                <div>
+                  <label htmlFor="author">Select Author:</label>
+                  <select
+                    id="author"
+                    value={selectedAuthor}
+                    onChange={handleAuthorChange}
+                  >
+                    <option value="">All Authors</option>
+                    {uniqueAuthors.map((author, index) => (
+                      <option key={index} value={author}>
+                        {author}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+            )}
+
             </div>
+            
+            <div className="accordion" id="accordionExample">
+              {filteredExamples.map((example, index) => (
+                <div key={index} className="accordion-item">
+                  <h2 className="accordion-header">
+                    <button
+                      className={`accordion-button ${
+                        openIndex === index ? "" : "collapsed"
+                      }`}
+                      type="button"
+                      onClick={() => handleAccordionClick(index)}
+                      aria-expanded={openIndex === index ? "true" : "false"}
+                      aria-controls={`collapse-${index}`}
+                    >
+                      {example.heading}, Created by: {example.writer},{" "}
+                      {example.createdAt.toLocaleString()}
+                    </button>
+                  </h2>
+                  <div
+                    id={`collapse-${index}`}
+                    className={`accordion-collapse collapse ${
+                      openIndex === index ? "show" : ""
+                    }`}
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div className="accordion-body">
+                      <strong>{example.content}</strong>
+                      <div style={{ float: "right" }}>
+                        <button
+                          onClick={() => handleEdit(example.id)}
+                          style={{
+                            backgroundColor: "blue",
+                            color: "white",
+                            fontSize: "100%",
+                            marginRight: "5px",
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDelete(example.id)}
+                          style={{
+                            backgroundColor: "red",
+                            color: "white",
+                            fontSize: "100%",
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <form onSubmit={handleFormSubmit} style={addNoticeFormStyles}>
+              <h3>{editing ? "Edit Notice" : "Add New Notice"}</h3>
+              <div className="form-group">
+                <label htmlFor="heading">Heading:</label>
+                <input
+                  type="text"
+                  id="heading"
+                  name="heading"
+                  value={newNotice.heading}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="content">Content:</label>
+                <textarea
+                  id="content"
+                  name="content"
+                  value={newNotice.content}
+                  onChange={handleInputChange}
+                  required
+                ></textarea>
+              </div>
+              <div className="form-group">
+                <label htmlFor="writer">Writer:</label>
+                <input
+                  type="text"
+                  id="writer"
+                  name="writer"
+                  value={newNotice.writer}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <button type="submit" className="btn-add-notice">
+                {editing ? "Update Notice" : "Add Notice"}
+              </button>
+            </form>
           </div>
-        ))}
-      </div>
-      <form onSubmit={handleFormSubmit} style={addNoticeFormStyles}>
-        <h3>{editing ? "Edit Notice" : "Add New Notice"}</h3>
-        <div className="form-group">
-          <label htmlFor="heading">Heading:</label>
-          <input
-            type="text"
-            id="heading"
-            name="heading"
-            value={newNotice.heading}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="content">Content:</label>
-          <textarea
-            id="content"
-            name="content"
-            value={newNotice.content}
-            onChange={handleInputChange}
-            required
-          ></textarea>
-        </div>
-        <div className="form-group">
-          <label htmlFor="writer">Writer:</label>
-          <input
-            type="text"
-            id="writer"
-            name="writer"
-            value={newNotice.writer}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <button type="submit" className="btn-add-notice">
-          {editing ? "Update Notice" : "Add Notice"}
-        </button>
-      </form>
+        </body>
+      </html>
     </div>
   );
 }
