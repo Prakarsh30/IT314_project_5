@@ -47,17 +47,17 @@ function NoticeBoard() {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-// const notice = mongoose.Schema({
-//   Heading: String,
-//   content: String,
-//   writer: String,
-//   createdAt: {
-//     type: Date,
-//     default: new Date(),
-//   },
-// });
+    // const notice = mongoose.Schema({
+    //   Heading: String,
+    //   content: String,
+    //   writer: String,
+    //   createdAt: {
+    //     type: Date,
+    //     default: new Date(),
+    //   },
+    // });
     // const newNotice={
-      
+
     //   Heading: Heading,
     //   content: content,
     //   writer: writer,
@@ -130,7 +130,8 @@ function NoticeBoard() {
       );
     } else if (filter === "author" && selectedAuthor) {
       filtered = filtered.filter(
-        (example) => example.writer.toLowerCase() === selectedAuthor.toLowerCase()
+        (example) =>
+          example.writer.toLowerCase() === selectedAuthor.toLowerCase()
       );
     }
 
@@ -141,7 +142,9 @@ function NoticeBoard() {
     );
   };
 
-  const uniqueAuthors = Array.from(new Set(examples.map((example) => example.writer)));
+  const uniqueAuthors = Array.from(
+    new Set(examples.map((example) => example.writer))
+  );
 
   const filteredExamples = getFilteredExamples();
   const addNoticeFormStyles = {
@@ -151,7 +154,6 @@ function NoticeBoard() {
     border: "1px solid #ccc",
     borderRadius: "5px",
   };
-  
 
   return (
     <div>
@@ -183,7 +185,11 @@ function NoticeBoard() {
       {filter === "author" && (
         <div>
           <label htmlFor="author">Select Author:</label>
-          <select id="author" value={selectedAuthor} onChange={handleAuthorChange}>
+          <select
+            id="author"
+            value={selectedAuthor}
+            onChange={handleAuthorChange}
+          >
             <option value="">All Authors</option>
             {uniqueAuthors.map((author, index) => (
               <option key={index} value={author}>

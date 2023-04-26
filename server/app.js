@@ -6,17 +6,23 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
+
 const PORT = 5000;
 app.use(express.json());
-app.use(cors({
-  origin:"http://localhost:3000"
-}));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 mongoose
   .connect(process.env.CONNECTION_URL)
   .then(() => {
-    app.listen(PORT, (req, res) => {
-      console.log("Server is listening on,", `http://localhost:${PORT}`);
+    app.listen(process.env.PORT || PORT, (req, res) => {
+      console.log(
+        "Server is listening on,",
+        `http://localhost:${process.env.PORT || PORT}`
+      );
     });
   })
   .catch((err) => {
@@ -36,9 +42,11 @@ const noticeRoute = require("./routes/notice");
 const loginRoute = require("./routes/login");
 
 app.use(express.json());
-app.use(cors({
-  origin:"http://localhost:3000"
-}));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use("/login", loginRoute);
 app.use("", homepageRoute);

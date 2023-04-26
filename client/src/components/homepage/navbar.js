@@ -1,17 +1,25 @@
-import React, { useState, useContext, useEffect } from "react";
+import * as React from "react";
+import { useState, useContext, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+
 import "./navbar_style.css";
 import { Credentials } from "../../App";
+import { useCookies } from "react-cookie";
 
 const Navbar = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  // let navigate = useNavigate();
+
   const { isLoggedIn, setisLoggedIn } = useContext(Credentials);
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
@@ -20,10 +28,16 @@ const Navbar = () => {
     localStorage.clear();
     localStorage.removeItem(key1);
     localStorage.removeItem(key2);
+    removeCookie("email", { path: "/" });
+    // cookies.removeCookie("role");
+    // window.location.reload();
+
     setEmail(null);
     setRole(null);
     setisLoggedIn(false);
-    console.log(get("role"));
+    window.open("/");
+    // navigate("/");
+    console.log("km", cookies.email, isLoggedIn);
   };
 
   const get = (keyName) => {
@@ -40,14 +54,15 @@ const Navbar = () => {
     return item.value;
   };
   const runthis = async () => {
-    setEmail(get("email"));
+    setEmail(cookies.email);
+    cookies.email && setisLoggedIn(true);
+    console.log(";;", cookies.email);
   };
   useEffect(() => {
     runthis();
-  }, [isLoggedIn]);
+  }, []);
   const openNav = () => {
     console.log("Opened");
-
     document.getElementById("mySidebar").style.width = "25%";
   };
 
@@ -55,38 +70,44 @@ const Navbar = () => {
     document.getElementById("mySidebar").style.width = "0";
   };
   console.log("Nav", isLoggedIn);
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar style={{ minHeight: "7%" }}>
-            <div className="dropdown">
-              <IconButton
-                size="large"
-                align="left"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 2 }}
-                className="dropbtn"
-                onClick={openNav}
-              >
-                <MenuIcon />
-              </IconButton>
-              <div id="mySidebar" className="sidebar">
-                <a
-                  href="javascript:void(0)"
-                  class="closebtn"
-                  onClick={closeNav}
-                >
-                  ×
-                </a>
-                <a href="/">Home</a>
-                <a href="/NoticeBoard">Notice Board</a>
-                <a href="/complaints">Complaints</a>
-                <a href="/couriers">Couriers</a>
-                <a href="/lostnfound">Lost and found</a>
+        <AppBar position="static" sx={{ bgcolor: "#146C94" }}>
+          <Toolbar style={{ minHeight: "7vh" }}>
+            {isLoggedIn && (
+              <div className="dropdown">
+                {isLoggedIn && (
+                  <IconButton
+                    size="large"
+                    align="left"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
+                    className="dropbtn"
+                    onClick={openNav}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                )}
+
+                <div id="mySidebar" className="sidebar">
+                  <a
+                    href="javascript:void(0)"
+                    class="closebtn"
+                    onClick={closeNav}
+                  >
+                    ×
+                  </a>
+                  <a href="/">Home</a>
+                  <a href="/NoticeBoard">Notice Board</a>
+                  <a href="/complaints">Complaints</a>
+                  <a href="/couriers">Couriers</a>
+                  <a href="/lostnfound">Lost and found</a>
+                </div>
               </div>
-            </div>
+            )}
 
             <Typography
               variant="h6"
@@ -97,8 +118,6 @@ const Navbar = () => {
               <a href="/">Hostel Management System</a>
             </Typography>
 
-            {/* <Button color="inherit" href="/" className="home-btn">Home</Button> */}
-            {/* <Button color="inherit" href="/login" className="login-btn" align="right">Login</Button> */}
             {isLoggedIn && (
               <div className="dropdown-right">
                 <button className="dropbtn-right">
