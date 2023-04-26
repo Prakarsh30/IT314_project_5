@@ -47,7 +47,7 @@ td {
 }
 
 .headerStyle {
-    background-color: rgb(70, 169, 169);
+    background-color: #f6f1f1;
     color: black;
     text-align: center;
 }
@@ -63,6 +63,7 @@ body {
     /* margin: 1.5%; */
     padding: 1.5%;
     background-color: whitesmoke;
+    text-align: center;
 }
 
 .courierform{
@@ -86,7 +87,7 @@ body {
 .button{
     width:80px;
     height:30px;
-    background: #ffacac;
+    background: #f6f1f1;
     color: black;
     font-size: 14px;
     justify-self: right;
@@ -112,6 +113,6 @@ body {
 .formblock{
     display: block;
     width: 100%;
-    padding: 10px;
-    background-color: rgb(182, 255, 255);
+    padding: 20px;
+    background-color: #67b3ff;
 }
