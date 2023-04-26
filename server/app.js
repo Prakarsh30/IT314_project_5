@@ -43,11 +43,11 @@ const noticeRoute = require("./routes/notice");
 const loginRoute = require("./routes/login");
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  })
-);
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//   })
+// );
 app.use(express.urlencoded({ extended: true }));
 app.use("/login", loginRoute);
 app.use("", homepageRoute);

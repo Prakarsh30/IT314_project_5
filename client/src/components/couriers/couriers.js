@@ -38,7 +38,7 @@ export default function CourierPage() {
     const [courierList, setCourierList] = useState([]);
   // get all list of current couriers when page is loaded
     document.onreadystatechange = async function () {
-    newCourier = (await fetch("http://localhost:5000/couriers")).json();
+    newCourier = (await fetch("https://hostel-management-system-2l8c.onrender.com/couriers")).json();
 
     newCourier.then(async (data) => {
         console.log(data);
@@ -78,7 +78,7 @@ export default function CourierPage() {
     };
 
     const Adding = async (Newitem) => {
-        const res = await fetch("http://localhost:5000/couriers", {
+        const res = await fetch("https://hostel-management-system-2l8c.onrender.com/couriers", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -98,7 +98,7 @@ export default function CourierPage() {
   const deleteEntry = async (_id) => {
     console.log(_id);
     const res = await fetch(
-      `http://localhost:5000/couriers/${_id}`,
+      `https://hostel-management-system-2l8c.onrender.com/couriers/${_id}`,
       {
         method: "delete",
         headers: {
