@@ -3,7 +3,6 @@ const courierMessage = require("../models/courier");
 const getCouriers = async (req, res) => {
   try {
     const courierMessages = await courierMessage.find();
-    // console.log(courierMessages); ->> printed in console
     res.status(200).send(courierMessages);
     console.log("Sent data");
   } catch (error) {
@@ -15,12 +14,15 @@ const createCouriers = async (req, res) => {
   console.log("Adding Courier");
   const courier = req.body;
 
-  // console.log(courier);
   const newCourier = new courierMessage(courier);
 
-  // console.log(newCourier.couriedID);
-
   try {
+    // if duplicate
+    const existingCourier = await courierMessage.findOne({ couriedID: courier.couriedID});
+    if (existingCourier) {
+      return res.status(459).json({ message: "Complaint already exists." });
+    }
+    // if no duplicate save it
     await newCourier.save();
     res.status(200).send(newCourier);
   } catch (error) {
@@ -29,8 +31,7 @@ const createCouriers = async (req, res) => {
 };
 
 const deleteCouriers = async (req, res) => {
-  // delete requested ID
-  // const { _id } = req.body;
+
   const _id = req.params.id;
   console.log(_id); 
   const courier = await courierMessage.findByIdAndDelete(_id);

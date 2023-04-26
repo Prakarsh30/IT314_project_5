@@ -21,6 +21,11 @@ h2 {
   color: black;
 }
 
+p{
+    font-size: 17px;
+    color: black;
+}
+
 table {
   border: 2px solid rgb(0, 0, 0);
   width: 100%;
@@ -66,6 +71,7 @@ body {
   /* margin: 1.5%; */
   padding: 1.5%;
   background-color: whitesmoke;
+  text-align: center;
 }
 
 .courierform {
@@ -117,5 +123,19 @@ body {
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: rgb(182, 255, 255);
+  background-color: #BDCDD6;
+}
+
+
+
+h3 span {
+    font-size: 16px;
+    float: left;
+}
+
+h3 input.search-input {
+    width: 300px;
+    margin-left: auto;
+    float: right;
+    height: 25px;
 }

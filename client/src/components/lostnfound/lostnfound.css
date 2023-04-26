@@ -14,7 +14,7 @@ body {
 /* styles for table here */
 
 table {
-    border: 2px solid rgb(0, 0, 0);
+    border: 0px solid rgb(0, 0, 0);
     height: 0px;
     width: 100%;
 }
@@ -79,7 +79,7 @@ td {
    height: available;
    min-height: auto;
    float: center;
-   /* background-color: #F6F1F1; */
+   background-color: #F6F1F1;
    border-collapse: collapse;
    display:block;
 }
