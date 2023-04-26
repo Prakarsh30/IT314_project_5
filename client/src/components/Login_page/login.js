@@ -42,7 +42,7 @@ export default function LoginPage() {
 
   // no sign up page, we will only have sign in page that collect email, password and role
   const login = async (user) => {
-    const res = await fetch("http://localhost:5000/login", {
+    const res = await fetch("https://hostel-management-system-2l8c.onrender.com//login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

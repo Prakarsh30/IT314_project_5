@@ -12,7 +12,6 @@ import { CookiesProvider } from "react-cookie";
 import Mainpage from "./components/homepage/mainpage";
 import Footer from "./components/footer/Footer";
 
-
 // import addComp from "./components/complaints/Add_complaint";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -36,7 +35,6 @@ export default function App() {
               <Route path="/lostnfound" element={<Lostnfound />} />
             </Routes>
           </BrowserRouter>
-          
         </Credentials.Provider>
       </CookiesProvider>
     </>
