@@ -5,6 +5,19 @@ import { useNavigate } from "react-router-dom";
 
 import "./courier_styles.css";
 
+const get = (key) => {
+    const itemStr = localStorage.getItem(key);
+    if (!itemStr) {
+      return null;
+    }
+    const item = JSON.parse(itemStr);
+    const now = new Date();
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key);
+      return null;
+    }
+    return item.value;
+  };
 
 export default function CourierPage() {
 
@@ -83,7 +96,7 @@ export default function CourierPage() {
         console.log('deleted!');
         window.location.reload();
     }
-
+const role = get("role");
     return (
         <div className="App">
         <body>
@@ -92,9 +105,12 @@ export default function CourierPage() {
         <br></br>
         <p>Students are requested to collect their couriers from the room of Hostel Supervisor within a month of receiving. This List is updated daily. </p>
         <br></br>
+{/* Title in centre that As admin yuo can add new couriers to list */}
 
+        {role=="admin"&&(<h3>As admin you can add new couriers to list</h3>)}
+        <br></br>
         {/* form to add new courier */}
-        <div className="formblock">
+        {role=="admin"&&(<div className="formblock">
             <form>
                 <label class ="label">Student name:
                     <input
@@ -120,7 +136,7 @@ export default function CourierPage() {
                 <input type="submit" className="button" 
                 onClick={handleRedirecting}/>
             </form>
-        </div>
+        </div>)}
         <br></br>
         <table>
             <thead class = "headerStyle">
@@ -130,7 +146,7 @@ export default function CourierPage() {
                     <th>Room No.</th>
                     <th>Courier ID</th>
                     <th>Date</th>
-                    <th>Delete</th>
+                    {role=="admin"&&(<th>Delete</th>)}
                 </tr>
             </thead>
             <tbody>
@@ -143,7 +159,7 @@ export default function CourierPage() {
                             <td>{data.room}</td>
                             <td>{data.couriedID}</td>
                             <td>{data.RecievedAt}</td>
-                            <td className="tdb"> <button onClick={()=>deleteEntry(data._id)} className="button2">Delete</button></td>
+                            {role=="admin"&&(<td className="tdb"> <button onClick={()=>deleteEntry(data._id)} className="button2">Delete</button></td>)}
                         </tr>
                     )
                 })

@@ -9,6 +9,7 @@ const {
 
 router.get("/", getComplaints);
 router.post("/", createComplaints);
-router.delete("/", deleteComplaints);
+router.delete("/:id", deleteComplaints);
+// router.put("/", updateComplaint);
 
 module.exports = router;

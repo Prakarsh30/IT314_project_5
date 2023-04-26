@@ -5,7 +5,7 @@ exports.auth= async(req,res) =>{
     console.log("Login route");
     const {email,password} = req.body;
     if(!email || !password){
-        return res.status(400).json({error:"Please fill all the fields",success:false});
+        return res.status(452).json({error:"Please fill all the fields",success:false});
     }
 
     // check for existing User
@@ -13,7 +13,7 @@ exports.auth= async(req,res) =>{
     const isexist = await User.findOne({email:email});
     
     if(!isexist){
-        return res.status(400).json({error:"Not Exist",success:false});
+        return res.status(453).json({error:"Not Exist",success:false});
     }
 
     // compare password
@@ -22,7 +22,7 @@ exports.auth= async(req,res) =>{
     const ismatch = bcrypt.compareSync(isexist.password, hash);
 
     if(!ismatch){
-        return res.status(400).json({error:"Invalid Credentials",success:false});
+        return res.status(454).json({error:"Invalid Credentials",success:false});
     }
 
     // const token = jwt.sign({_id:isexist._id},process.env.SECRET_KEY);

@@ -29,5 +29,3 @@ exports.postNotice = async(req, res) =>{
 }
 
 
-
-
