@@ -1,6 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import * as React from "react";
+import { useState, useContext, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,8 +11,11 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./navbar_style.css";
 import { Credentials } from "../../App";
+import { useCookies } from "react-cookie";
 
 const Navbar = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+
   const { isLoggedIn, setisLoggedIn } = useContext(Credentials);
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
@@ -20,10 +24,14 @@ const Navbar = () => {
     localStorage.clear();
     localStorage.removeItem(key1);
     localStorage.removeItem(key2);
+    removeCookie("email", { path: "/" });
+    // cookies.removeCookie("role");
+    // window.location.reload();
+
     setEmail(null);
     setRole(null);
     setisLoggedIn(false);
-    console.log(get("role"));
+    console.log("km", cookies.email, isLoggedIn);
   };
 
   const get = (keyName) => {
@@ -40,14 +48,15 @@ const Navbar = () => {
     return item.value;
   };
   const runthis = async () => {
-    setEmail(get("email"));
+    setEmail(cookies.email);
+    cookies.email && setisLoggedIn(true);
+    console.log(";;", cookies.email);
   };
   useEffect(() => {
     runthis();
-  }, [isLoggedIn]);
+  }, []);
   const openNav = () => {
     console.log("Opened");
-
     document.getElementById("mySidebar").style.width = "25%";
   };
 
@@ -55,6 +64,7 @@ const Navbar = () => {
     document.getElementById("mySidebar").style.width = "0";
   };
   console.log("Nav", isLoggedIn);
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -97,8 +107,6 @@ const Navbar = () => {
               <a href="/">Hostel Management System</a>
             </Typography>
 
-            {/* <Button color="inherit" href="/" className="home-btn">Home</Button> */}
-            {/* <Button color="inherit" href="/login" className="login-btn" align="right">Login</Button> */}
             {isLoggedIn && (
               <div className="dropdown-right">
                 <button className="dropbtn-right">

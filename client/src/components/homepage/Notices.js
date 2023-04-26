@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./Notices_style.css";
+import { useCookies } from "react-cookie";
 
 function Notices() {
+  const [cookies, setCookie] = useCookies(["user"]);
+
   useEffect(() => {
-    console.log("useEffect");
+    console.log(cookies.email);
     getNotices();
   }, [""]);
   const [list, setList] = useState([]);

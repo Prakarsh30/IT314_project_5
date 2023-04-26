@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -26,22 +26,19 @@ const get = (key) => {
   return item.value;
 };
 export default function Lostnfound() {
-  let Lostnfound;
-
-  const [lostnfound, setlostnfound] = useState([]);
+  const [list, setlist] = useState([]);
   // get all list of current couriers when page is loaded
-  document.onreadystatechange = async function () {
-    Lostnfound = (await fetch("http://localhost:5000/lostnfound")).json();
-
-    Lostnfound.then(async (data) => {
-      // console.log(data);
-      await setlostnfound(data);
-    });
+  const fetchData = async function () {
+    const Lostnfound = await fetch("http://localhost:5000/lostnfound").json();
+    console.log(Lostnfound);
+    setlist(Lostnfound);
     // console.log(lostnfound);
     // console.log("Loaded data");
   };
 
-  // form inputs; will be integrated with backend using post and get methods later
+  useEffect(() => {
+    fetchData();
+  }, []); // form inputs; will be integrated with backend using post and get methods later
   const [itemname, setName] = useState("");
   const [studentid, setStudentid] = useState("");
   const [contact, setContact] = useState("");
@@ -319,7 +316,7 @@ export default function Lostnfound() {
                   </tr>
                 </thead>
                 <tbody>
-                  {lostnfound.map((data, index) => {
+                  {list.map((data, index) => {
                     return (
                       <tr key={index} class="lostnfound_data_entry">
                         <td>{index + 1}</td>
