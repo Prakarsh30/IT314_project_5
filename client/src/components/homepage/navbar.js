@@ -1,29 +1,90 @@
-import React from "react";
-import {GiHamburgerMenu} from "react-icons/gi"
+import React, { useState, useContext, useEffect } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 import "./navbar_style.css";
+import { Credentials } from "../../App";
 
 const Navbar = () => {
-  return (
-    // <nav className="topnav">
-    //     <a className="active" href="/">Home</a>
-    //     <li>
-    //       <a className="alignright" href="/login">Login</a>
-    //     </li>
-    //   </nav>
-    <nav className="navbar">
-    <div className="dropdown">
-      <button className="dropbtn"><GiHamburgerMenu /></button>
-      <div className="dropdown-content">
-        <a href="/NoticeBoard">Notice Board</a>
-        <a href="/complaints">Complaints</a>
-        <a href="/couriers">Couriers</a>
-        <a href="/lostnfound">Lost and found</a>
+  const { isLoggedIn, setisLoggedIn } = useContext(Credentials);
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
+  const remove = (key1, key2) => {
+    // console.log(namestr);
+    localStorage.clear();
+    localStorage.removeItem(key1);
+    localStorage.removeItem(key2);
+    setEmail(null);
+    setRole(null);
+    setisLoggedIn(false);
+    console.log(get("role"));
+  };
 
-      </div>
-    </div>
-    <a href="/" className="home-btn">Home</a>
-    <a href="/login" className="login-btn">Login</a>
-  </nav>
+  const get = (keyName) => {
+    const data = localStorage.getItem(keyName);
+    if (!data) {
+      // if no value exists associated with the key, return null
+      return null;
+    }
+    const item = JSON.parse(data);
+    // if (Date.now() > item.ttl) {
+    //   localStorage.removeItem(keyName);
+    //   return null;
+    // }
+    return item.value;
+  };
+  // const name = get("email");
+  let index;
+  let namestr;
+  // if (isLoggedIn) {
+  // }
+  const runthis = async () => {
+    setEmail(get("email"));
+  };
+  useEffect(() => {
+    runthis();
+  }, [isLoggedIn]);
+
+  console.log("Nav", isLoggedIn);
+  return (
+    <>
+      <nav className="navbar">
+        <div className="dropdown">
+          <button className="dropbtn">
+            <GiHamburgerMenu />
+          </button>
+          <div className="dropdown-content">
+            <a href="/NoticeBoard">Notice Board</a>
+            <a href="/complaints">Complaints</a>
+            <a href="/couriers">Couriers</a>
+            <a href="/lostnfound">Lost and found</a>
+          </div>
+        </div>
+        <a href="/" className="home-btn">
+          Home
+        </a>
+        {isLoggedIn && (
+          <div className="dropdown-right">
+            <button className="dropbtn-right">
+              {email.substring(0, email.indexOf("@"))}
+            </button>
+            <div className="dropdown-right-content">
+              <a
+                href="#"
+                onClick={() => {
+                  remove("role", "email");
+                }}
+              >
+                Logout
+              </a>
+            </div>
+          </div>
+        )}
+        {!isLoggedIn && (
+          <a href="/login" className="login-btn">
+            Login
+          </a>
+        )}
+      </nav>
+    </>
   );
 };
 

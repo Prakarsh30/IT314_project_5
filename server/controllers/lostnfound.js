@@ -7,7 +7,7 @@ const getLostnfound = async (req, res) => {
   } catch (error) {
     res.status(409).send({ message: error.message });
   }
-}
+};
 
 const createLostnfound = async (req, res) => {
   const lostnfound = req.body;
@@ -16,14 +16,13 @@ const createLostnfound = async (req, res) => {
   console.log(newLostnfound);
   try {
     await newLostnfound.save();
-      // console.log("hey" , newLostnfound);
+    // console.log("hey" , newLostnfound);
 
     res.status(200).send(newLostnfound);
   } catch (error) {
-    
     res.status(409).json({ message: error.message });
   }
-}
+};
 
 const deleteLostnfound = async (req, res) => {
   // delete requested ID
@@ -36,6 +35,6 @@ const deleteLostnfound = async (req, res) => {
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
-}
+};
 
-module.exports = { getLostnfound, createLostnfound,deleteLostnfound };
+module.exports = { getLostnfound, createLostnfound, deleteLostnfound };
