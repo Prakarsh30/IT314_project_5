@@ -7,6 +7,6 @@ const { deleteLostnfound } = require("../controllers/lostnfound");
 // const { createlostnfound } = require("../controllers/lostnfound");
 router.get("/", getLostnfound);
 router.post("/", createLostnfound);
-router.delete("/", deleteLostnfound);
+router.delete("/:id", deleteLostnfound);
 
 module.exports = router;

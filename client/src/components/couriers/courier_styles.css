@@ -50,6 +50,9 @@ td {
   background-color: rgb(70, 169, 169);
   color: black;
   text-align: center;
+  background-color: #f6f1f1;
+  color: black;
+  text-align: center;
 }
 
 body {
@@ -91,7 +94,6 @@ body {
   font-size: 14px;
   justify-self: right;
   border: none;
-  cursor: pointer;
 }
 
 .button2 {
