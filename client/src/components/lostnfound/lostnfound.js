@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -17,6 +17,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useCookies } from "react-cookie";
 
 const get = (key) => {
   const itemStr = localStorage.getItem(key);
@@ -32,22 +33,24 @@ const get = (key) => {
   return item.value;
 };
 export default function Lostnfound() {
+  const [cookies, setCookie] = useCookies(["user"]);
   let navigate = useNavigate();
   let Lostnfound;
 
   const [lostnfound, setlostnfound] = useState([]);
   // get all list of current couriers when page is loaded
-  const fetchData = async function () {
-    const Lostnfound = await fetch("http://localhost:5000/lostnfound").json();
-    console.log(Lostnfound);
-    setlist(Lostnfound);
+  document.onreadystatechange = async function () {
+    Lostnfound = (await fetch("http://localhost:5000/lostnfound")).json();
+
+    Lostnfound.then(async (data) => {
+      // console.log(data);
+      await setlostnfound(data);
+    });
     // console.log(lostnfound);
     // console.log("Loaded data");
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []); // form inputs; will be integrated with backend using post and get methods later
+  // form inputs; will be integrated with backend using post and get methods later
   const [itemname, setName] = useState("");
   const [studentid, setStudentid] = useState("");
   const [contact, setContact] = useState("");
@@ -174,7 +177,7 @@ export default function Lostnfound() {
       </CardContent>
     </React.Fragment>
   );
-  const role = get("role");
+  const role = cookies.role;
 
   return (
     <body>
@@ -292,7 +295,7 @@ export default function Lostnfound() {
                   </tr>
                 </thead>
                 <tbody>
-                  {list.map((data, index) => {
+                  {lostnfound.map((data, index) => {
                     return (
                       <tr key={index} className="lostnfound_data_entry">
                         <td>{index + 1}</td>

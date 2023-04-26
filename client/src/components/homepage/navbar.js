@@ -7,14 +7,18 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+
 import "./navbar_style.css";
 import { Credentials } from "../../App";
 import { useCookies } from "react-cookie";
 
 const Navbar = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  // let navigate = useNavigate();
 
   const { isLoggedIn, setisLoggedIn } = useContext(Credentials);
   const [email, setEmail] = useState("");
@@ -31,6 +35,8 @@ const Navbar = () => {
     setEmail(null);
     setRole(null);
     setisLoggedIn(false);
+    window.open("/");
+    // navigate("/");
     console.log("km", cookies.email, isLoggedIn);
   };
 
@@ -68,35 +74,40 @@ const Navbar = () => {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" sx={{bgcolor: "#146C94"}}>
+        <AppBar position="static" sx={{ bgcolor: "#146C94" }}>
           <Toolbar style={{ minHeight: "7vh" }}>
-            <div className="dropdown">
-              <IconButton
-                size="large"
-                align="left"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 2 }}
-                className="dropbtn"
-                onClick={openNav}
-              >
-                <MenuIcon />
-              </IconButton>
-              <div id="mySidebar" className="sidebar">
-                <a
-                  href="javascript:void(0)"
-                  class="closebtn"
-                  onClick={closeNav}
-                >
-                  ×
-                </a>
-                <a href="/">Home</a>
-                <a href="/NoticeBoard">Notice Board</a>
-                <a href="/complaints">Complaints</a>
-                <a href="/couriers">Couriers</a>
-                <a href="/lostnfound">Lost and found</a>
+            {isLoggedIn && (
+              <div className="dropdown">
+                {isLoggedIn && (
+                  <IconButton
+                    size="large"
+                    align="left"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
+                    className="dropbtn"
+                    onClick={openNav}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                )}
+
+                <div id="mySidebar" className="sidebar">
+                  <a
+                    href="javascript:void(0)"
+                    class="closebtn"
+                    onClick={closeNav}
+                  >
+                    ×
+                  </a>
+                  <a href="/">Home</a>
+                  <a href="/NoticeBoard">Notice Board</a>
+                  <a href="/complaints">Complaints</a>
+                  <a href="/couriers">Couriers</a>
+                  <a href="/lostnfound">Lost and found</a>
+                </div>
               </div>
-            </div>
+            )}
 
             <Typography
               variant="h6"
