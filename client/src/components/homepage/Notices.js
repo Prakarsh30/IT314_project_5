@@ -11,7 +11,7 @@ function Notices() {
   }, [""]);
   const [list, setList] = useState([]);
   const getNotices = async () => {
-    const res = await fetch("http://localhost:5000/notice", {
+    const res = await fetch("https://hostel-management-system-2l8c.onrender.com//notice", {
       method: "GET",
     });
 
