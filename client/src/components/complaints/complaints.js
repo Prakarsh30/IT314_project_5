@@ -179,7 +179,7 @@ const Complaints = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`https://hostel-management-system-2l8c.onrender.com//complaints/${id}`)
+      .delete(`http://localhost:5000/complaints/${id}`)
       .then((res) => {
         setDeleteAlert(false);
         setDeleteAlertMessage("Complaint deleted successfully");
@@ -189,7 +189,7 @@ const Complaints = () => {
           setDeleteAlert(false);
         }, 3000);
         axios
-          .get("https://hostel-management-system-2l8c.onrender.com//complaints")
+          .get("http://localhost:5000/complaints")
           .then((res) => {
             setComplaints(res.data);
           })
@@ -209,7 +209,7 @@ const Complaints = () => {
       creator: editCreator,
     };
     axios
-      .patch(`https://hostel-management-system-2l8c.onrender.com//complaints/${id}`, updatedComplaint)
+      .patch(`http://localhost:5000/complaints/${id}`, updatedComplaint)
       .then((res) => {
         setEdit(false);
         setEditAlertMessage("Complaint updated successfully");
@@ -219,7 +219,7 @@ const Complaints = () => {
           setEditAlert(false);
         }, 3000);
         axios
-          .get("https://hostel-management-system-2l8c.onrender.com//complaints")
+          .get("http://localhost:5000/complaints")
           .then((res) => {
             setComplaints(res.data);
           })
@@ -240,7 +240,7 @@ const Complaints = () => {
       creator: creator,
     };
     axios
-      .post("https://hostel-management-system-2l8c.onrender.com//complaints", newComplaint)
+      .post("http://localhost:5000/complaints", newComplaint)
       .then((res) => {
         setOpen(false);
         setAlertMessage("Complaint added successfully");
@@ -250,7 +250,7 @@ const Complaints = () => {
           setAlert(false);
         }, 3000);
         axios
-          .get("https://hostel-management-system-2l8c.onrender.com//complaints")
+          .get("http://localhost:5000/complaints")
           .then((res) => {
             setComplaints(res.data);
           })
@@ -265,7 +265,7 @@ const Complaints = () => {
 
   useEffect(() => {
     axios
-      .get("https://hostel-management-system-2l8c.onrender.com//complaints")
+      .get("http://localhost:5000/complaints")
       .then((res) => {
         setComplaints(res.data);
       })
