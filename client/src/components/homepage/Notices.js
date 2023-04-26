@@ -14,14 +14,23 @@ function Notices() {
     
     const data = await res.json();
     setList(data);
-    console.log(data);
-    console.log("funct")
   }
-  console.log("hello1")
-  console.log(list)
-  const newList = list.filter((example, index) => index<4);
-  console.log("hello") 
-  console.log(newList)
+  let newList;
+  if(list.length<4){
+    newList = list.filter((example, index) => (index<4));
+  }
+  else{
+    newList = list.filter((example, index) => (index>(lengthList-5)));
+  }
+  // const newList = list.filter((example, index) => (index<4));
+  
+  function filterString(str){
+    let newStr= str;
+    if(str.length>42){
+      newStr= str.substring(0,42)+ "..."
+    };
+    return newStr;
+  }
   return (
     <div className="news-card">
         <div className="news-header">
@@ -30,7 +39,7 @@ function Notices() {
         <div className="news-body">
           <ul className="news-list">
           {newList.map((example, index) => (
-              (<li key={index}><a href="#"><h5><b>{example.Heading}:</b></h5> <li>{example.content}</li></a></li>)
+              (<li key={index}><a href="#"><h6><b>{example.Heading}:</b></h6> <li>{filterString(example.content)}</li></a></li>)
           ))}
             {/* <li><a href="#">Headline 1</a></li>
             <li><a href="#">Headline 2</a></li>
