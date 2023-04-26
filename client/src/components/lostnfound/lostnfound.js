@@ -10,13 +10,15 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Stack } from "@mui/material";
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useCookies } from "react-cookie";
+import Footer from "../footer/Footer";
 
 const get = (key) => {
   const itemStr = localStorage.getItem(key);
@@ -32,6 +34,7 @@ const get = (key) => {
   return item.value;
 };
 export default function Lostnfound() {
+  const [cookies, setCookie] = useCookies(["user"]);
   let navigate = useNavigate();
   let Lostnfound;
 
@@ -59,7 +62,7 @@ export default function Lostnfound() {
     studentid: "",
     contact: "",
     description: "",
-    status: "",
+    status: "lost",
   };
 
   const handleRedirecting = async (e) => {
@@ -75,28 +78,36 @@ export default function Lostnfound() {
     );
 
     await Adding(Newitem);
-    window.location.reload();
+    // window.location.reload();
   };
 
   const handleDelete = async (f) => {
     console.log("Deleting");
-    const res = await fetch(`http://localhost:5000/lostnfound/${f}`, {
-      method: "delete",
-      headers: {
-        "Content-Type": "application/json",
+    const res = await fetch(
+      `http://localhost:5000/lostnfound/${f}`,
+      {
+        method: "delete",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    },{mode: 'no-cors'});
+      { mode: "no-cors" }
+    );
     console.log(res);
-    window.location.reload();
+    // window.location.reload();
   };
   const updateStatus = async (f) => {
     console.log("Updating");
-    const res = await fetch(`http://localhost:5000/lostnfound/${f}`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
+    const res = await fetch(
+      `http://localhost:5000/lostnfound/${f}`,
+      {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    },{mode: 'no-cors'});
+      { mode: "no-cors" }
+    );
     console.log(res);
     window.location.reload();
   };
@@ -167,7 +178,7 @@ export default function Lostnfound() {
       </CardContent>
     </React.Fragment>
   );
-const role = get("role");
+  const role = cookies.role;
 
   return (
     <body>
@@ -176,7 +187,7 @@ const role = get("role");
         marginLeft={39}
         marginTop={3}
         alignItems={"center"}
-        sx={{bgcolor: "#f1f1f1"}}
+        sx={{ bgcolor: "#f1f1f1" }}
       >
         <h2>Lost and Found</h2>
         <h5>Report and check your items here.</h5>
@@ -185,7 +196,7 @@ const role = get("role");
       <div className="container">
         <div className="leftpane2">
           <Box sx={{ minWidth: 275 }}>
-            <Card sx={{bgcolor: "#f1f1f1", height:"71.5px"}}>{card2}</Card>
+            <Card sx={{ bgcolor: "#f1f1f1", height: "71.5px" }}>{card2}</Card>
           </Box>
           <br></br>
           <div className="lostnfound_form ps-4">
@@ -234,7 +245,7 @@ const role = get("role");
                 <h6>Item status</h6>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue=""
+                  defaultValue="lost"
                   name="radio-buttons-group"
                   row
                 >
@@ -266,7 +277,7 @@ const role = get("role");
         <div className="somepane"></div>
         <div className="middlepane">
           <Box sx={{ minWidth: 275 }}>
-            <Card sx={{bgcolor: "#f1f1f1"}}>{card3}</Card>
+            <Card sx={{ bgcolor: "#f1f1f1" }}>{card3}</Card>
           </Box>
           <br></br>
           <div className="middlepane2">
@@ -282,7 +293,6 @@ const role = get("role");
                     <th>Status</th>
                     {/* <th>Date Created</th> */}
                     <th> </th>
-                    <th> </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -297,26 +307,22 @@ const role = get("role");
                         <td>{data.status}</td>
                         {/* <td>{data.createdAt.substring(0, 10)}</td> */}
                         <td>
-                        {/* {role=="admin"&&(<td className="tdb"> 
+                          {/* {role=="admin"&&(<td className="tdb"> 
                         <button onClick={()=>updateStatus(data._id)} 
                         className="button2">
                           Delete
                         </button></td>)} */}
-                        {role=="admin"&&(<td className="tdb"> 
-                        <Button variant="text" onClick={()=>handleDelete(data._id)}
-                        className="button2">
-                          <DeleteIcon />
-                        </Button></td>)}
-                          {/* <Button variant="text">
-                            <DeleteIcon />
-                          </Button> */}
-                        </td>
-                        <td>
-                        {role=="admin"&&(<td className="tdb"> 
-                        <Button variant="text" onClick={()=>handleEdit(data._id)}
-                        className="button2">
-                          <EditIcon/>
-                        </Button></td>)}
+                          {role == "admin" && (
+                            <td className="tdb">
+                              <Button
+                                variant="text"
+                                onClick={() => handleDelete(data._id)}
+                                className="button2"
+                              >
+                                <DeleteIcon />
+                              </Button>
+                            </td>
+                          )}
                           {/* <Button variant="text">
                             <DeleteIcon />
                           </Button> */}
@@ -324,13 +330,13 @@ const role = get("role");
                       </tr>
                     );
                   })}
-                  
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
+      <Footer/>
     </body>
   );
 }

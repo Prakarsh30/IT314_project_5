@@ -17,10 +17,10 @@ const createCouriers = async (req, res) => {
   const newCourier = new courierMessage(courier);
 
   try {
-    // if duplicate
+    // if duplicate : 459
     const existingCourier = await courierMessage.findOne({ couriedID: courier.couriedID});
     if (existingCourier) {
-      return res.status(459).json({ message: "Complaint already exists." });
+      return res.status(459).json({ message: "Courier with same ID already exists." });
     }
     // if no duplicate save it
     await newCourier.save();

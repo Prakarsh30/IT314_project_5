@@ -2,6 +2,7 @@ import React, { StrictMode, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login_styles.css";
 import { Credentials } from "../../App";
+import { useCookies } from "react-cookie";
 
 export default function LoginPage() {
   let navigate = useNavigate();
@@ -9,6 +10,8 @@ export default function LoginPage() {
   console.log("kirtan", isLoggedIn);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [cookies, setCookie] = useCookies(["user"]);
 
   const user = {
     email: "",
@@ -39,7 +42,7 @@ export default function LoginPage() {
 
   // no sign up page, we will only have sign in page that collect email, password and role
   const login = async (user) => {
-    const res = await fetch("http://localhost:5000/login", {
+    const res = await fetch("https://hostel-management-system-2l8c.onrender.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,14 +61,21 @@ export default function LoginPage() {
       // // set the token in local storage
       // console.log(data)
       // set("token", data.token, 3600);
-      set("email", data.user.email, 3600);
-      set("role", data.user.role, 3600);
-      const token = get("role");
-      console.log(token);
-      setisLoggedIn(true);
-      console.log("KK", isLoggedIn);
-      navigate("/", { curruser: { email: user.email } });
+      // set("email", data.user.email, 3600);
+      // set("role", data.user.role, 3600);
 
+      setCookie("email", data.user.email);
+      setCookie("role", data.user.role);
+
+      console.log("Yup");
+      // window.location.reload();
+      navigate("/", { curruser: { email: user.email } });
+      console.log("bruh");
+      window.location.reload();
+
+      setisLoggedIn(true);
+
+      console.log("lklk");
       //t window.alert("Login Successful");
       //navigate to the home page
       // window.alert("Login successful")
@@ -173,23 +183,22 @@ export default function LoginPage() {
               {button_flag && "Change Password"}
             </button>
           </div>
-          {button_flag&&(
-          <p className="field">
-            Login :{" "}
-            <button id="buttonset" onClick={handlebutton}>
-              Click here
-            </button>{" "}
-          </p>
+          {button_flag && (
+            <p className="field">
+              Login :{" "}
+              <button id="buttonset" onClick={handlebutton}>
+                Click here
+              </button>{" "}
+            </p>
           )}
-          {!button_flag&&(
-          <p className="field">
-            Change Password :{" "}
-            <button id="buttonset" onClick={handlebutton}>
-              Click here
-            </button>{" "}
-          </p>
+          {!button_flag && (
+            <p className="field">
+              Change Password :{" "}
+              <button id="buttonset" onClick={handlebutton}>
+                Click here
+              </button>{" "}
+            </p>
           )}
-          
         </form>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" className="icons">
