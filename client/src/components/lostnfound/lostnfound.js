@@ -18,6 +18,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useCookies } from "react-cookie";
+import Footer from "../footer/Footer";
 
 const get = (key) => {
   const itemStr = localStorage.getItem(key);
@@ -335,6 +336,7 @@ export default function Lostnfound() {
           </div>
         </div>
       </div>
+      <Footer/>
     </body>
   );
 }

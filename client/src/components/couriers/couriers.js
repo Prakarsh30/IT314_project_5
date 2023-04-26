@@ -7,6 +7,7 @@ import "./courier_styles.css";
 import SendIcon from "@mui/icons-material/Send";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { useCookies } from "react-cookie";
+import Footer from "../footer/Footer";
 
 const get = (key) => {
   const itemStr = localStorage.getItem(key);
@@ -126,9 +127,11 @@ export default function CourierPage() {
     }
 
   return (
-    <div className="App">
-      <html>
-        <body>
+    <html>
+      <body>
+        <div className="App">
+     
+       
           <div className="inBlock">
             <h2>Couriers Updates</h2>
             <br></br>
@@ -234,8 +237,12 @@ export default function CourierPage() {
               </tbody>
             </table>
           </div>
-        </body>
-      </html>
-    </div>
+        
+      
+        </div>
+        <Footer/>
+
+      </body>
+    </html>
     );
 };

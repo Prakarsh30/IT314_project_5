@@ -31,6 +31,7 @@ import handleAlertClose from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Footer from "../footer/Footer";
 
 const set = (key, value, expiry) => {
   const now = new Date();
@@ -289,6 +290,7 @@ const Complaints = () => {
 const role = get("role");
 
   return (
+    <body>
     <div>
       <div className="complaints">
         <div className="complaints__header">
@@ -495,6 +497,8 @@ const role = get("role");
         </Alert>
       </snackbar> */}
     </div>
+    <Footer/>
+    </body>
   );
 };
 
