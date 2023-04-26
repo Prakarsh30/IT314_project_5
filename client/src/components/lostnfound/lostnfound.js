@@ -62,7 +62,7 @@ export default function Lostnfound() {
     studentid: "",
     contact: "",
     description: "",
-    status: "",
+    status: "lost",
   };
 
   const handleRedirecting = async (e) => {
@@ -78,7 +78,7 @@ export default function Lostnfound() {
     );
 
     await Adding(Newitem);
-    window.location.reload();
+    // window.location.reload();
   };
 
   const handleDelete = async (f) => {
@@ -94,7 +94,7 @@ export default function Lostnfound() {
       { mode: "no-cors" }
     );
     console.log(res);
-    window.location.reload();
+    // window.location.reload();
   };
   const updateStatus = async (f) => {
     console.log("Updating");
@@ -245,7 +245,7 @@ export default function Lostnfound() {
                 <h6>Item status</h6>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue=""
+                  defaultValue="lost"
                   name="radio-buttons-group"
                   row
                 >

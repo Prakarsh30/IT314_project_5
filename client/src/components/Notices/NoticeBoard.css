@@ -57,8 +57,47 @@ body {
 
 .FilterBlock{
   margin: 10px;
+  justify-content: left;
   display: flex;
 }
+
+.blocks{
+  position: relative;
+  margin-left: 25px;
+}
+
+.noticeBlock{
+  padding: 25px;
+  display: block;
+  background-color: rgb(237, 241, 214);
+  margin-bottom: 25px;
+}
+.noticeBlock h3{
+  padding-bottom: 5px;
+}
+.noticeBlock h4{
+  padding-bottom: 10px;
+  text-align: left;
+}
+.noticeBlock p{
+  padding-bottom: 5px;
+}
+
+.addNew{
+  position: fixed;
+  bottom: -4px;
+  right: 3px;
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  background-color: rgb(141, 141, 250);
+}
+
+.accordion{
+  width: 80%;
+  margin-left: 10%;
+}
+
 
 .notice-board {
   border: 2px solid #444;
@@ -133,7 +172,7 @@ body {
   color: #444;
 }
 
-.filter-container {
+/* .filter-container {
   width: 10%;
   text-align: right;
   margin-left: 10%;
@@ -145,7 +184,7 @@ body {
   border-radius: 5px;
   background-color: #fff;
   color: #444;
-}
+} */
 
 .empty-space {
   width: 10%;
