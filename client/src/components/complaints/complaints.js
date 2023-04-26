@@ -32,7 +32,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Footer from "../footer/Footer";
-
+import "./complaints.css";
+import {useCookies} from "react-cookie";
 const set = (key, value, expiry) => {
   const now = new Date();
   const item = {
@@ -114,7 +115,7 @@ const Complaints = () => {
   const [deleteTitle, setDeleteTitle] = useState("");
   const [deleteMessage, setDeleteMessage] = useState("");
   const [deleteCreator, setDeleteCreator] = useState("");
-
+  const [cookies,setCookies]=useCookies(["user"]);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -276,196 +277,188 @@ const Complaints = () => {
 
   const get = (keyName) => {
     const data = localStorage.getItem(keyName);
-    if (!data) {     // if no value exists associated with the key, return null
-        return null;
+    if (!data) {
+      // if no value exists associated with the key, return null
+      return null;
     }
     const item = JSON.parse(data);
     if (Date.now() > item.ttl) {
-        localStorage.removeItem(keyName);
-        return null;
+      localStorage.removeItem(keyName);
+      return null;
     }
     return item.value;
   };
 
-const role = get("role");
+  // cards function
+  function myFunction() {
+    var input, filter, cards, cardContainer, h5, title, i;
+    input = document.getElementById("myFilter");
+    filter = input.value.toUpperCase();
+    cardContainer = document.getElementById("myItems");
+    cards = cardContainer.getElementsByClassName("card");
+    for (i = 0; i < cards.length; i++) {
+      title = cards[i].querySelector(".card-body h5.card-title");
+      if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+        cards[i].style.display = "";
+      } else {
+        cards[i].style.display = "none";
+      }
+    }
+  }
+  //
+  const role = cookies.role;
 
   return (
     <body>
-    <div>
-      <div className="complaints">
-        <div className="complaints__header">
-          <h1>Complaints</h1>
-          
-          {/* {role === "admin" && (<Button
-            variant="contained"
-            color="primary"
-            onClick={handleClickOpen}
-            className="complaints__add"
-          >
-            Add Complaint
-          </Button>)} */}
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleClickOpen}
-            className="complaints__add"
-          >
-            Add Complaint
-          </Button>
+      <div className="App">
+        <div className="complains_container">
+          <div className="Complaints__addbtn">
+            <h1>Complaints</h1>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleClickOpen}
+              className="complaints__add"
+            >
+              Add Complaint
+            </Button>
+          </div>
 
-
-        </div>
-        <div className="complaints__body">
-          {complaints.map((complaint) => (
-            <div className="complaints__card">
-              <div className="complaints__cardHeader">
-                <h3>{complaint.title}</h3>
-                <div className="complaints__cardHeaderButtons">
-                  
-                  {/*  */}
-
-                  
-                  {role === "admin" && (<Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() =>
-                      handleEditOpen(
-                        complaint._id,
-                        complaint.title,
-                        complaint.message,
-                        complaint.creator
-                      )
-                    }
-                  >
-                    Edit
-                  </Button>)}
-
-
-                  {role === "admin" && (<Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() =>
-                      handleDeleteOpen(
-                        complaint._id,
-                        complaint.title,
-                        complaint.message,
-                        complaint.creator
-                      )
-                    }
-                  >
-                    Delete
-                  </Button>)}
-
-
+          <div className="row" id="myItems">
+            <div className="col-sm-12 mb-3">
+              {complaints.map((complaint) => (
+                <div className="card complaints_card">
+                  <div className="card-body">
+                    <h5 id="complaints_title" className="card-title ">{complaint.title}</h5>
+                    <p className="card-subtitle mb-2 text-muted">
+                      {complaint.message}
+                    </p>
+                    
+                  </div>
+                  <p className="card-text">- {complaint.creator}</p>
+                  {/* <div className="complaints__cardFooter">
+                    <p>Created by: {complaint.creator}</p>
+                  </div> */}
+                  <div className="complaints_delete">
+                      {role === "admin" && (
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={() =>
+                            handleDelete(
+                              complaint._id,
+                              complaint.title,
+                              complaint.message,
+                              complaint.creator
+                            )
+                          }
+                        >
+                          Delete
+                        </Button>
+                      )}
+                    </div>
                 </div>
-              </div>
-              <div className="complaints__cardBody">
-                <p>{complaint.message}</p>
-              </div>
-              <div className="complaints__cardFooter">
-                <p>Created by: {complaint.creator}</p>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Add Complaint</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To add a complaint, please enter the title, message and creator
-            name.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="title"
-            label="Title"
-            type="text"
-            fullWidth
-            onChange={handleTitleChange}
-          />
-          <TextField
-            margin="dense"
-            id="message"
-            label="Message"
-            type="text"
-            fullWidth
-            onChange={handleMessageChange}
-          />
-          <TextField
-            margin="dense"
-            id="creator"
-            label="Creator"
-            type="text"
-            fullWidth
-            onChange={handleCreatorChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
-            Add
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Dialog
-        open={edit}
-        onClose={handleEditClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Edit Complaint</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To edit a complaint, please enter the title, message and creator
-            name.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="title"
-            label="Title"
-            type="text"
-            fullWidth
-            value={editTitle}
-            onChange={handleEditTitleChange}
-          />
-          <TextField
-            margin="dense"
-            id="message"
-            label="Message"
-            type="text"
-            fullWidth
-            value={editMessage}
-            onChange={handleEditMessageChange}
-          />
-          <TextField
-            margin="dense"
-            id="creator"
-            label="Creator"
-            type="text"
-            fullWidth
-            value={editCreator}
-            onChange={handleEditCreatorChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleEditClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={() => handleEdit(editId)} color="primary">
-            Edit
-          </Button>
-        </DialogActions>
-      </Dialog>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Add Complaint</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To add a complaint, please enter the title, message and creator
+              name.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="title"
+              label="Title"
+              type="text"
+              fullWidth
+              onChange={handleTitleChange}
+            />
+            <TextField
+              margin="dense"
+              id="message"
+              label="Message"
+              type="text"
+              fullWidth
+              onChange={handleMessageChange}
+            />
+            <TextField
+              margin="dense"
+              id="creator"
+              label="Creator"
+              type="text"
+              fullWidth
+              onChange={handleCreatorChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleSubmit} color="primary">
+              Add
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={edit}
+          onClose={handleEditClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Edit Complaint</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To edit a complaint, please enter the title, message and creator
+              name.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="title"
+              label="Title"
+              type="text"
+              fullWidth
+              value={editTitle}
+              onChange={handleEditTitleChange}
+            />
+            <TextField
+              margin="dense"
+              id="message"
+              label="Message"
+              type="text"
+              fullWidth
+              value={editMessage}
+              onChange={handleEditMessageChange}
+            />
+            <TextField
+              margin="dense"
+              id="creator"
+              label="Creator"
+              type="text"
+              fullWidth
+              value={editCreator}
+              onChange={handleEditCreatorChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleEditClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={() => handleEdit(editId)} color="primary">
+              Edit
+            </Button>
+          </DialogActions>
+        </Dialog>
 
-      {/* <Dialog
+        {/* <Dialog
 
         open={deleteOpen}
         onClose={handleDeleteClose}
@@ -496,8 +489,8 @@ const role = get("role");
           {alertMessage}
         </Alert>
       </snackbar> */}
-    </div>
-    <Footer/>
+      </div>
+      <Footer />
     </body>
   );
 };

@@ -1,4 +1,4 @@
-.ag-format-container {
+/* .ag-format-container {
   width: 1142px;
   margin: 0 auto;
 }
@@ -97,7 +97,7 @@ a {
   -webkit-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-}
+} */
 /* .ag-courses_item:nth-child(2n) .ag-courses-item_bg {
   background-color: #3ecd5e;
 }
@@ -114,7 +114,7 @@ a {
   background-color: #4c49ea;
 } */
 
-@media only screen and (max-width: 979px) {
+/* @media only screen and (max-width: 979px) {
   .ag-courses_item {
     -ms-flex-preferred-size: calc(50% - 30px);
     flex-basis: calc(50% - 30px);
@@ -200,7 +200,7 @@ Dialog p {
 }
 Dialog p a:visited {
   color: #000;
-}
+} */
 /* 
 button.primary {
   display: inline-block;
@@ -220,11 +220,61 @@ button.primary:hover {
   box-shadow: 0 20px 20px -10px #000;
   transform: translateY(-5px);
 } */
-@keyframes fadeIn {
+/* @keyframes fadeIn {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
   }
+} */
+
+.App {
+  display: flex;
+  background-color: #19a7ce ;
+  padding: 2.5%;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.complains_container {
+  border-radius: 10px;
+  background-color: whitesmoke;
+  padding: 2.5%;
+  /* text-align: center; */
+  width: 100%;
+  z-index: 1;
+  display: block;
+}
+
+body{
+  width: 100%;
+  display: block;
+  height: auto;
+}
+
+ul li {
+  list-style: none;
+  
+}
+
+/* .Complaints__addbtn{
+  left:50px;
+} */
+
+#complaints_title{
+  font-weight: 600;
+}
+
+.complaints_delete{
+  /* display: block; */
+  color: red;
+
+}
+.complaints_card{
+  padding: 20px;
+  margin: 10px;
+  background-color: #a5ddec;
+  border: 1px solid #19a7ce;
 }
