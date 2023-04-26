@@ -1,10 +1,8 @@
 import React from "react";
-import Sidebar from "./sidebar";
-import Navbar from "./navbar";
 import Notices from "./Notices";
-import CourierBoard from "./Courier_board";
 import Carousels from "./Carousel";
 import "./mainpage_style.css"
+import Contact_cards from "./Contact_cards";
 
 function Mainpage(){
     return(
@@ -12,7 +10,7 @@ function Mainpage(){
             {/* <Sidebar/> */}
             <div className="left">
                 <Notices/>
-                <CourierBoard/>
+                <Contact_cards/>
             </div>
             <div className="right">
                 <Carousels/>

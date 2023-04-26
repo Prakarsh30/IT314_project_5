@@ -59,7 +59,7 @@ const Navbar = () => {
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
-          <Toolbar style={{ minHeight: "7%" }}>
+          <Toolbar style={{ minHeight: "7vh" }}>
             <div className="dropdown">
               <IconButton
                 size="large"
