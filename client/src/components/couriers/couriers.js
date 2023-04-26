@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import "./courier_styles.css";
+import SendIcon from '@mui/icons-material/Send';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 const get = (key) => {
     const itemStr = localStorage.getItem(key);
@@ -209,8 +211,8 @@ export default function CourierPage() {
                     onChange={(e) => setcourierID(e.target.value)}
                     class = "ipBox"/>
                 </label>
-                <input type="submit" className="button" 
-                onClick={handleRedirecting}/>
+                <Button variant="contained"
+                onClick={handleRedirecting}><SendIcon/></Button>
             </form>
         </div>)}
         <br></br>
@@ -235,7 +237,7 @@ export default function CourierPage() {
                             <td>{data.room}</td>
                             <td>{data.couriedID}</td>
                             <td>{data.RecievedAt}</td>
-                            {role=="admin"&&(<td className="tdb"> <button onClick={()=>deleteEntry(data._id)} className="button2">Delete</button></td>)}
+                            {role=="admin"&&(<td className="tdb"> <Button variant="contained" onClick={()=>deleteEntry(data._id)} sx={{opacity:"0%"}}><DeleteOutlineOutlinedIcon/></Button></td>)}
                         </tr>
                     )
                 })
