@@ -1,4 +1,5 @@
-import React from "react";
+import React, { createContext, useState } from "react";
+
 import Sidebar from "./components/homepage/sidebar";
 import Navbar from "./components/homepage/navbar";
 import LoginPage from "./components/Login_page/login";
@@ -9,29 +10,29 @@ import Lostnfound from "./components/lostnfound/lostnfound";
 import Notices from "./components/homepage/Notices";
 import Mainpage from "./components/homepage/mainpage";
 
-
 // import addComp from "./components/complaints/Add_complaint";
-import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+export const Credentials = createContext(null);
 
-function App() {
+export default function App() {
+  const [isLoggedIn, setisLoggedIn] = useState(false);
   return (
     <>
-      <Navbar/>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/login' element={<LoginPage/>}/>
-          <Route path='/' element={<Mainpage/>}/>
-          <Route path='/couriers' element={<CouriersPage/>}/>
-          <Route path='/complaints' element={<Complaints/>}/>
-          <Route path='/complaints/add' element={<addComp/>}/>
-          <Route path='/NoticeBoard' element={<NoticeBoard />}/>
-          <Route path='/lostnfound' element={<Lostnfound/>}/>
-          
-        </Routes>
-      </BrowserRouter>
+      <Credentials.Provider value={{ isLoggedIn, setisLoggedIn }}>
+        <Navbar />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<Mainpage />} />
+            <Route path="/couriers" element={<CouriersPage />} />
+            <Route path="/complaints" element={<Complaints />} />
+            <Route path="/complaints/add" element={<addComp />} />
+            <Route path="/NoticeBoard" element={<NoticeBoard />} />
+            <Route path="/lostnfound" element={<Lostnfound />} />
+          </Routes>
+        </BrowserRouter>
+      </Credentials.Provider>
     </>
   );
-};
-
-export default App;
+}

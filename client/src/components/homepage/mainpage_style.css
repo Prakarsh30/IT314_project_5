@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-color: #aebdca;
 }
 .container {
   padding: 0;
@@ -8,8 +8,8 @@ body {
   min-width: 100%;
 }
 .left {
-  width: 30%;
+  width: 25%;
 }
 .right {
-  width: 70%;
+  width: 75%;
 }

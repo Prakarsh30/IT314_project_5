@@ -10,7 +10,7 @@ function Carousels() {
           style={{ width: "100%", height: "93vh" }}
         />
         <Carousel.Caption>
-          <h3>First</h3>
+          <h3 style={{color: "white"}}>First</h3>
           <p>HOR Men</p>
         </Carousel.Caption>
       </Carousel.Item>
@@ -22,7 +22,7 @@ function Carousels() {
         />
 
         <Carousel.Caption>
-          <h3>Second</h3>
+          <h3 style={{color: "white"}}>Second</h3>
           <p>New HOR Men</p>
         </Carousel.Caption>
       </Carousel.Item>
@@ -34,7 +34,7 @@ function Carousels() {
         />
 
         <Carousel.Caption>
-          <h3>Third</h3>
+          <h3 style={{color: "white"}}>Third</h3>
           <p>New HOR Men</p>
         </Carousel.Caption>
       </Carousel.Item>
@@ -46,7 +46,7 @@ function Carousels() {
         />
 
         <Carousel.Caption>
-          <h3>Fourth</h3>
+          <h3 style={{color: "white"}}>Fourth</h3>
           <p>Hostel Top</p>
         </Carousel.Caption>
       </Carousel.Item>
@@ -58,9 +58,7 @@ function Carousels() {
         />
 
         <Carousel.Caption>
-          <h3>
-            <a>Fifth</a>
-          </h3>
+          <h3 style={{color: "white"}}>Fifth</h3>
           <p>HOR Women</p>
         </Carousel.Caption>
       </Carousel.Item>

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { StrictMode, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login_styles.css";
+import { Credentials } from "../../App";
 
 export default function LoginPage() {
   let navigate = useNavigate();
-
+  const { isLoggedIn, setisLoggedIn } = useContext(Credentials);
+  console.log("kirtan", isLoggedIn);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -60,6 +62,10 @@ export default function LoginPage() {
       set("role", data.user.role, 3600);
       const token = get("role");
       console.log(token);
+      setisLoggedIn(true);
+      console.log("KK", isLoggedIn);
+      navigate("/", { curruser: { email: user.email } });
+
       //t window.alert("Login Successful");
       //navigate to the home page
       // window.alert("Login successful")
@@ -74,8 +80,6 @@ export default function LoginPage() {
     user.password = password;
     // console.log(user);
     await login(user);
-
-    navigate("/", { curruser: { email: user.email } });
   };
 
   function validateForm() {
@@ -165,15 +169,27 @@ export default function LoginPage() {
           <div className="form__field">
             {/* <input type="submit" defaultValue="Sign In" />  */}
             <button className="login_btn" onClick={handleRedirecting}>
-            {!button_flag && ("Log In")}{button_flag && ("Change Password")}
+              {!button_flag && "Log In"}
+              {button_flag && "Change Password"}
             </button>
           </div>
+          {button_flag&&(
+          <p className="field">
+            Login :{" "}
+            <button id="buttonset" onClick={handlebutton}>
+              Click here
+            </button>{" "}
+          </p>
+          )}
+          {!button_flag&&(
           <p className="field">
             Change Password :{" "}
             <button id="buttonset" onClick={handlebutton}>
               Click here
             </button>{" "}
           </p>
+          )}
+          
         </form>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" className="icons">
