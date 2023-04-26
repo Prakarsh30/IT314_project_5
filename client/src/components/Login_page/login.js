@@ -168,12 +168,23 @@ export default function LoginPage() {
             {!button_flag && ("Log In")}{button_flag && ("Change Password")}
             </button>
           </div>
+          {button_flag&&(
+          <p className="field">
+            Login :{" "}
+            <button id="buttonset" onClick={handlebutton}>
+              Click here
+            </button>{" "}
+          </p>
+          )}
+          {!button_flag&&(
           <p className="field">
             Change Password :{" "}
             <button id="buttonset" onClick={handlebutton}>
               Click here
             </button>{" "}
           </p>
+          )}
+          
         </form>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" className="icons">

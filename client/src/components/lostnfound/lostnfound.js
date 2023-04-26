@@ -4,14 +4,15 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import "./lostnfound.css";
-import { useNavigate } from "react-router-dom";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Stack } from "@mui/material";
+
 const get = (key) => {
   const itemStr = localStorage.getItem(key);
   if (!itemStr) {
@@ -26,7 +27,6 @@ const get = (key) => {
   return item.value;
 };
 export default function Lostnfound() {
-  let navigate = useNavigate();
   let Lostnfound;
 
   const [lostnfound, setlostnfound] = useState([]);
@@ -47,13 +47,13 @@ export default function Lostnfound() {
   const [studentid, setStudentid] = useState("");
   const [contact, setContact] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("lost");
+  const [status, setStatus] = useState("");
   const Newitem = {
     itemname: "",
     studentid: "",
     contact: "",
     description: "",
-    status: "lost",
+    status: "",
   };
 
   const handleRedirecting = async (e) => {
@@ -83,16 +83,10 @@ export default function Lostnfound() {
     console.log(res);
     window.location.reload();
   };
-  const updateStatus = async (f) => {
-    console.log("Updating");
-    const res = await fetch(`http://localhost:5000/lostnfound/${f}`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },{mode: 'no-cors'});
-    console.log(res);
-    window.location.reload();
+  
+
+  const handleEdit = async (f) => {
+    // Function to edit
   };
 
   const Adding = async (Newitem) => {
@@ -125,19 +119,6 @@ export default function Lostnfound() {
 
   //Done
 
-  const card1 = (
-    <div class="card1">
-      <React.Fragment>
-        <CardContent>
-          <h4>Lost and Found Instructions:</h4>
-          The students are requested to collect the missing items from the
-          hostel supervisor's office. The contact information of the reporter is
-          shared in the table.
-        </CardContent>
-      </React.Fragment>
-    </div>
-  );
-
   const card2 = (
     <React.Fragment>
       <CardContent>
@@ -158,6 +139,62 @@ export default function Lostnfound() {
     </React.Fragment>
   );
 const role = get("role");
+
+// function table_sort() {
+//   const styleSheet = document.createElement('style')
+//   styleSheet.innerHTML = `
+//           .order-inactive span {
+//               visibility:hidden;
+//           }
+//           .order-inactive:hover span {
+//               visibility:visible;
+//           }
+//           .order-active span {
+//               visibility: visible;
+//           }
+//       `
+//   document.head.appendChild(styleSheet)
+
+//   document.querySelectorAll('th.order').forEach(th_elem => {
+//       let asc = true
+//       const span_elem = document.createElement('span')
+//       span_elem.style = "font-size:0.8rem; margin-left:0.5rem"
+//       span_elem.innerHTML = "▼"
+//       th_elem.appendChild(span_elem)
+//       th_elem.classList.add('order-inactive')
+
+//       const index = Array.from(th_elem.parentNode.children).indexOf(th_elem)
+//       th_elem.addEventListener('click', (e) => {
+//       document.querySelectorAll('th.order').forEach(elem => {
+//           elem.classList.remove('order-active')
+//           elem.classList.add('order-inactive')
+//       })
+//       th_elem.classList.remove('order-inactive')
+//       th_elem.classList.add('order-active')
+
+//       if (!asc) {
+//           th_elem.querySelector('span').innerHTML = '▲'
+//       } else {
+//           th_elem.querySelector('span').innerHTML = '▼'
+//       }
+//       const arr = Array.from(th_elem.closest("table").querySelectorAll('tbody tr'))
+//       arr.sort((a, b) => {
+//           const a_val = a.children[index].innerText
+//           const b_val = b.children[index].innerText
+//           return (asc) ? a_val.localeCompare(b_val) : b_val.localeCompare(a_val)
+//       })
+//       arr.forEach(elem => {
+//           th_elem.closest("table").querySelector("tbody").appendChild(elem)
+//       })
+//       asc = !asc
+//       })
+//   })
+// }
+
+//table_sort()
+
+
+
   return (
     <body>
       <Stack
@@ -177,43 +214,55 @@ const role = get("role");
           </Box>
           <br></br>
           <div className="lostnfound_form ps-4">
+
             <form>
+
               <TextField
                 id="outlined-basic"
+                required
                 label="Item Name"
                 variant="filled"
                 value={itemname}
                 size="small"
+                inputProps={{ maxLength: 12 }}
+                
+                
                 onChange={(e) => setName(e.target.value)}
               />
               <br></br>
               <br></br>
               <TextField
                 id="outlined-basic"
+                required
                 label="Student ID"
                 variant="filled"
                 value={studentid}
                 size="small"
+                inputProps={{ maxLength: 12 }}
                 onChange={(e) => setStudentid(e.target.value)}
               />
               <br></br>
               <br></br>
               <TextField
                 id="outlined-basic"
+                required
                 label="Student Contact"
                 variant="filled"
                 value={contact}
                 size="small"
+                inputProps={{ maxLength: 12 }}
                 onChange={(e) => setContact(e.target.value)}
               />
               <br></br>
               <br></br>
               <TextField
                 id="outlined-basic"
+                required
                 label="Item Description"
                 variant="filled"
                 value={description}
                 size="small"
+                inputProps={{ maxLength: 20 }}
                 onChange={(e) => setDescription(e.target.value)}
               />
               <br></br>
@@ -222,9 +271,10 @@ const role = get("role");
                 <h6>Item status</h6>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="lost"
+                  defaultValue=""
                   name="radio-buttons-group"
                   row
+                  required
                 >
                   <FormControlLabel
                     value="lost"
@@ -269,8 +319,6 @@ const role = get("role");
                     <th>Student Contact</th>
                     <th>Status</th>
                     <th>Date Created</th>
-                    <th>Last Modified</th>
-                    <th>Status</th>
                     <th> </th>
                   </tr>
                 </thead>
@@ -285,26 +333,19 @@ const role = get("role");
                         <td>{data.contact}</td>
                         <td>{data.status}</td>
                         <td>{data.createdAt.substring(0, 10)}</td>
-                        <td>{data.updatedAt.substring(0, 10)}</td>
                         <td>
-                        {/* {role=="admin"&&(<td className="tdb"> 
-                        <button onClick={()=>updateStatus(data._id)} 
-                        className="button2">
-                          Delete
-                        </button></td>)} */}
                         {role=="admin"&&(<td className="tdb"> 
-                        <button onClick={()=>handleDelete(data._id)}
+                        <Button variant="text" onClick={()=>handleDelete(data._id)}
                         className="button2">
-                          Delete
-                        </button></td>)}
-                          {/* <Button variant="text">
-                            <DeleteIcon />
-                          </Button> */}
+                          <DeleteIcon />
+                        </Button></td>)}
+
                         </td>
-                        {/*onClick={handleDelete}*} */}
+      
                       </tr>
                     );
                   })}
+                  
                 </tbody>
               </table>
             </div>
