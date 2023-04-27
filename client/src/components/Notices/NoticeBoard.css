@@ -10,14 +10,14 @@
 }
 
 /* styles for table here */
-.App {
+.notices__App {
   width: 100%;
   min-height: 100vh;
   justify-content: center;
   padding: 2.5%;
 }
 
-body {
+notices__body {
   width: 100%;
   display: block;
   height: auto;
@@ -27,6 +27,8 @@ body {
 }
 
 .inBlock {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   /* margin: 1.5%; */
   padding: 1.5%;
   background-color: whitesmoke;
@@ -67,6 +69,7 @@ body {
 }
 
 .noticeBlock{
+  border-radius: 10px;
   padding: 25px;
   display: block;
   background-color: rgb(237, 241, 214);

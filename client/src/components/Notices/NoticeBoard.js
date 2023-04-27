@@ -226,10 +226,10 @@ function NoticeBoard() {
   };
 
   return (
-    <div className="App">
+    <div className="notices__App">
       <html>
         <body>
-          <div className="inBlock">
+          <div className="inBlock notices__body">
             <h3 className="searchBlock">
               <span>Search Notices</span>
               <input
