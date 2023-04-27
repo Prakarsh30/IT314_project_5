@@ -142,6 +142,7 @@ function NoticeBoard() {
     console.log(newNotice, "newNotice");
 
     postNotice(newNotice);
+    handleClose();
   };
 
   const handleDelete = (id) => {

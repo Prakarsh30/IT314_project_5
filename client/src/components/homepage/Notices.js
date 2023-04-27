@@ -24,12 +24,19 @@ function Notices() {
 
   let newList;
   // get latest 4 news
+  // if (list.length < 4) {
+  //   newList = list.filter((example, index) => index < 4);
+  // } else {
+  //   newList = list.filter((example, index) => index > list.length() - 5);
+  // }
+  // const newList = list.filter((example, index) => (index<4));
+
   if (list.length < 4) {
     newList = list.filter((example, index) => index < 4);
   } else {
-    newList = list.filter((example, index) => index > list.length() - 5);
+    // newList = list.filter((example, index) => index > list.length - 5);
+    newList = list.filter((example, index) => index > list.length - 5).reverse();
   }
-  // const newList = list.filter((example, index) => (index<4));
 
   function filterString(str) {
     let newStr = str;
