@@ -1,23 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap'); */
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Raleway, sans-serif;
+  /* font-family: Raleway, sans-serif; */
+  /* font-family: 'Press Start 2P', cursive; */
+  /* font-family: 'Times New Roman', Times, serif; */
   /* display: block; */
+}
+
+body{
+  /* font-family: 'Press Start 2P', cursive; */
+  font-family: 'Times New Roman', Times, serif;
+
 }
 
 /* styles for table here */
 .notices__App {
   width: 100%;
+  /* font-family: 'Press Start 2P', cursive; */
   min-height: 100vh;
   justify-content: center;
   padding: 2.5%;
 }
 
-notices__body {
+.notices__body {
   width: 100%;
   display: block;
   height: auto;
@@ -35,6 +44,9 @@ notices__body {
   text-align: center;
 }
 
+.inBlock:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
 .searchBlock filterBlock {
   position: relative;
   font-size: 16px;
@@ -43,18 +55,22 @@ notices__body {
 
 .searchBlock input.search-input {
   width: 300px;
-  margin-left: auto;
+  margin-left: 10px;
   position: relative;
   float: right;
   height: 25px;
 }
 
+.searchBlock span{
+  margin: auto 0px;
+}
 .searchBlock{
   margin-bottom: 25px;
   height: auto;
   padding: 5px;
   width: 100%;
   display: flex;
+  justify-content: right;
 }
 
 .FilterBlock{
@@ -68,11 +84,28 @@ notices__body {
   margin-left: 25px;
 }
 
+.glow {
+	transition-duration: .3s;
+	transition-property: box-shadow;
+
+	@include hideTapHighlightColor();
+	@include hardwareAccel();
+	@include improveAntiAlias();
+}
+
+.glow:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, .6);
+}
+
+.noticesalign__left{
+  display: flex;
+  align-items: start;
+}
 .noticeBlock{
   border-radius: 10px;
   padding: 25px;
   display: block;
-  background-color: rgb(237, 241, 214);
+  background-color: #86dbf3;
   margin-bottom: 25px;
 }
 .noticeBlock h3{

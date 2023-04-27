@@ -230,6 +230,7 @@ function NoticeBoard() {
       <html>
         <body>
           <div className="inBlock notices__body">
+          <h2>Notices</h2>
             <h3 className="searchBlock">
               <span>Search Notices</span>
               <input
@@ -342,10 +343,10 @@ function NoticeBoard() {
                   //   </div>
                   // </div>
                   <>
-                    <div key={index} className="noticeBlock">
+                    <div key={index} className="noticeBlock glow">
                       <h3>{example.Heading}</h3>
-                      <p>{example.content}</p>
-                      <h7>{example.writer}</h7>
+                      <p className="noticesalign__left">{example.content}</p>
+                      <h7 className="noticesalign__left">{example.writer}</h7>
                     </div>
                   </>
                 );

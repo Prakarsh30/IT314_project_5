@@ -26,8 +26,7 @@ function Notices() {
   // get latest 4 news
   if (list.length < 4) {
     newList = list.filter((example, index) => index < 4);
-  } else {
-    newList = list.filter((example, index) => index > list.length() - 5);
+  } else {newList = list.filter((example, index) => index > list.length - 4);
   }
   // const newList = list.filter((example, index) => (index<4));
 

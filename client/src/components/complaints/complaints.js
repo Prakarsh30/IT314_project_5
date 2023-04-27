@@ -285,7 +285,7 @@ const Complaints = () => {
       <div className="App">
         <div className="complains_container">
           <div className="Complaints__addbtn">
-            <h1>Complaints</h1>
+            <h1 >Complaints</h1>
             <Button
               variant="contained"
               color="primary"
@@ -299,12 +299,13 @@ const Complaints = () => {
           <div className="row" id="myItems">
             <div className="col-sm-12 mb-3">
               {complaints.map((complaint) => (
-                <div className="card complaints_card">
+                <div className="card complaints_card glow">
                   <div className="card-body">
-                    <h5 id="complaints_title" className="card-title ">
+                    <h5 id="complaints_title" className="card-title">
                       {complaint.title}
                     </h5>
-                    <p className="card-subtitle mb-2 text-muted">
+                    <hr id="complaints_hr"/>
+                    <p className="card-subtitle mb-2 text-muted complaints_padding">
                       {complaint.message}
                     </p>
                   </div>
