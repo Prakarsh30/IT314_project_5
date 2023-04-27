@@ -10,6 +10,7 @@ export default function LoginPage() {
   console.log("kirtan", isLoggedIn);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [Newpassword, setNewPassword] = useState("");
 
   const [cookies, setCookie] = useCookies(["user"]);
 
@@ -42,7 +43,8 @@ export default function LoginPage() {
 
   // no sign up page, we will only have sign in page that collect email, password and role
   const login = async (user) => {
-    const res = await fetch("https://hostel-management-system-2l8c.onrender.com/login", {
+    console.log("login");
+    const res = await fetch("http://localhost:5000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,8 +55,8 @@ export default function LoginPage() {
     console.log("hey");
 
     console.log(data);
-    if (res.status === 400 || !data) {
-      window.alert("Invalid Credentials");
+    if (res.status != 200 || !data) {
+      window.alert(data.error);
     } else {
       // console.log(data.token);
 
@@ -82,14 +84,63 @@ export default function LoginPage() {
       // navigate("/");
     }
   };
+
+  const changePassword = async () => {
+    console.log("change password");
+    const res = await fetch("http://localhost:5000/login", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password, Newpassword }),
+    });
+    const data = await res.json();
+    console.log("hy", data);
+    if (res.status != 200 || !data) {
+      window.alert(data.error);
+    } else {
+      // console.log(data.token);
+
+      // // set the token in local storage
+      // console.log(data)
+      // set("token", data.token, 3600);
+      // set("email", data.user.email, 3600);
+      // set("role", data.user.role, 3600);
+
+      setCookie("email", data.user.email);
+      setCookie("role", data.user.role);
+
+      console.log("Yup");
+      // window.location.reload();
+      navigate("/", { curruser: { email: user.email } });
+      console.log("bruh");
+      window.location.reload();
+
+      setisLoggedIn(true);
+
+      console.log("lklk");
+      //t window.alert("Login Successful");
+      //navigate to the home page
+      // window.alert("Login successful")
+      // navigate("/");
+    }
+  };
+
   // get the token from local storage
 
   const handleRedirecting = async (e) => {
     e.preventDefault();
+
     user.email = email;
     user.password = password;
     // console.log(user);
-    await login(user);
+    {
+      !button_flag && (await login(user));
+    }
+
+    {
+      button_flag && (await changePassword());
+    }
   };
 
   function validateForm() {
@@ -170,7 +221,7 @@ export default function LoginPage() {
                   placeholder="New Password"
                   required=""
                   onChange={(data) => {
-                    setPassword(data.target.value);
+                    setNewPassword(data.target.value);
                   }}
                 />
               </div>
