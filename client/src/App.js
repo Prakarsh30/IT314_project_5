@@ -7,7 +7,6 @@ import Complaints from "./components/complaints/complaints";
 import Lostnfound from "./components/lostnfound/lostnfound";
 import { CookiesProvider } from "react-cookie";
 import Mainpage from "./components/homepage/mainpage";
-import "./index.css";
 // import addComp from "./components/complaints/Add_complaint";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
