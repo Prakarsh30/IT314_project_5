@@ -84,6 +84,11 @@ body{
   margin-left: 25px;
 }
 
+.deleteButton{
+  display: flex;
+  justify-content: flex-end;
+}
+
 .glow {
 	transition-duration: .3s;
 	transition-property: box-shadow;
