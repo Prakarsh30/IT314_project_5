@@ -78,7 +78,7 @@ export default function Lostnfound() {
     );
 
     await Adding(Newitem);
-    // window.location.reload();
+    window.location.reload();
   };
 
   const handleDelete = async (f) => {
@@ -94,7 +94,7 @@ export default function Lostnfound() {
       { mode: "no-cors" }
     );
     console.log(res);
-    // window.location.reload();
+    window.location.reload();
   };
   const updateStatus = async (f) => {
     console.log("Updating");
@@ -118,6 +118,7 @@ export default function Lostnfound() {
 
   const Adding = async (Newitem) => {
     console.log("Adding");
+    console.log(Newitem);
     const res = await fetch("http://localhost:5000/lostnfound", {
       method: "POST",
       headers: {
@@ -245,7 +246,7 @@ export default function Lostnfound() {
                 <h6>Item status</h6>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="lost"
+                  defaultValue=""
                   name="radio-buttons-group"
                   row
                 >

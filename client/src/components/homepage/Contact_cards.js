@@ -67,7 +67,7 @@ const Contact_cards = () => {
             <h3>{item.name}</h3>
             <p>{item.occupation} - {item.location}</p>
           </Carousel.Caption> */}
-          <div className="card">
+          <div className="contact_card">
         <div className="card-header">
           <img className="profile-image" src={item.image} alt={item.name} />
           <div className="profile-info">

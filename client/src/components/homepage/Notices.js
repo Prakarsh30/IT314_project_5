@@ -35,6 +35,7 @@ function Notices() {
     }
     return newStr;
   }
+  const role=cookies.role;
   console.log('NEW LIST');
   console.log(newList);
   console.log(list);
@@ -60,7 +61,12 @@ function Notices() {
         </ul>
         <ul>
           <li>
-            <a href="/NoticeBoard">More...</a>
+            
+           
+
+            {role != "" && (
+                             <a href="/NoticeBoard">More...</a>
+                          )}
           </li>
         </ul>
       </div>

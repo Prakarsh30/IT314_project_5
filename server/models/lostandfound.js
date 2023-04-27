@@ -24,7 +24,7 @@ const lostandfound = mongoose.Schema({
   description: {
     type: String,
     required: true,
-    minlength: 10,
+    minlength: 5,
   },
   studentid: {
     type: String,
@@ -36,7 +36,9 @@ const lostandfound = mongoose.Schema({
     required: true,
     minlength: 3,
   },
-  type: Boolean,
+  status:{
+    type: String,
+  }
 });
 
 const lostandfoundMessage = mongoose.model("lostandfoundMessage", lostandfound);
