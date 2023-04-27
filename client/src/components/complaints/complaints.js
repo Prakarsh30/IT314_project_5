@@ -1,39 +1,17 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import ListItem from "@mui/material/ListItem";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { TextField } from "@mui/material";
 import axios from "axios";
-import { Alert } from "@mui/material";
 import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
-import deleteOpen from "@mui/icons-material/Delete";
-import snackbar from "@mui/material";
-import handleAlertClose from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import { useHistory } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import Footer from "../footer/Footer";
 import "./complaints.css";
-import {useCookies} from "react-cookie";
+import { useCookies } from "react-cookie";
 const set = (key, value, expiry) => {
   const now = new Date();
   const item = {
@@ -41,20 +19,6 @@ const set = (key, value, expiry) => {
     expiry: now.getTime() + expiry,
   };
   localStorage.setItem(key, JSON.stringify(item));
-};
-
-const get = (key) => {
-  const itemStr = localStorage.getItem(key);
-  if (!itemStr) {
-    return null;
-  }
-  const item = JSON.parse(itemStr);
-  const now = new Date();
-  if (now.getTime() > item.expiry) {
-    localStorage.removeItem(key);
-    return null;
-  }
-  return item.value;
 };
 
 const remove = (key) => {
@@ -115,7 +79,7 @@ const Complaints = () => {
   const [deleteTitle, setDeleteTitle] = useState("");
   const [deleteMessage, setDeleteMessage] = useState("");
   const [deleteCreator, setDeleteCreator] = useState("");
-  const [cookies,setCookies]=useCookies(["user"]);
+  const [cookies, setCookies] = useCookies(["user"]);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -180,7 +144,9 @@ const Complaints = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`https://hostel-management-system-2l8c.onrender.com/complaints/${id}`)
+      .delete(
+        `https://hostel-management-system-2l8c.onrender.com/complaints/${id}`
+      )
       .then((res) => {
         setDeleteAlert(false);
         setDeleteAlertMessage("Complaint deleted successfully");
@@ -210,7 +176,10 @@ const Complaints = () => {
       creator: editCreator,
     };
     axios
-      .patch(`https://hostel-management-system-2l8c.onrender.com/complaints/${id}`, updatedComplaint)
+      .patch(
+        `https://hostel-management-system-2l8c.onrender.com/complaints/${id}`,
+        updatedComplaint
+      )
       .then((res) => {
         setEdit(false);
         setEditAlertMessage("Complaint updated successfully");
@@ -241,7 +210,10 @@ const Complaints = () => {
       creator: creator,
     };
     axios
-      .post("https://hostel-management-system-2l8c.onrender.com/complaints", newComplaint)
+      .post(
+        "https://hostel-management-system-2l8c.onrender.com/complaints",
+        newComplaint
+      )
       .then((res) => {
         setOpen(false);
         setAlertMessage("Complaint added successfully");
@@ -329,34 +301,35 @@ const Complaints = () => {
               {complaints.map((complaint) => (
                 <div className="card complaints_card">
                   <div className="card-body">
-                    <h5 id="complaints_title" className="card-title ">{complaint.title}</h5>
+                    <h5 id="complaints_title" className="card-title ">
+                      {complaint.title}
+                    </h5>
                     <p className="card-subtitle mb-2 text-muted">
                       {complaint.message}
                     </p>
-                    
                   </div>
                   <p className="card-text">- {complaint.creator}</p>
                   {/* <div className="complaints__cardFooter">
                     <p>Created by: {complaint.creator}</p>
                   </div> */}
                   <div className="complaints_delete">
-                      {role === "admin" && (
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          onClick={() =>
-                            handleDelete(
-                              complaint._id,
-                              complaint.title,
-                              complaint.message,
-                              complaint.creator
-                            )
-                          }
-                        >
-                          Delete
-                        </Button>
-                      )}
-                    </div>
+                    {role === "admin" && (
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() =>
+                          handleDelete(
+                            complaint._id,
+                            complaint.title,
+                            complaint.message,
+                            complaint.creator
+                          )
+                        }
+                      >
+                        Delete
+                      </Button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
-import TextField from "@mui/material/TextField";
 import "./courier_styles.css";
 import SendIcon from "@mui/icons-material/Send";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
@@ -33,67 +31,72 @@ export default function CourierPage() {
   // console.log(role);
 
   // list of all current couriers
-    let newCourier;
+  let newCourier;
 
-    const [courierList, setCourierList] = useState([]);
+  const [courierList, setCourierList] = useState([]);
   // get all list of current couriers when page is loaded
-    document.onreadystatechange = async function () {
-    newCourier = (await fetch("https://hostel-management-system-2l8c.onrender.com/couriers")).json();
+  document.onreadystatechange = async function () {
+    newCourier = (
+      await fetch("https://hostel-management-system-2l8c.onrender.com/couriers")
+    ).json();
 
     newCourier.then(async (data) => {
-        console.log(data);
-        await setCourierList(data);
-        await setFilter(data);
-        });
-        console.log(courierList);
-        console.log("Loaded data");
-    };
+      console.log(data);
+      await setCourierList(data);
+      await setFilter(data);
+    });
+    console.log(courierList);
+    console.log("Loaded data");
+  };
 
-    // form inputs; will be integrated with backend using post and get methods later
-    const [couriedID, setcourierID] = useState("");
-    const [filter, setFilter] = useState([]);
-    const [name, setName] = useState("");
-    const [room, setRoom] = useState("");
+  // form inputs; will be integrated with backend using post and get methods later
+  const [couriedID, setcourierID] = useState("");
+  const [filter, setFilter] = useState([]);
+  const [name, setName] = useState("");
+  const [room, setRoom] = useState("");
 
-    const Newitem = {
-        student_name: "",
-        couriedID: "",
-        room: "",
-        date: "",
-    };
+  const Newitem = {
+    student_name: "",
+    couriedID: "",
+    room: "",
+    date: "",
+  };
 
-    const handleRedirecting = async (e) => {
-        e.preventDefault();
+  const handleRedirecting = async (e) => {
+    e.preventDefault();
 
-        Newitem.student_name = name;
-        Newitem.couriedID = couriedID;
-        Newitem.room = room;
+    Newitem.student_name = name;
+    Newitem.couriedID = couriedID;
+    Newitem.room = room;
 
-        alert(
-            `New courier for: ${Newitem.student_name} with courier ID: ${Newitem.couriedID}, Room No.: ${Newitem.room}`
-        );
+    alert(
+      `New courier for: ${Newitem.student_name} with courier ID: ${Newitem.couriedID}, Room No.: ${Newitem.room}`
+    );
 
-        await Adding(Newitem);
-        window.location.reload();
-    };
+    await Adding(Newitem);
+    window.location.reload();
+  };
 
-    const Adding = async (Newitem) => {
-        const res = await fetch("https://hostel-management-system-2l8c.onrender.com/couriers", {
+  const Adding = async (Newitem) => {
+    const res = await fetch(
+      "https://hostel-management-system-2l8c.onrender.com/couriers",
+      {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(Newitem),
-        });
+      }
+    );
 
-        const data = await res.json();
+    const data = await res.json();
 
-        console.log(data);
+    console.log(data);
 
-        if(res.status != 200){
-            alert(`${data.message}`);
-        }
-    };
+    if (res.status != 200) {
+      alert(`${data.message}`);
+    }
+  };
 
   const deleteEntry = async (_id) => {
     console.log(_id);
@@ -112,26 +115,24 @@ export default function CourierPage() {
   };
   const role = cookies.role;
 
-    const requestSearch = (searchedVal) => {
-        const filteredRows = courierList.filter((row) => {
-        return row.student_name
-            .toString()
-            .toLowerCase()
-            .includes(searchedVal.toString().toLowerCase());
-        });
-        if (searchedVal.length < 1) {
-        setFilter(courierList);
-        } else {
-        setFilter(filteredRows);
-        }
+  const requestSearch = (searchedVal) => {
+    const filteredRows = courierList.filter((row) => {
+      return row.student_name
+        .toString()
+        .toLowerCase()
+        .includes(searchedVal.toString().toLowerCase());
+    });
+    if (searchedVal.length < 1) {
+      setFilter(courierList);
+    } else {
+      setFilter(filteredRows);
     }
+  };
 
   return (
     <html>
       <body>
         <div className="App">
-     
-       
           <div className="inBlock">
             <h2>Couriers Updates</h2>
             <br></br>
@@ -237,12 +238,9 @@ export default function CourierPage() {
               </tbody>
             </table>
           </div>
-        
-      
         </div>
-        <Footer/>
-
+        <Footer />
       </body>
     </html>
-    );
-};
+  );
+}

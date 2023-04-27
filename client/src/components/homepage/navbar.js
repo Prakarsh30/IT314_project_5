@@ -1,13 +1,9 @@
 import * as React from "react";
 import { useState, useContext, useEffect } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
 
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -35,7 +31,8 @@ const Navbar = () => {
     setEmail(null);
     setRole(null);
     setisLoggedIn(false);
-    window.open("/");
+    // window.location.reload();
+    window.location.replace("/");
     // navigate("/");
     console.log("km", cookies.email, isLoggedIn);
   };
