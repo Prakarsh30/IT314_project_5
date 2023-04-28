@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 
 exports.auth = async (req, res) => {
   // console.log("Login route");
+  //console.log("Login route");
   const { email, password } = req.body;
   if (!email || !password) {
     return res

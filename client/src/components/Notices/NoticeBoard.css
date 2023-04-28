@@ -1,5 +1,7 @@
+noticeboard
+
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap'); */
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  /* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); */
 
 * {
   box-sizing: border-box;
@@ -79,7 +81,12 @@ body{
   display: flex;
 }
 
+.notices__date{
+  width:130px;
+}
 .blocks{
+  display: flex;
+  width:fit-content;
   position: relative;
   margin-left: 25px;
 }
@@ -114,6 +121,8 @@ body{
   margin-bottom: 25px;
 }
 .noticeBlock h3{
+  margin: auto;
+  border-bottom: 1px solid black;
   padding-bottom: 5px;
 }
 .noticeBlock h4{
@@ -125,16 +134,24 @@ body{
 }
 
 .addNew{
+  font-size: large;
+  font-weight: 500;
+  width: 160px;
+  height: 60px;
+  border-radius: 5px;
   position: fixed;
-  bottom: -4px;
-  right: 3px;
-  margin: 10px;
+  bottom: 16px;
+  right: 3%;
+  margin: 5px;
   padding: 10px;
   border: none;
   background-color: #146c94;
   color: white;
 }
 
+.addNew:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
 .accordion{
   width: 80%;
   margin-left: 10%;

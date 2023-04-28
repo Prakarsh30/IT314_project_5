@@ -6,7 +6,7 @@ function Notices() {
   const [cookies, setCookie] = useCookies(["user"]);
 
   useEffect(() => {
-    console.log(cookies.email);
+    //console.log(cookies.email);
     getNotices();
   }, [""]);
   const [list, setList] = useState([]);

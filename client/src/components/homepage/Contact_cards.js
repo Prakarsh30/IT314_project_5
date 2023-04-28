@@ -29,27 +29,30 @@ const Contact_cards = () => {
     //   location: 'Chicago, IL'
     // },
     {
-        image:'https://cdn.dribbble.com/users/2878951/screenshots/14013747/media/603f0b853c409547dfa51cba996f375c.png?compress=1&resize=400x300',
+        image:'https://gtjai.com.vn/wp-content/uploads/2021/07/avt.png',
         name:'Prof. Bakul Gohel',
         occupation:'Warden, HOR-Men',
+        address:'\n 2201, Faculty Block-2\n DA-IICT, Gandhinagar\n Gujarat - 382 007',
         email:'warden_men@daiict.ac.in',
         phone_no:'079-68261672 (Off.), 9328888966 (M)',
         
     },
     {
-        image:'https://cdn.dribbble.com/users/2878951/screenshots/14013747/media/603f0b853c409547dfa51cba996f375c.png?compress=1&resize=400x300',
-        name:'Emma A. Main',
-        occupation:'Graphics Designer',
-        email:'PaulGoyette@gmail.com',
-        phone_no:'000 123-456',
+        image:'https://w7.pngwing.com/pngs/481/915/png-transparent-computer-icons-user-avatar-woman-avatar-computer-business-conversation-thumbnail.png',
+        name:'Mr. Jitendra Parmar',
+        occupation:'Senior Hostel Supervisor',
+        address:'\n Old HOR Men\n DA-IICT, Gandhinagar\n Gujarat - 382 007',
+        email:'\nhostel_supervisor@daiict.ac.in \njitendra_parmar@daiict.ac.in',
+        phone_no:'Phone: 079-68261544 (Off.), 9328994140 (M)',
         
-    },
-    {
-        image:'https://cdn.dribbble.com/users/2878951/screenshots/14013747/media/603f0b853c409547dfa51cba996f375c.png?compress=1&resize=400x300',
-        name:'Emma A. Main',
+      },
+      {
+        image:'https://www.shareicon.net/data/512x512/2016/09/15/829453_user_512x512.png',
+        name:'Prof. Priyanka Singh',
         occupation:'Graphics Designer',
-        email:'PaulGoyette@gmail.com',
-        phone_no:'000 123-456',
+        address:'\n 4206, Faculty Block-4\n DA-IICT, Gandhinagar\n Gujarat - 382 007',
+        email:'warden_women@daiict.ac.in',
+        phone_no:' 079-68261589 (Off.), 9328721604 (M)',
         
     }
   ];
@@ -73,6 +76,7 @@ const Contact_cards = () => {
           <div className="profile-info">
             <h4>{item.name}</h4>
             <h5>{item.occupation}</h5>
+            <h6>{item.address}</h6>
           </div>
         </div>
         <div className="card-body">

@@ -1,5 +1,3 @@
-// this page is to diplsay notice page
-const { json } = require("express");
 const noticeMessage = require("../models/notice");
 
 exports.getNotice = async(req, res) =>{
@@ -28,14 +26,14 @@ exports.postNotice = async(req, res) =>{
     }    
 }
 
-exports.deleteNotice = async(req, res) =>{
+exports.deleteNotice = async (req, res) => {
+  const id = req.params.id;
+  // delete notice
+  try {
+    await noticeMessage.findByIdAndDelete(id).exec();
+    res.send("Notice deleted");
+  } catch (err) {
+    //console.log(err);
+  }
+};
 
-    const id = req.params.id;
-    // delete notice
-    try{
-        await noticeMessage.findByIdAndDelete(id).exec();
-        res.send("Notice deleted");
-    }catch(err){
-        console.log(err);
-    }
-}
