@@ -36,7 +36,7 @@ export default function Lostnfound() {
   const [lostnfound, setlostnfound] = useState([]);
   // get all list of current couriers when page is loaded
   document.onreadystatechange = async function () {
-    Lostnfound = (await fetch("http://localhost:5000/lostnfound")).json();
+    Lostnfound = (await fetch("https://hostel-management-system-2l8c.onrender.com/lostnfound")).json();
 
     Lostnfound.then(async (data) => {
       // console.log(data);
@@ -79,7 +79,7 @@ export default function Lostnfound() {
   const handleDelete = async (f) => {
     console.log("Deleting");
     const res = await fetch(
-      `http://localhost:5000/lostnfound/${f}`,
+      `https://hostel-management-system-2l8c.onrender.com/lostnfound/${f}`,
       {
         method: "delete",
         headers: {
@@ -94,7 +94,7 @@ export default function Lostnfound() {
   const updateStatus = async (f) => {
     console.log("Updating");
     const res = await fetch(
-      `http://localhost:5000/lostnfound/${f}`,
+      `https://hostel-management-system-2l8c.onrender.com/lostnfound/${f}`,
       {
         method: "put",
         headers: {
@@ -114,7 +114,7 @@ export default function Lostnfound() {
   const Adding = async (Newitem) => {
     console.log("Adding");
     console.log(Newitem);
-    const res = await fetch("http://localhost:5000/lostnfound", {
+    const res = await fetch("https://hostel-management-system-2l8c.onrender.com/lostnfound", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

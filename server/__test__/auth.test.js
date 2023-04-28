@@ -2,7 +2,7 @@ const { auth } = require("../controllers/user_detail");
 const User = require("../models/user");
 const request = require("supertest");
 jest.mock("../models/user");
-const baseURL = "http://localhost:5000";
+const baseURL = "https://hostel-management-system-2l8c.onrender.com";
 
 // test empty field error
 describe("POST /login", () => {

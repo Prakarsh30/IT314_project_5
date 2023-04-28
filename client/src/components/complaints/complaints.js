@@ -233,7 +233,10 @@ const Complaints = () => {
       })
       .catch((err) => {
         console.log(err);
+        // setAlertMessage error message
+        setAlertType(err.response);
       });
+      
   };
 
   useEffect(() => {
