@@ -1,215 +1,338 @@
-import React, { useEffect, useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import TextField from '@mui/material/TextField';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import React, { useState } from "react";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
 import "./lostnfound.css";
-import { Icon } from "@mui/material";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { DataGrid } from '@mui/x-data-grid';
+import { useNavigate } from "react-router-dom";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Stack } from "@mui/material";
+import { useCookies } from "react-cookie";
+import Footer from "../footer/Footer";
 
+const get = (key) => {
+  const itemStr = localStorage.getItem(key);
+  if (!itemStr) {
+    return null;
+  }
+  const item = JSON.parse(itemStr);
+  const now = new Date();
+  if (now.getTime() > item.expiry) {
+    localStorage.removeItem(key);
+    return null;
+  }
+  return item.value;
+};
 export default function Lostnfound() {
-  
-    let navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(["user"]);
+  let navigate = useNavigate();
+  let Lostnfound;
 
-    // classify based on role. Provide chance to admin to add new couriers. Allow students to view
-    // const { state_ip } = this.props.location
-    // const role = this.state_ip.curruser.role;
-    // console.log(role);
+  const [lostnfound, setlostnfound] = useState([]);
+  // get all list of current couriers when page is loaded
+  document.onreadystatechange = async function () {
+    Lostnfound = (await fetch("http://localhost:5000/lostnfound")).json();
 
+    Lostnfound.then(async (data) => {
+      // console.log(data);
+      await setlostnfound(data);
+    });
+    // console.log(lostnfound);
+    // console.log("Loaded data");
+  };
 
-    
-    // get requets to get list of all request.
-    // print list.
+  // form inputs; will be integrated with backend using post and get methods later
+  const [itemname, setName] = useState("");
+  const [studentid, setStudentid] = useState("");
+  const [contact, setContact] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("");
+  const Newitem = {
+    itemname: "",
+    studentid: "",
+    contact: "",
+    description: "",
+    status: "lost",
+  };
 
-    const [courier_item, setItems] = useState("");
+  const handleRedirecting = async (e) => {
+    e.preventDefault();
+    console.log("Redirecting");
+    Newitem.itemname = itemname;
+    Newitem.studentid = studentid;
+    Newitem.contact = contact;
+    Newitem.description = description;
+    Newitem.status = status;
+    alert(
+      `New ${Newitem.status} item named: ${Newitem.itemname} added to the list`
+    );
 
-    // structure of data entry and method to post data
+    await Adding(Newitem);
+    window.location.reload();
+  };
 
-    // using static json data object to print table and get the layout of table and the couriers page
-    
-    const item1 = {
-        itemID: "1",
-        item_name: "Test1",
-        ID: "ASBH1",
-        date: '29-01-23',
-        contact: 'xxxxx xxxxx',
-    };
+  const handleDelete = async (f) => {
+    console.log("Deleting");
+    const res = await fetch(
+      `http://localhost:5000/lostnfound/${f}`,
+      {
+        method: "delete",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { mode: "no-cors" }
+    );
+    console.log(res);
+    window.location.reload();
+  };
+  const updateStatus = async (f) => {
+    console.log("Updating");
+    const res = await fetch(
+      `http://localhost:5000/lostnfound/${f}`,
+      {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { mode: "no-cors" }
+    );
+    console.log(res);
+    window.location.reload();
+  };
 
-    const item2 = {
-        itemID: "2",
-        item_name: "Test2",
-        ID: "XW31A",
-        date: '29-01-23',
-        contact: 'yyyyy yyyyy',
-    };
+  const handleEdit = async (f) => {
+    // Function to edit
+  };
 
-    const item3 = {
-        itemID: "3",
-        item_name: "Test3",
-        ID: "A123Z",
-        date: '29-01-23',
-        contact: 'zzzzz zzzzz',
-        
-    };
+  const Adding = async (Newitem) => {
+    console.log("Adding");
+    console.log(Newitem);
+    const res = await fetch("http://localhost:5000/lostnfound", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Newitem),
+    });
 
-    const newCourier= [item1, item2,item3];
+    const data = await res.json();
+    console.log("Pp");
+    console.log(data);
+  };
 
-    // form inputs; will be integrated with backend using post and get methods later
-    const [itemID, setitemID] = useState("");
-    const [name, setitemName] = useState("");
+  // Table data
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        alert(`New item named: ${name} with ID: ${itemID}`);
-    }
+  // const lostnfoundData = [
+  //     {
+  //         "index":"1",
+  //         "itemname":"Pen"
+  //     },
+  //     {
+  //         "index":"2",
+  //         "itemname":"Gun"
+  //     },
+  // ];
 
-    return (
-    
-        <div className="App">
-        <body className="AppBody">
-        <p align='center'>
-        <h2>Lost and Found</h2>
-        </p>
-        <p align='center'>
-        <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{ height: 140}}
-        image=""
-        title="charger"
-      />
+  //Done
+
+  const card1 = (
+    <div className="card1">
+      <React.Fragment>
+        <CardContent>
+          <h4>Lost and Found Instructions:</h4>
+          The students are requested to collect the missing items from the
+          hostel supervisor's office. The contact information of the reporter is
+          shared in the table.
+        </CardContent>
+      </React.Fragment>
+    </div>
+  );
+
+  const card2 = (
+    <React.Fragment>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lost item
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Description of the lost item
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          <h6>Found a lost item? Fill out the form below!</h6>
         </Typography>
       </CardContent>
-        <p align='center'>
-        <Button size="small">Claim</Button>
-        </p>
-        </Card>
-        </p>
-        <br></br>
-        <p>Students are requested to claim lost items from the room of the Hostel Supervisor.</p>
-        <br></br>
+    </React.Fragment>
+  );
 
-        {/* form to add new courier
-        <div className="form">
-            <form onSubmit={handleSubmit}>
-                <label class ="label">Item name:
-                    <input
-                    type="text" 
-                    value={name}
-                    onChange={(e) => setitemName(e.target.value)}
-                    class = "ipBox"/>
-                </label>
-                <label class ="label">Item Description:
-                    <input 
-                    type="text" 
-                    value={itemID}
-                    onChange={(e) => setitemID(e.target.value)}
-                    class = "ipBox"/>
-                </label>
-                <input type="submit" className="button"/>
+  const card3 = (
+    <React.Fragment>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          <h5>Looking for a lost item? Check out the table below!</h5>
+        </Typography>
+      </CardContent>
+    </React.Fragment>
+  );
+  const role = cookies.role;
+
+  return (
+    <body>
+      <Stack
+        className="university-card"
+        marginLeft={39}
+        marginTop={3}
+        alignItems={"center"}
+        sx={{ bgcolor: "#f1f1f1" }}
+      >
+        <h2>Lost and Found</h2>
+        <h5>Report and check your items here.</h5>
+      </Stack>
+      <br></br>
+      <div className="container">
+        <div className="leftpane2">
+          <Box sx={{ minWidth: 275 }}>
+            <Card sx={{ bgcolor: "#f1f1f1", height: "71.5px" }}>{card2}</Card>
+          </Box>
+          <br></br>
+          <div className="lostnfound_form ps-4">
+            <form>
+              <TextField
+                id="outlined-basic"
+                label="Item Name"
+                variant="filled"
+                value={itemname}
+                size="small"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <br></br>
+              <br></br>
+              <TextField
+                id="outlined-basic"
+                label="Student ID"
+                variant="filled"
+                value={studentid}
+                size="small"
+                onChange={(e) => setStudentid(e.target.value)}
+              />
+              <br></br>
+              <br></br>
+              <TextField
+                id="outlined-basic"
+                label="Student Contact"
+                variant="filled"
+                value={contact}
+                size="small"
+                onChange={(e) => setContact(e.target.value)}
+              />
+              <br></br>
+              <br></br>
+              <TextField
+                id="outlined-basic"
+                label="Item Description"
+                variant="filled"
+                value={description}
+                size="small"
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <br></br>
+              <br></br>
+              <label className="lostnfound_label">
+                <h6>Item status</h6>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue=""
+                  name="radio-buttons-group"
+                  row
+                >
+                  <FormControlLabel
+                    value="lost"
+                    control={<Radio />}
+                    onChange={() => setStatus("lost")}
+                    label="Lost"
+                  />
+                  <FormControlLabel
+                    value="found"
+                    control={<Radio />}
+                    onChange={() => setStatus("found")}
+                    label="Found"
+                  />
+                </RadioGroup>
+              </label>
+              <br></br>
+              <Button
+                variant="contained"
+                className="lostnfound_button"
+                onClick={handleRedirecting}
+              >
+                submit
+              </Button>
             </form>
-        </div> */}
-        <br></br>
-        <div>
-        <BottomNavigation>
-  <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-  <BottomNavigationAction label="Claim" icon={<CheckCircleIcon/>} />
-  <BottomNavigationAction label="Search" icon={<ManageSearchIcon />} />
-</BottomNavigation>
+          </div>
         </div>
-        <table>
-            <thead class = "headerStyle">
-                <tr>
+        <div className="somepane"></div>
+        <div className="middlepane">
+          <Box sx={{ minWidth: 275 }}>
+            <Card sx={{ bgcolor: "#f1f1f1" }}>{card3}</Card>
+          </Box>
+          <br></br>
+          <div className="middlepane2">
+            <div className="table_css">
+              <table>
+                <thead className="lostnfound_headerStyle">
+                  <tr>
                     <th>Index</th>
-                    {/* <th>Item ID</th> */}
                     <th>Item Name</th>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Contacts</th>
-                </tr>
-            </thead>
-            <tbody>
-            {
-                newCourier.map((data, index)=>{
-                    return(
-                        <tr key={index} class = "data_entry">
-                            {/* <td>{index+1}</td> */}
-                            <td>{data.itemID}</td>
-                            <td>{data.item_name}</td>
-                            <td>{data.date}</td>
-                            <td>{data.ID}</td>
-                            <td>{data.contact}</td>
-                            <td>{data.image}</td>
-                        </tr>
-                    )
-                })
-            }
-            </tbody>
-        </table>
-        <div>
-        <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1,height: '2ch', width: '15ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-    <br></br>
-    <h5>Enter the lost item here: </h5>
-    <br></br>
-      <div>
-        <TextField
-          label="Item Name"
-          defaultValue=" "
-          variant="standard"
-        />
-        <TextField
-          label="Description"
-          defaultValue=" "
-          variant="standard"
-        />
-        <TextField
-          label="Date"
-          defaultValue=" "
-          variant="standard"
-        />
-        <TextField
-          label="Contact number"
-          defaultValue=" "
-          variant="standard"
-        />
-        <Button size="small">Upload Photo</Button>
-        <p align='right'>
-        <Button size="small">Submit</Button>
-        </p>
+                    <th>Item Description</th>
+                    <th>Student ID</th>
+                    <th>Student Contact</th>
+                    <th>Status</th>
+                    {/* <th>Date Created</th> */}
+                    <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {lostnfound.map((data, index) => {
+                    return (
+                      <tr key={index} className="lostnfound_data_entry">
+                        <td>{index + 1}</td>
+                        <td>{data.itemname}</td>
+                        <td>{data.description}</td>
+                        <td>{data.studentid}</td>
+                        <td>{data.contact}</td>
+                        <td>{data.status}</td>
+                        {/* <td>{data.createdAt.substring(0, 10)}</td> */}
+                        <td>
+                          {/* {role=="admin"&&(<td className="tdb"> 
+                        <button onClick={()=>updateStatus(data._id)} 
+                        className="button2">
+                          Delete
+                        </button></td>)} */}
+                          {role == "admin" && (
+                            <td className="tdb">
+                              <Button
+                                variant="text"
+                                onClick={() => handleDelete(data._id)}
+                                className="button2"
+                              >
+                                <DeleteIcon />
+                              </Button>
+                            </td>
+                          )}
+                          {/* <Button variant="text">
+                            <DeleteIcon />
+                          </Button> */}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-    </Box>
-        </div>
-    <br></br>
-    <br></br>
-
-        </body>
-        </div>
-    );
-    
+      <Footer />
+    </body>
+  );
 }

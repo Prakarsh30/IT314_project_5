@@ -1,0 +1,44 @@
+.contact_card {
+    background-color: #fff;
+    border: 3px solid black;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* margin: 20px auto; */
+    max-width: 600px;
+    padding: 20px;
+    height: 46.5vh;
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-image {
+    border-radius: 50%;
+    height: 60px;
+    margin-right: 20px;
+    width: 60px;
+  }
+  
+  .profile-info {
+    flex: 1;
+  }
+  
+  .card-header h2 {
+    margin: 0;
+  }
+  
+  .card-header h3 {
+    color: #999;
+    margin: 0;
+  }
+  
+  .card-body {
+    padding: 20px 0;
+  }
+  
+  .contact-info {
+    margin: 0;
+  }
+  

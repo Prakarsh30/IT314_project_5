@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const { getlostnfound } = require("../controllers/lostnfound");
-router.get("/", getlostnfound);
+const { getLostnfound } = require("../controllers/lostnfound");
+const { createLostnfound } = require("../controllers/lostnfound");
+const { deleteLostnfound } = require("../controllers/lostnfound");
+// const { createlostnfound } = require("../controllers/lostnfound");
+router.get("/", getLostnfound);
+router.post("/", createLostnfound);
+router.delete("/:id", deleteLostnfound);
 
 module.exports = router;

@@ -1,0 +1,80 @@
+.App {
+  display: flex;
+  background-color: white ;
+  padding: 2.5%;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.complains_container {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: whitesmoke;
+  padding: 2.5%;
+  /* text-align: center; */
+  width: 100%;
+  z-index: 1;
+  display: block;
+}
+
+.complains_container:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+body{
+  width: 100%;
+  display: block;
+  height: auto;
+}
+
+ul li {
+  list-style: none;
+  
+}
+
+/* .Complaints__addbtn{
+  left:50px;
+} */
+.Complaints__addbtn{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#complaints_title{
+  font-weight: 600;
+}
+
+.complaints_delete{
+  /* display: block; */
+  color: red;
+
+}
+.complaints_card{
+  
+  padding: 20px;
+  margin: 10px;
+  background-color: #a5ddec;
+  border: 1px solid #19a7ce;
+}
+
+.glow {
+	transition-duration: .3s;
+	transition-property: box-shadow;
+
+	@include hideTapHighlightColor();
+	@include hardwareAccel();
+	@include improveAntiAlias();
+}
+
+.glow:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, .6);
+}
+
+#complaints_hr{
+  border-top: 1px solid black;
+  background: black;
+}
+
+.complaints_padding{
+  padding: 10px;
+}

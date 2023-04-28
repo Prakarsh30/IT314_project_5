@@ -32,4 +32,14 @@ const deleteNotice = async (req, res) => {
   }
 };
 
-module.exports = { getNotices, createNotices, deleteNotice};
+exports.deleteNotice = async(req, res) =>{
+
+    const id = req.params.id;
+    // delete notice
+    try{
+        await noticeMessage.findByIdAndDelete(id).exec();
+        res.send("Notice deleted");
+    }catch(err){
+        console.log(err);
+    }
+}
