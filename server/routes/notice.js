@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const { getNotice, postNotice } = require("../controllers/notice");
-router.get("/", getNotice);
-router.post("/", postNotice);
-
+const { getNotices } = require("../controllers/notice");
+router.get("/", getNotices);
 
 module.exports = router;
 
