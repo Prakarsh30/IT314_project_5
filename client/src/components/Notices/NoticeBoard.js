@@ -11,24 +11,14 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import Slide from "@mui/material/Slide";
 import { TextField } from "@mui/material";
+import { useCookies } from "react-cookie";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
-// {
-//   id: 1,
-//   heading: "H1",
-//   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sagittis pharetra libero ac dapibus. Duis pulvinar, tortor et feugiat scelerisque, ligula metus tincidunt ipsum, ut euismod dui sem ut lacus. Vestibulum malesuada, nunc id finibus dapibus, nisl magna commodo ipsum, sed mattis turpis metus ut ex. Suspendisse potenti. Vivamus condimentum cursus leo, et euismod neque congue laoreet. Ut finibus ex non ex maximus, et ornare nisi volutpat. Quisque cursus purus ac ultrices fermentum.",
-//   writer: "Admin 1",
-//   createdAt: new Date(),
-// },
-// {
-//   id: 2,
-//   heading: "H2",
-//   content: "Morbi blandit nulla sit amet dictum rhoncus. In maximus mauris porta velit pellentesque mollis. Nam convallis, lectus at cursus consequat, turpis enim bibendum augue, quis tincidunt sem augue id sapien. Phasellus luctus eu odio vel dictum. Morbi porttitor congue lacus sed scelerisque. Vivamus feugiat id orci sit amet mollis. Suspendisse volutpat vehicula porta. Morbi nec ullamcorper augue. Donec iaculis congue nisl, non pharetra sem. Donec ac posuere sem, at laoreet dui.",
-//   writer: "Admin 2",
-//   createdAt: new Date(),
-// },
 
 function NoticeBoard() {
   const [examples, setExamples] = useState([]);
+  const [cookies, setCookie] = useCookies(["user"]);
+  const role = cookies.role;
 
   const effectFun = async function () {
     const notices = (
@@ -112,21 +102,6 @@ function NoticeBoard() {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    // const notice = mongoose.Schema({
-    //   Heading: String,
-    //   content: String,
-    //   writer: String,
-    //   createdAt: {
-    //     type: Date,
-    //     default: new Date(),
-    //   },
-    // });
-    // const newNotice={
-
-    //   Heading: Heading,
-    //   content: content,
-    //   writer: writer,
-    // }
 
     if (!editing) {
       const newExamples = [...examples];
@@ -145,9 +120,21 @@ function NoticeBoard() {
     handleClose();
   };
 
-  const handleDelete = (id) => {
-    const updatedExamples = examples.filter((example) => example.id !== id);
-    setExamples(updatedExamples);
+  // updated delete entry only for admin
+  const deleteEntry = async (_id) => {
+    console.log(_id);
+    const res = await fetch(
+      `https://hostel-management-system-2l8c.onrender.com/notice/${_id}`,
+      {
+        method: "delete",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { mode: "no-cors" }
+    );
+    console.log("deleted!");
+    window.location.reload();
   };
 
   const handleEdit = (id) => {
@@ -348,6 +335,18 @@ function NoticeBoard() {
                       <h3>{example.Heading}</h3>
                       <p className="noticesalign__left">{example.content}</p>
                       <h7 className="noticesalign__left">{example.writer}</h7>
+                      <div className="deleteButton">
+                        <br></br>
+                      {role == "admin" && (
+                      <Button 
+                            variant="contained"
+                            onClick={() => deleteEntry(example._id)}
+                            sx={{ opacity: "100%" }}
+                          >
+                            <DeleteOutlineOutlinedIcon /> Delete
+                        </Button>
+                      )}
+                      </div>
                     </div>
                   </>
                 );
@@ -392,10 +391,11 @@ function NoticeBoard() {
               </button>
             </form> */}
 
+            {role == "admin" && (
             <button type="submit" className="addNew" onClick={handleClickOpen}>
               Add Complain
             </button>
-
+            )}
             <Dialog
               open={open}
               onClose={handleClose}
