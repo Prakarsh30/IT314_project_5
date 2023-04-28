@@ -5,10 +5,14 @@ An Hostel Management System is built to serve the requirements for successfuly m
 
 ## Tools and technologies specification
 1. Frontend Development : React
-2. Backend Development : Node Express
+2. Backend Development : Express js
 3. NoSQL Database : Mongo DB
 4. Design and Ideation : Figma
-5. API testing: Postman
+
+Testing:
+1. API testing: Postman and Jest
+2. GUI testing: Selenium
+3. Load testing: JMeter
 
 ## Major Features
 - Differentiation of roles based on login with user specific access for admin and students protected and encrypted by bcrpyt
