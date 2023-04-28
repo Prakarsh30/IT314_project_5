@@ -261,7 +261,7 @@ function NoticeBoard() {
               </div>
               {filter === "date" && (
                 <div className="blocks">
-                  <label htmlFor="datePicker">Select Date:</label>
+                  <label htmlFor="datePicker" className="notices__date">Select Date:</label>
                   <DatePicker
                     id="datePicker"
                     selected={selectedDate}
@@ -271,7 +271,7 @@ function NoticeBoard() {
               )}
               {filter === "author" && (
                 <div className="blocks">
-                  <label htmlFor="author">Select Author:</label>
+                  <label htmlFor="author" className="notices__date">Select Author:</label>
                   <select
                     id="author"
                     value={selectedAuthor}
@@ -393,7 +393,7 @@ function NoticeBoard() {
             </form> */}
 
             <button type="submit" className="addNew" onClick={handleClickOpen}>
-              Add New Complain
+              Add Complain
             </button>
 
             <Dialog

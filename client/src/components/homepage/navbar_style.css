@@ -82,16 +82,18 @@
 }
 
 .dropdown-right {
+  color: transparent;
   position: absolute;
   right: 0%;
   display: block;
 }
 
 .dropdown-right-content {
+  width: 116px;
   display: none;
   position: absolute;
-  top: 90%;
-  right: 5px;
+  top: 10 0%;
+  right: 0px;
   background-color: #000000;
   border: 1px solid #000000;
   min-width: 100px;
@@ -116,11 +118,11 @@
 }
 
 .dropbtn-right {
-  background-color: #000000;
+  background-color: #19a7ce;
   color: #fff;
   padding: 13px;
   height: 7vh;
-  font-size: 16px;
+  font-size: large;
   border: none;
   cursor: pointer;
 }
