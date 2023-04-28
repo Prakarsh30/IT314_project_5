@@ -1,11 +1,18 @@
 const noticeMessage = require("../models/notice");
 
-    if(notice){
-        res.status(200).json(notice);
-    }else{
-        res.status(404).json({message: "No notice found"});
-    }
-}
+exports.postNotice = async (req, res) => {
+  // create a new notice
+
+  const { Heading, content, writer } = req.body;
+  const notice = await noticeMessage.create({ Heading, content, writer });
+  // print heading from notice
+  try {
+    noticeMessage.insertOne(notice);
+    res.status(201).json(notice);
+  } catch (err) {
+    res.status(409).json({ message: err.message });
+  }
+};
 
 const createNotices = async (req, res) => {
   const notice = req.body;
@@ -19,27 +26,13 @@ const createNotices = async (req, res) => {
   }
 };
 
-const deleteNotice = async (req, res) => {
-  // delete requested ID
-  const { _id } = req.body;
-
-  const notice = await noticeMessage.findByIdAndDelete(_id);
-
+exports.deleteNotice = async (req, res) => {
+  const id = req.params.id;
+  // delete notice
   try {
-    res.status(201).json({ message: "Successful" });
+    await noticeMessage.findByIdAndDelete(id).exec();
+    res.send("Notice deleted");
   } catch (err) {
-    res.status(409).json({ message: err.message });
+    console.log(err);
   }
 };
-
-exports.deleteNotice = async(req, res) =>{
-
-    const id = req.params.id;
-    // delete notice
-    try{
-        await noticeMessage.findByIdAndDelete(id).exec();
-        res.send("Notice deleted");
-    }catch(err){
-        console.log(err);
-    }
-}
