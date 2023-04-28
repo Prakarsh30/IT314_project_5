@@ -292,7 +292,7 @@ export default function Lostnfound() {
                   </tr>
                 </thead>
                 <tbody>
-                  {lostnfound.map((data, index) => {
+                  {(lostnfound.reverse()).map((data, index) => {
                     return (
                       <tr key={index} className="lostnfound_data_entry">
                         <td>{index + 1}</td>

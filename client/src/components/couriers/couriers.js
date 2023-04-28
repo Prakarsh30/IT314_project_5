@@ -212,7 +212,7 @@ export default function CourierPage() {
                 </tr>
               </thead>
               <tbody id="geeks">
-                {filter.map((data, index) => {
+                {(filter.reverse()).map((data, index) => {
                   return (
                     <tr key={index} class="data_entry">
                       <td>{index + 1}</td>
