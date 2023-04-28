@@ -56,4 +56,6 @@ app.use("/couriers", couriersRoute);
 app.use("/lostnfound", lostnfoundRoute);
 app.use("/notice", noticeRoute);
 
-
+app.all("*", (req, res) => {
+  res.status(404).json({ message: "Bad Gateway" });
+});

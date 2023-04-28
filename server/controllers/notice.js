@@ -14,15 +14,13 @@ exports.postNotice = async (req, res) => {
   }
 };
 
-const createNotices = async (req, res) => {
-  const notice = req.body;
-
-  const newNotice = new noticeMessage(notice);
+exports.getNotice = async (req, res) => {
+  // get all notices
   try {
-    await newNotice.save();
-    res.status(200).send(newNotice);
-  } catch (error) {
-    res.status(409).json({ message: error.message });
+    const notice = await noticeMessage.find();
+    res.status(200).json(notice);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
   }
 };
 
@@ -36,3 +34,4 @@ exports.deleteNotice = async (req, res) => {
     console.log(err);
   }
 };
+
