@@ -38,6 +38,7 @@ const lostandfound = mongoose.Schema({
   },
   status:{
     type: String,
+    required: true,
   }
 });
 
