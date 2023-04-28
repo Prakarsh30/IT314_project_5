@@ -159,7 +159,7 @@ export default function LoginPage() {
     <div className="align">
       <div className="grid">
         <form
-          action="https://localhost:5000/post"
+          action="https://hostel-management-system-2l8c.onrender.com/post"
           method="POST"
           className="form login"
           onSubmit={handleSubmit}
