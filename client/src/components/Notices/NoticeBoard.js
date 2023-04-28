@@ -36,7 +36,7 @@ function NoticeBoard() {
     ).json();
 
     notices.then((data) => {
-      console.log(data, "data");
+      // console.log(data, "data");
       setExamples(data);
     });
   };
@@ -57,7 +57,7 @@ function NoticeBoard() {
       }
     );
     const data = await res.json();
-    console.log(data, "Updated list");
+    // console.log(data, "Updated list");
     setNewNotice({
       id: null,
       Heading: "",
@@ -67,7 +67,7 @@ function NoticeBoard() {
     });
   };
 
-  console.log(examples, "examples");
+  // console.log(examples, "examples");
   const [newNotice, setNewNotice] = useState({
     id: null,
     Heading: "",
@@ -75,8 +75,8 @@ function NoticeBoard() {
     writer: "",
     createdAt: null,
   });
-  console.log(examples);
-  console.log("Loaded data Notices");
+  // console.log(examples);
+  // console.log("Loaded data Notices");
   const [searchTerm, setSearchTerm] = useState("");
   const [editing, setEditing] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
@@ -95,7 +95,7 @@ function NoticeBoard() {
 
   const handlewriterChange = (e) => {
     setwriter(e.target.value);
-    console.log(writer, "writer");
+    // console.log(writer, "writer");
   };
 
   const [Heading, setHeading] = useState("");
@@ -139,7 +139,7 @@ function NoticeBoard() {
       setExamples(newExamples);
     }
 
-    console.log(newNotice, "newNotice");
+    // console.log(newNotice, "newNotice");
 
     postNotice(newNotice);
     handleClose();
@@ -215,7 +215,7 @@ function NoticeBoard() {
     borderRadius: "5px",
   };
 
-  console.log(filteredExamples);
+  // console.log(filteredExamples);
 
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {

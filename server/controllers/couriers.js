@@ -4,14 +4,14 @@ const getCouriers = async (req, res) => {
   try {
     const courierMessages = await courierMessage.find();
     res.status(200).send(courierMessages);
-    console.log("Sent data");
+    // console.log("Sent data");
   } catch (error) {
     res.status(409).send({ message: error.message });
   }
 };
 
 const createCouriers = async (req, res) => {
-  console.log("Adding Courier");
+  // console.log("Adding Courier");
   const courier = req.body;
 
   const newCourier = new courierMessage(courier);
@@ -33,17 +33,17 @@ const createCouriers = async (req, res) => {
 const deleteCouriers = async (req, res) => {
 
   const _id = req.params.id;
-  console.log(_id); 
+  // console.log(_id); 
   const courier = await courierMessage.findByIdAndDelete(_id);
 
-  console.log(courier);
+  // console.log(courier);
   try {
     res.status(201).json({ message: "Successful" });
   } catch (err) {
     // console.log("not deleted");
     res.status(409).json({ message: err.message });
   }
-  console.log("Exit method");
+  // console.log("Exit method");
 };
 
 module.exports = { getCouriers, createCouriers, deleteCouriers };

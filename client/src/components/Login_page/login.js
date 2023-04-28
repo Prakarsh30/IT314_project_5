@@ -7,7 +7,7 @@ import { useCookies } from "react-cookie";
 export default function LoginPage() {
   let navigate = useNavigate();
   const { isLoggedIn, setisLoggedIn } = useContext(Credentials);
-  console.log("kirtan", isLoggedIn);
+  // console.log("kirtan", isLoggedIn);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [Newpassword, setNewPassword] = useState("");
@@ -43,7 +43,7 @@ export default function LoginPage() {
 
   // no sign up page, we will only have sign in page that collect email, password and role
   const login = async (user) => {
-    console.log("login");
+    // console.log("login");
     const res = await fetch("https://hostel-management-system-2l8c.onrender.com/login", {
       method: "POST",
       headers: {
@@ -52,9 +52,9 @@ export default function LoginPage() {
       body: JSON.stringify(user),
     });
     const data = await res.json();
-    console.log("hey");
+    // console.log("hey");
 
-    console.log(data);
+    // console.log(data);
     if (res.status != 200 || !data) {
       window.alert(data.error);
     } else {
@@ -69,15 +69,15 @@ export default function LoginPage() {
       setCookie("email", data.user.email);
       setCookie("role", data.user.role);
 
-      console.log("Yup");
+      // console.log("Yup");
       // window.location.reload();
       navigate("/", { curruser: { email: user.email } });
-      console.log("bruh");
+      // console.log("bruh");
       window.location.reload();
 
       setisLoggedIn(true);
 
-      console.log("lklk");
+      // console.log("lklk");
       //t window.alert("Login Successful");
       //navigate to the home page
       // window.alert("Login successful")
@@ -86,7 +86,7 @@ export default function LoginPage() {
   };
 
   const changePassword = async () => {
-    console.log("change password");
+    // console.log("change password");
     const res = await fetch("https://hostel-management-system-2l8c.onrender.com/login", {
       method: "PUT",
       headers: {
@@ -95,7 +95,7 @@ export default function LoginPage() {
       body: JSON.stringify({ email, password, Newpassword }),
     });
     const data = await res.json();
-    console.log("hy", data);
+    // console.log("hy", data);
     if (res.status != 200 || !data) {
       window.alert(data.error);
     } else {
@@ -110,15 +110,15 @@ export default function LoginPage() {
       setCookie("email", data.user.email);
       setCookie("role", data.user.role);
 
-      console.log("Yup");
+      // console.log("Yup");
       // window.location.reload();
       navigate("/", { curruser: { email: user.email } });
-      console.log("bruh");
+      // console.log("bruh");
       window.location.reload();
 
       setisLoggedIn(true);
 
-      console.log("lklk");
+      // console.log("lklk");
       //t window.alert("Login Successful");
       //navigate to the home page
       // window.alert("Login successful")

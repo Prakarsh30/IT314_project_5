@@ -20,7 +20,8 @@ mongoose
   .connect(process.env.CONNECTION_URL)
   .then(() => {
     app.listen(process.env.PORT || PORT, (req, res) => {
-      console.log(
+      console.log
+      (
         "Server is listening on,",
         `http://localhost:${process.env.PORT || PORT}`
       );

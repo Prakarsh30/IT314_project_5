@@ -4,7 +4,7 @@ const noticeMessage = require("../models/notice");
 
 exports.getNotice = async(req, res) =>{
   // fetch all the notices
-    console.log("get notice route huree")
+    // console.log("get notice route huree")
     const notice = await noticeMessage.find();
 
     if(notice){

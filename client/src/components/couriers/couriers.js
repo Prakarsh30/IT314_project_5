@@ -41,12 +41,12 @@ export default function CourierPage() {
     ).json();
 
     newCourier.then(async (data) => {
-      console.log(data);
+      // console.log(data);
       await setCourierList(data);
       await setFilter(data);
     });
-    console.log(courierList);
-    console.log("Loaded data");
+    // console.log(courierList);
+    // console.log("Loaded data");
   };
 
   // form inputs; will be integrated with backend using post and get methods later
@@ -91,7 +91,7 @@ export default function CourierPage() {
 
     const data = await res.json();
 
-    console.log(data);
+    // console.log(data);
 
     if (res.status != 200) {
       alert(`${data.message}`);
@@ -99,7 +99,7 @@ export default function CourierPage() {
   };
 
   const deleteEntry = async (_id) => {
-    console.log(_id);
+    // console.log(_id);
     const res = await fetch(
       `https://hostel-management-system-2l8c.onrender.com/couriers/${_id}`,
       {
@@ -110,7 +110,7 @@ export default function CourierPage() {
       },
       { mode: "no-cors" }
     );
-    console.log("deleted!");
+    // console.log("deleted!");
     window.location.reload();
   };
   const role = cookies.role;

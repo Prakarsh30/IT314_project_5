@@ -161,11 +161,11 @@ const Complaints = () => {
             setComplaints(res.data);
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err);
           });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -194,11 +194,11 @@ const Complaints = () => {
             setComplaints(res.data);
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err);
           });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -228,11 +228,11 @@ const Complaints = () => {
             setComplaints(res.data);
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err);
           });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         // setAlertMessage error message
         setAlertType(err.response);
       });
@@ -246,7 +246,7 @@ const Complaints = () => {
         setComplaints(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, []);
 

@@ -41,7 +41,7 @@ const createComplaints = async (req, res) => {
   const complaint = req.body;
 
   const newComplaint = new complaintMessage(complaint);
-  console.log(newComplaint);
+  // console.log(newComplaint);
   try {
     await newComplaint.save();
     // console.log("hey" , newComplaint);
@@ -60,7 +60,7 @@ const deleteComplaints = async (req, res) => {
   const complaint = await complaintMessage.findByIdAndDelete(_id);
 
   try {
-    console.log("deleted");
+    // console.log("deleted");
     res.status(201).json({ message: "Successful" });
   } catch (err) {
     res.status(409).json({ message: err.message });

@@ -62,7 +62,7 @@ export default function Lostnfound() {
 
   const handleRedirecting = async (e) => {
     e.preventDefault();
-    console.log("Redirecting");
+    // console.log("Redirecting");
     Newitem.itemname = itemname;
     Newitem.studentid = studentid;
     Newitem.contact = contact;
@@ -77,7 +77,7 @@ export default function Lostnfound() {
   };
 
   const handleDelete = async (f) => {
-    console.log("Deleting");
+    // console.log("Deleting");
     const res = await fetch(
       `https://hostel-management-system-2l8c.onrender.com/lostnfound/${f}`,
       {
@@ -88,11 +88,11 @@ export default function Lostnfound() {
       },
       { mode: "no-cors" }
     );
-    console.log(res);
+    // console.log(res);
     window.location.reload();
   };
   const updateStatus = async (f) => {
-    console.log("Updating");
+    // console.log("Updating");
     const res = await fetch(
       `https://hostel-management-system-2l8c.onrender.com/lostnfound/${f}`,
       {
@@ -103,7 +103,7 @@ export default function Lostnfound() {
       },
       { mode: "no-cors" }
     );
-    console.log(res);
+    // console.log(res);
     window.location.reload();
   };
 
@@ -112,8 +112,8 @@ export default function Lostnfound() {
   };
 
   const Adding = async (Newitem) => {
-    console.log("Adding");
-    console.log(Newitem);
+    // console.log("Adding");
+    // console.log(Newitem);
     const res = await fetch("https://hostel-management-system-2l8c.onrender.com/lostnfound", {
       method: "POST",
       headers: {
@@ -123,8 +123,8 @@ export default function Lostnfound() {
     });
 
     const data = await res.json();
-    console.log("Pp");
-    console.log(data);
+    // console.log("Pp");
+    // console.log(data);
   };
 
   // Table data
