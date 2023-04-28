@@ -318,7 +318,6 @@ const Complaints = () => {
                     {role === "admin" && (
                       <Button
                         variant="contained"
-                        color="secondary"
                         onClick={() =>
                           handleDelete(
                             complaint._id,

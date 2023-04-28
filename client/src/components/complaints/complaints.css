@@ -46,8 +46,9 @@ ul li {
 
 .complaints_delete{
   /* display: block; */
-  color: red;
-
+  display: flex;
+  color: rgba(255, 0, 0, 0);
+  align-content: end;
 }
 .complaints_card{
   

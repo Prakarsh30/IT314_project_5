@@ -1,5 +1,7 @@
+noticeboard
+
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap'); */
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  /* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); */
 
 * {
   box-sizing: border-box;
@@ -120,8 +122,7 @@ body{
 }
 .noticeBlock h3{
   margin: auto;
-  border-radius: 5px;
-  border: 2px solid rgb(111, 110, 110);
+  border-bottom: 1px solid black;
   padding-bottom: 5px;
 }
 .noticeBlock h4{
@@ -144,8 +145,7 @@ body{
   margin: 5px;
   padding: 10px;
   border: none;
-  background-color: #146c94;
-  color: white;
+  background-color: #86dbf3;
 }
 
 .addNew:hover{

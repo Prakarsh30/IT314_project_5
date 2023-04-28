@@ -133,7 +133,7 @@ const Navbar = () => {
               </div>
             )}
             {!isLoggedIn && (
-              <a href="/login" className="login-btn">
+                <a href="/login" className="login-btn">
                 Login
               </a>
             )}

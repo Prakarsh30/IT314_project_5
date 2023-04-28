@@ -67,7 +67,13 @@
   padding: 13px;
 }
 .login-btn {
+  display:inline-block;
+  text-align: center;
+  font-weight: 600;
+  font-size: large;
+  width: 116px;
   position: absolute;
+  background-color: #19a7ce;
   color: #fff;
   text-decoration: none;
   right: 0%;
@@ -77,7 +83,6 @@
 
 .home-btn:hover,
 .login-btn:hover {
-  color: #19a7ce;
   text-decoration: none;
 }
 
