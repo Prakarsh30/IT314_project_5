@@ -144,7 +144,8 @@ body{
   margin: 5px;
   padding: 10px;
   border: none;
-  background-color: #86dbf3;
+  background-color: #146c94;
+  color: white;
 }
 
 .addNew:hover{

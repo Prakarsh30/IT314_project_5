@@ -2,7 +2,7 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
 exports.auth = async (req, res) => {
-  console.log("Login route");
+  //console.log("Login route");
   const { email, password } = req.body;
   if (!email || !password) {
     return res
@@ -44,7 +44,7 @@ exports.auth = async (req, res) => {
 
 exports.changePassword = async (req, res) => {
   const { email, password, Newpassword } = req.body;
-  console.log("Change password route", Newpassword);
+  //console.log("Change password route", Newpassword);
 
   if (!email || !password || !Newpassword) {
     return res
@@ -73,7 +73,7 @@ exports.changePassword = async (req, res) => {
     { email: email },
     { $set: { password: Newpassword } }
   );
-  console.log(updated, "updated");
+  //console.log(updated, "updated");
   // const token = jwt.sign({_id:isexist._id},process.env.SECRET_KEY);
   res.status(200).json({
     // token,

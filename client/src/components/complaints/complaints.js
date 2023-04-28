@@ -233,6 +233,7 @@ const Complaints = () => {
       })
       .catch((err) => {
         console.log(err);
+        setAlertType(err.response);
       });
   };
 
@@ -298,7 +299,7 @@ const Complaints = () => {
 
           <div className="row" id="myItems">
             <div className="col-sm-12 mb-3">
-              {complaints.map((complaint) => (
+              {(complaints.reverse()).map((complaint) => (
                 <div className="card complaints_card glow">
                   <div className="card-body">
                     <h5 id="complaints_title" className="card-title">

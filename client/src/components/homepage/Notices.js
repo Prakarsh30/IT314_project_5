@@ -6,7 +6,7 @@ function Notices() {
   const [cookies, setCookie] = useCookies(["user"]);
 
   useEffect(() => {
-    console.log(cookies.email);
+    //console.log(cookies.email);
     getNotices();
   }, [""]);
   const [list, setList] = useState([]);
@@ -46,9 +46,9 @@ function Notices() {
     return newStr;
   }
   const role = cookies.role;
-  console.log("NEW LIST");
-  console.log(newList);
-  console.log(list);
+  //console.log("NEW LIST");
+  //console.log(newList);
+  //console.log(list);
   return (
     <div className="news-card">
       <div className="news-header">

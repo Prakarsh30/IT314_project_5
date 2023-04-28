@@ -31,7 +31,7 @@ exports.deleteNotice = async (req, res) => {
     await noticeMessage.findByIdAndDelete(id).exec();
     res.send("Notice deleted");
   } catch (err) {
-    console.log(err);
+    //console.log(err);
   }
 };
 

@@ -34,7 +34,7 @@ const Navbar = () => {
     // window.location.reload();
     window.location.replace("/");
     // navigate("/");
-    console.log("km", cookies.email, isLoggedIn);
+    //console.log("km", cookies.email, isLoggedIn);
   };
 
   const get = (keyName) => {
@@ -53,20 +53,20 @@ const Navbar = () => {
   const runthis = async () => {
     setEmail(cookies.email);
     cookies.email && setisLoggedIn(true);
-    console.log(";;", cookies.email);
+    //console.log(";;", cookies.email);
   };
   useEffect(() => {
     runthis();
   }, []);
   const openNav = () => {
-    console.log("Opened");
+    //console.log("Opened");
     document.getElementById("mySidebar").style.width = "25%";
   };
 
   const closeNav = async () => {
     document.getElementById("mySidebar").style.width = "0";
   };
-  console.log("Nav", isLoggedIn);
+  //console.log("Nav", isLoggedIn);
 
   return (
     <>

@@ -26,7 +26,7 @@ function NoticeBoard() {
     ).json();
 
     notices.then((data) => {
-      console.log(data, "data");
+      //console.log(data, "data");
       setExamples(data);
     });
   };
@@ -47,7 +47,7 @@ function NoticeBoard() {
       }
     );
     const data = await res.json();
-    console.log(data, "Updated list");
+    //console.log(data, "Updated list");
     setNewNotice({
       id: null,
       Heading: "",
@@ -57,7 +57,7 @@ function NoticeBoard() {
     });
   };
 
-  console.log(examples, "examples");
+  //console.log(examples, "examples");
   const [newNotice, setNewNotice] = useState({
     id: null,
     Heading: "",
@@ -65,8 +65,8 @@ function NoticeBoard() {
     writer: "",
     createdAt: null,
   });
-  console.log(examples);
-  console.log("Loaded data Notices");
+  //console.log(examples);
+  //console.log("Loaded data Notices");
   const [searchTerm, setSearchTerm] = useState("");
   const [editing, setEditing] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
@@ -85,7 +85,7 @@ function NoticeBoard() {
 
   const handlewriterChange = (e) => {
     setwriter(e.target.value);
-    console.log(writer, "writer");
+    //console.log(writer, "writer");
   };
 
   const [Heading, setHeading] = useState("");
@@ -114,7 +114,7 @@ function NoticeBoard() {
       setExamples(newExamples);
     }
 
-    console.log(newNotice, "newNotice");
+    //console.log(newNotice, "newNotice");
 
     postNotice(newNotice);
     handleClose();
@@ -122,7 +122,7 @@ function NoticeBoard() {
 
   // updated delete entry only for admin
   const deleteEntry = async (_id) => {
-    console.log(_id);
+    //console.log(_id);
     const res = await fetch(
       `https://hostel-management-system-2l8c.onrender.com/notice/${_id}`,
       {
@@ -133,7 +133,7 @@ function NoticeBoard() {
       },
       { mode: "no-cors" }
     );
-    console.log("deleted!");
+    //console.log("deleted!");
     window.location.reload();
   };
 
@@ -202,7 +202,7 @@ function NoticeBoard() {
     borderRadius: "5px",
   };
 
-  console.log(filteredExamples);
+  //console.log(filteredExamples);
 
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -242,20 +242,9 @@ function NoticeBoard() {
                   onChange={handleFilterChange}
                 >
                   <option value="all">All Notices</option>
-                  <option value="date">Date</option>
                   <option value="author">Author</option>
                 </select>
               </div>
-              {filter === "date" && (
-                <div className="blocks">
-                  <label htmlFor="datePicker" className="notices__date">Select Date:</label>
-                  <DatePicker
-                    id="datePicker"
-                    selected={selectedDate}
-                    onChange={handleDateChange}
-                  />
-                </div>
-              )}
               {filter === "author" && (
                 <div className="blocks">
                   <label htmlFor="author" className="notices__date">Select Author:</label>
@@ -278,7 +267,7 @@ function NoticeBoard() {
             <br></br>
 
             <div className="accordion" id="accordionExample">
-              {filteredExamples.map((example, index) => {
+              {(filteredExamples.reverse()).map((example, index) => {
                 return (
                   // <div key={index} className="accordion-item">
                   //   <h2 className="accordion-header">
@@ -393,7 +382,7 @@ function NoticeBoard() {
 
             {role == "admin" && (
             <button type="submit" className="addNew" onClick={handleClickOpen}>
-              Add Complain
+              Add New Notice
             </button>
             )}
             <Dialog

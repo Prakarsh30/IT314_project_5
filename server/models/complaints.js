@@ -2,9 +2,20 @@ const mongoose = require("mongoose");
 
 // time stamp true
 const complaints = mongoose.Schema({
-  title: String,
-  message: String,
-  creator: String,
+  title: {
+    type: String,
+    required: true,
+    minlength: 5,
+  },
+  message: {
+    type: String,
+    required: true,
+    minlength: 5,
+  },
+  creator: {
+    type: String,
+    required: true,
+  },
   // createdAt: {
   //   type: Date,
   //   default: new Date(),
